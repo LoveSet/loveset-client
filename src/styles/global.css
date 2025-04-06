@@ -28,10 +28,12 @@ a {
 
 /* Theme Colors */
 :root {
-  --primary-color: #1e88e5;
+  /* --primary-color: #1e88e5; */
+  --primary-color: #5891FF;
   --primary-light: #6ab7ff;
   --primary-dark: #005cb2;
   --secondary-color: #ffffff;
+  --gray-color: #ececfb;
   --text-primary: #333333;
   --text-secondary: #757575;
   --background-light: #f9f9f9;

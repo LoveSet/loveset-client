@@ -1,14 +1,15 @@
 /* Home Page Styles */
-.home-container {
+.homeContainer {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   background-color: var(--background-light);
+  /* background: url('https://dzjkc846jk9vh.cloudfront.net/myke-simon-atsUqIm3wxo-unsplash.jpg') no-repeat center/cover; */
 }
 
-.home-content {
+.homeContent {
   max-width: 600px;
   text-align: center;
   padding: 40px;
@@ -17,22 +18,23 @@
   box-shadow: 0 4px 20px var(--shadow-color);
 }
 
-.logo-container {
+.logoContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
 }
 
-.logo-icon {
+.logoIcon {
   font-size: 2.5rem;
   margin-right: 15px;
 }
 
-.logo-text {
-  font-size: 2.5rem;
+.logoText {
+  font-size: 2.6rem;
   font-weight: 700;
   color: var(--primary-color);
+  font-family: "Inter";
 }
 
 .tagline {
@@ -40,6 +42,7 @@
   font-weight: 600;
   margin-bottom: 20px;
   color: var(--text-primary);
+  font-family: 'Neuzeit Grotesk Bold';
 }
 
 .description {
@@ -47,9 +50,10 @@
   margin-bottom: 40px;
   line-height: 1.6;
   color: var(--text-secondary);
+  font-family: "Inter";
 }
 
-.auth-buttons {
+.authButtons {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -60,7 +64,7 @@
   margin-right: auto;
 }
 
-.google-auth-button {
+.googleAuthButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,13 +74,15 @@
   border-radius: 8px;
   font-weight: 500;
   transition: background-color 0.2s;
+  font-family: "Inter";
 }
 
-.google-auth-button:hover {
-  background-color: var(--primary-dark);
+.googleAuthButton:hover {
+  /* background-color: var(--primary-dark); */
+  opacity: .85;
 }
 
-.google-icon {
+.googleIcon {
   background-color: white;
   color: var(--primary-color);
   width: 24px;
@@ -89,7 +95,7 @@
   font-weight: 700;
 }
 
-.invite-button {
+.inviteButton {
   padding: 14px 20px;
   background-color: transparent;
   color: var(--primary-color);
@@ -99,19 +105,22 @@
   transition: background-color 0.2s;
 }
 
-.invite-button:hover {
+.inviteButton:hover {
   background-color: rgba(30, 136, 229, 0.05);
 }
 
-.terms-text {
+.termsText {
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
 
-.terms-link {
+.termsLink {
   background: none;
   border: none;
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
+  /* color: black; */
+  color: var(--text-secondary);
+
   text-decoration: underline;
   cursor: pointer;
   font-size: 0.9rem;
@@ -120,7 +129,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .home-content {
+  .homeContent {
     padding: 30px 20px;
   }
 
@@ -132,4 +141,3 @@
     font-size: 1rem;
   }
 }
-
