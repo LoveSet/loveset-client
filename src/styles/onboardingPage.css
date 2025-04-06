@@ -1,0 +1,157 @@
+/* Onboarding Page Styles */
+.onboarding-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #94a3b8; /* Gray for incomplete steps */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.progress-step.active .step-number {
+  background-color: #3b82f6; /* Blue for current step */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.progress-step.completed .step-number {
+  background-color: #3b82f6; /* Blue for completed steps */
+}
+
+.step-connector {
+  height: 2px;
+  width: 60px;
+  background-color: #e2e8f0; /* Light gray for incomplete connectors */
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.progress-step.completed .step-connector {
+  background-color: #3b82f6; /* Blue for completed connectors */
+}
+
+.onboarding-content {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  padding: 30px;
+}
+
+.step-content {
+  margin-bottom: 30px;
+}
+
+.step-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  accent-color: #3b82f6; /* Blue for checkboxes */
+}
+
+.checkbox-text {
+  font-size: 1rem;
+}
+
+.text-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 10px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+input.text-input {
+  min-height: auto;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.back-button {
+  padding: 12px 25px;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #d0d0d0;
+}
+
+.next-button {
+  padding: 12px 25px;
+  background-color: #3b82f6; /* Blue for buttons */
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.next-button:hover {
+  background-color: #2563eb; /* Darker blue on hover */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .onboarding-container {
+    padding: 20px 15px;
+  }
+
+  .step-connector {
+    width: 30px;
+  }
+
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+}
+
