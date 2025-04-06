@@ -77,31 +77,53 @@
   font-size: 1.5rem;
   margin-bottom: 20px;
   color: var(--text-primary);
+  font-family: "Neuzeit Grotesk Bold";
 }
 
-.checkboxGroup {
+/* New card-style option selection */
+.optionsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 15px;
 }
 
-.checkboxLabel {
+.optionCard {
+  position: relative;
+  padding: 15px;
+  border-radius: 8px;
+  /* background-color: rgba(0, 0, 0, 0.05); */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  cursor: pointer;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-family: "Inter";
 }
 
-.checkboxLabel input {
-  margin-right: 10px;
-  width: 18px;
-  height: 18px;
-  accent-color: #3b82f6; /* Blue for checkboxes */
+.optionCard:hover {
+  background-color: rgba(176, 173, 173, 0.08);
 }
 
-.checkboxText {
-  font-size: 1rem;
+.optionCard.selected {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
 }
 
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 12px;
+}
+
+/* Keep existing styles for text inputs */
 .textInput {
   width: 100%;
   padding: 12px 15px;
@@ -129,20 +151,24 @@ input.textInput {
 
 .backButton {
   padding: 12px 25px;
-  background-color: var(--background-dark);
+  /* background-color: var(--background-dark); */
   color: var(--text-primary);
+  border: 1px solid gray;
   border-radius: 8px;
   font-weight: 500;
   transition: background-color 0.2s;
 }
 
 .backButton:hover {
-  background-color: #d0d0d0;
+  /* background-color: #d0d0d0; */
+  opacity: 0.85;
 }
 
 .nextButton {
   padding: 12px 25px;
-  background-color: #3b82f6; /* Blue for buttons */
+  background-color: var(--primary-color);
+  /* background-color: #3b82f6;  */
+  /* Blue for buttons */
   color: white;
   border-radius: 8px;
   font-weight: 500;
@@ -150,7 +176,9 @@ input.textInput {
 }
 
 .nextButton:hover {
-  background-color: #2563eb; /* Darker blue on hover */
+  /* background-color: #2563eb;  */
+  /* Darker blue on hover */
+  opacity: 0.85;
 }
 
 /* Responsive */
@@ -163,7 +191,7 @@ input.textInput {
     width: 30px;
   }
 
-  .checkboxGroup {
+  .optionsGrid {
     grid-template-columns: 1fr;
   }
 }

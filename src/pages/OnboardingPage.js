@@ -33,7 +33,7 @@ const OnboardingPage = () => {
     }
   }
 
-  const handleCheckboxChange = (category, value) => {
+  const handleOptionToggle = (category, value) => {
     setFormData((prev) => {
       const updated = { ...prev }
       if (updated[category].includes(value)) {
@@ -59,16 +59,16 @@ const OnboardingPage = () => {
         return (
           <div className={styles.stepContent}>
             <h2>What type of content do you like?</h2>
-            <div className={styles.checkboxGroup}>
+            <div className={styles.optionsGrid}>
               {["Movies", "TV Shows", "Documentaries", "Animation", "Anime", "Short Films"].map((type) => (
-                <label key={type} className={styles.checkboxLabel}>
-                  <input
-                    type="checkbox"
-                    checked={formData.contentTypes.includes(type)}
-                    onChange={() => handleCheckboxChange("contentTypes", type)}
-                  />
-                  <span className={styles.checkboxText}>{type}</span>
-                </label>
+                <div
+                  key={type}
+                  className={`${styles.optionCard} ${formData.contentTypes.includes(type) ? styles.selected : ""}`}
+                  onClick={() => handleOptionToggle("contentTypes", type)}
+                >
+                  {type}
+                  {formData.contentTypes.includes(type) && <span className={styles.checkmark}>✓</span>}
+                </div>
               ))}
             </div>
           </div>
@@ -78,7 +78,7 @@ const OnboardingPage = () => {
         return (
           <div className={styles.stepContent}>
             <h2>Which film industries do you prefer?</h2>
-            <div className={styles.checkboxGroup}>
+            <div className={styles.optionsGrid}>
               {[
                 "Hollywood/American",
                 "British",
@@ -89,14 +89,14 @@ const OnboardingPage = () => {
                 "Other Asian",
                 "International",
               ].map((industry) => (
-                <label key={industry} className={styles.checkboxLabel}>
-                  <input
-                    type="checkbox"
-                    checked={formData.filmIndustries.includes(industry)}
-                    onChange={() => handleCheckboxChange("filmIndustries", industry)}
-                  />
-                  <span className={styles.checkboxText}>{industry}</span>
-                </label>
+                <div
+                  key={industry}
+                  className={`${styles.optionCard} ${formData.filmIndustries.includes(industry) ? styles.selected : ""}`}
+                  onClick={() => handleOptionToggle("filmIndustries", industry)}
+                >
+                  {industry}
+                  {formData.filmIndustries.includes(industry) && <span className={styles.checkmark}>✓</span>}
+                </div>
               ))}
             </div>
           </div>
@@ -106,7 +106,7 @@ const OnboardingPage = () => {
         return (
           <div className={styles.stepContent}>
             <h2>Which genres do you enjoy?</h2>
-            <div className={styles.checkboxGroup}>
+            <div className={styles.optionsGrid}>
               {[
                 "Action/Adventure",
                 "Comedy",
@@ -120,14 +120,14 @@ const OnboardingPage = () => {
                 "Documentary",
                 "Family/Children's",
               ].map((genre) => (
-                <label key={genre} className={styles.checkboxLabel}>
-                  <input
-                    type="checkbox"
-                    checked={formData.genres.includes(genre)}
-                    onChange={() => handleCheckboxChange("genres", genre)}
-                  />
-                  <span className={styles.checkboxText}>{genre}</span>
-                </label>
+                <div
+                  key={genre}
+                  className={`${styles.optionCard} ${formData.genres.includes(genre) ? styles.selected : ""}`}
+                  onClick={() => handleOptionToggle("genres", genre)}
+                >
+                  {genre}
+                  {formData.genres.includes(genre) && <span className={styles.checkmark}>✓</span>}
+                </div>
               ))}
             </div>
           </div>
@@ -137,16 +137,16 @@ const OnboardingPage = () => {
         return (
           <div className={styles.stepContent}>
             <h2>Which time periods do you prefer?</h2>
-            <div className={styles.checkboxGroup}>
+            <div className={styles.optionsGrid}>
               {["Recent/2020s", "2010s", "2000s", "1990s", "1980s", "Classic/Pre-1980s"].map((period) => (
-                <label key={period} className={styles.checkboxLabel}>
-                  <input
-                    type="checkbox"
-                    checked={formData.timePeriods.includes(period)}
-                    onChange={() => handleCheckboxChange("timePeriods", period)}
-                  />
-                  <span className={styles.checkboxText}>{period}</span>
-                </label>
+                <div
+                  key={period}
+                  className={`${styles.optionCard} ${formData.timePeriods.includes(period) ? styles.selected : ""}`}
+                  onClick={() => handleOptionToggle("timePeriods", period)}
+                >
+                  {period}
+                  {formData.timePeriods.includes(period) && <span className={styles.checkmark}>✓</span>}
+                </div>
               ))}
             </div>
           </div>
@@ -188,38 +188,38 @@ const OnboardingPage = () => {
 
   return (
     <div className={styles.onboardingContainerWrapper}>
-    <div className={styles.onboardingContainer}>
-      <div className={styles.progressBar}>
-        {Array.from({ length: totalSteps }).map((_, index) => (
-          <div
-            key={index}
-            className={`${styles.progressStep} ${index + 1 === step ? styles.active : index + 1 < step ? styles.completed : ""}`}
-          >
-            <div className={styles.stepNumber}>{index + 1}</div>
-            {index < totalSteps - 1 && <div className={styles.stepConnector}></div>}
-          </div>
-        ))}
-      </div>
+      <div className={styles.onboardingContainer}>
+        <div className={styles.progressBar}>
+          {Array.from({ length: totalSteps }).map((_, index) => (
+            <div
+              key={index}
+              className={`${styles.progressStep} ${index + 1 === step ? styles.active : index + 1 < step ? styles.completed : ""}`}
+            >
+              <div className={styles.stepNumber}>{index + 1}</div>
+              {index < totalSteps - 1 && <div className={styles.stepConnector}></div>}
+            </div>
+          ))}
+        </div>
 
-      <div className={styles.onboardingContent}>
-        {renderStepContent()}
+        <div className={styles.onboardingContent}>
+          {renderStepContent()}
 
-        <div className={styles.navigationButtons}>
-          {step > 1 && (
-            <button className={styles.backButton} onClick={handleBack}>
-              Back
+          <div className={styles.navigationButtons}>
+            {step > 1 && (
+              <button className={styles.backButton} onClick={handleBack}>
+                Back
+              </button>
+            )}
+
+            <button className={styles.nextButton} onClick={handleNext}>
+              {step === totalSteps ? "Finish" : "Next"}
             </button>
-          )}
-
-          <button className={styles.nextButton} onClick={handleNext}>
-            {step === totalSteps ? "Finish" : "Next"}
-          </button>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-
   )
 }
 
 export default OnboardingPage
+

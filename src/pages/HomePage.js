@@ -40,7 +40,7 @@ const HomePage = () => {
         <h1 className={styles.logoText}>LoveSet</h1>
       </div>
   
-      <h2 className={styles.tagline}>Your next favorite movie in 1 swipe</h2>
+      <h2 className={styles.tagline}>Your favorite movie in 1 swipe</h2>
   
       <p className={styles.description}>
         Discover movies and shows tailored to your taste. Swipe right on what
