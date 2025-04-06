@@ -16,7 +16,7 @@ const OnboardingPage = () => {
     favoriteMovie: "",
   })
 
-  const totalSteps = 6
+  const totalSteps = 4
 
   const handleNext = () => {
     if (step < totalSteps) {
