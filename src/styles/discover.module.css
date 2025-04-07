@@ -80,7 +80,7 @@
   width: 100%;
   height: 400px;
   overflow: hidden;
-  background-color: #000;
+  /* background-color: #000; */
 }
 
 .moviePoster img {
@@ -206,7 +206,8 @@
 }
 
 .trailerButton {
-  background-color: #3182ce;
+  background-color: var(--primary-color);
+  /* background-color: #3182ce; */
   color: white;
   flex: 2;
   box-shadow: 0 2px 8px rgba(49, 130, 206, 0.3);
@@ -294,7 +295,8 @@
   height: 65px;
   line-height: 27px;
   border-radius: 50%;
-  background-color: #3182ce;
+  /* background-color: #3182ce; */
+  background-color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
