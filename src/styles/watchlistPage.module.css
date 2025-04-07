@@ -6,6 +6,12 @@
   margin-top: 30px;
 }
 
+@media (max-width: 768px) {
+  .watchlistContainer {
+    margin-top: 0px !important;
+  }
+}
+
 .watchlistHeader {
   margin-bottom: 30px;
 }

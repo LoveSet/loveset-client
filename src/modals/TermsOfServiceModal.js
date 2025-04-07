@@ -20,6 +20,7 @@ const TermsOfServiceModal = ({ open=true, onClose }) => {
           transform: "translate(-50%, -50%)",
           outline: "none",
         }}
+        className="modalType1"
       >
         <div className="modal-container terms-modal">
           <button className="modal-close" onClick={onClose}>

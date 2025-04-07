@@ -36,7 +36,9 @@ const GetFreeSwipesModal = ({ open=true, onClose }) => {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         outline: 'none'
-      }}>
+      }}
+      className="modalType1"
+      >
         <div className="modal-container">
           <button className="modal-close" onClick={onClose}>
             ×

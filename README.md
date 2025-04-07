@@ -3,14 +3,12 @@
 - generate the "get 10 more swipes -> invite friend" modal from the "platle v2" document [done]
 - change options font [done]
 - remove box shadow [done]
+- fix: space below modal title [done]
 
 - adjust ui []
 - adjust coding []
 
-- fix: space below modal title []
-
 - fix: swiping animation, animate with button clicks []
-- link movie title []
 
 - pages []
 
@@ -19,7 +17,7 @@
   - watchlist [done]
   - premium [done]
   - settings [done]
-  - mobile []
+  - mobile [done]
 
 - modals [done]
 

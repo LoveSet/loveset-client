@@ -8,6 +8,7 @@ import DetailsPage from "./pages/DetailsPage"
 import PremiumPage from "./pages/PremiumPage"
 import WatchlistPage from "./pages/WatchlistPage"
 import SettingsPage from "./pages/SettingsPage"
+import ReferralEmail from "./email/referralAward"
 import "./styles/global.css"
 
 // Protected route component
@@ -44,6 +45,10 @@ function App() {
             <Route path="premium" element={<PremiumPage />} />
             <Route path="watchlist" element={<WatchlistPage />} />
             <Route path="settings" element={<SettingsPage />} />
+
+
+            <Route path="referral" element={<ReferralEmail />} />
+
           </Route>
         </Routes>
       </Router>

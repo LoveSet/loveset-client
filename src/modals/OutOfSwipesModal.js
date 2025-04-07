@@ -20,6 +20,7 @@ const OutOfSwipesModal = ({ open=true, onClose, onUpgrade, onInviteFriend }) => 
           transform: "translate(-50%, -50%)",
           outline: "none",
         }}
+        className="modalType1"
       >
         <div className="modal-container">
           <button className="modal-close" onClick={onClose}>

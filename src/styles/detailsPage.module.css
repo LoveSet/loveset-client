@@ -80,6 +80,24 @@
   margin-bottom: -70px;
 }
 
+@media (max-width: 768px) {
+  .playTrailerButton {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-bottom: 0px !important;
+  }
+}
+
 .playTrailerButton:hover {
   opacity: 0.85;
   /* background-color: var(--primary-dark); */
