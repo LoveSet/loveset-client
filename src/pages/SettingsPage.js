@@ -125,16 +125,16 @@ const SettingsPage = () => {
 
           <div className={styles.preferenceItem}>
             <div className={styles.preferenceLabel}>Industries</div>
-            <div className={styles.preferenceValue}>{preferences.genres.join(", ") || "Not set"}</div>
+            <div className={styles.preferenceValue}>{preferences.filmIndustries.join(", ") || "Not set"}</div>
           </div>
 
           <div className={styles.preferenceItem}>
             <div className={styles.preferenceLabel}>Genres</div>
-            <div className={styles.preferenceValue}>{preferences.favoriteMovie || "Not set"}</div>
+            <div className={styles.preferenceValue}>{preferences.genres.join(", ") || "Not set"}</div>
           </div>
           <div className={styles.preferenceItem}>
             <div className={styles.preferenceLabel}>Time Periods</div>
-            <div className={styles.preferenceValue}>{preferences.timePeriods || "Not set"}</div>
+            <div className={styles.preferenceValue}>{preferences.timePeriods.join(", ") || "Not set"}</div>
           </div>
         </div>
 

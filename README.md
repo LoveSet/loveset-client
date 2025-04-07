@@ -18,7 +18,7 @@
   - details [done]
   - watchlist [done]
   - premium [done]
-  - settings []
+  - settings [done]
   - mobile []
 
 - modals []
