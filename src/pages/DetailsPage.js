@@ -206,9 +206,12 @@ const DetailsPage = () => {
             <h3>Where to Watch</h3>
             <div className={styles.streamingPlatforms}>
               {movie.streamingOn.map((platform, index) => (
+                <>
                 <span key={index} className={styles.platformTag}>
+                {/* <img src = {'https://media.movieofthenight.com/services/hbo/logo-light-theme.svg'} className = {styles.platformLogo} /> */}
                   {platform}
                 </span>
+                </>
               ))}
             </div>
           </div>
