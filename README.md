@@ -7,6 +7,9 @@
 
 - fonts: ui-serif, Inter (text), Biotif\*, Neuzeit Grotesk Bold
 
+- change options font []
+- remove box shadow []
+
 - frontend [sunday][done]
 - ui adjustments [monday][]
 - backend [tuesday][]

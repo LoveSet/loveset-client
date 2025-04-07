@@ -61,14 +61,19 @@ const AppLayout = () => {
       </Box> */}
 
       <Box className={styles.userProfile}>
-        <Box className={styles.userAvatar}>{user?.name?.charAt(0) || "U"}</Box>
+        <Box className={styles.userAvatar}>{"E"}</Box>
         {sidebarOpen && (
           <Box className={styles.userInfo}>
-            <Typography variant="subtitle1" className={styles.userName}>
-              {user?.name || "User"}
+            <Typography variant="subtitle1" className={styles.userName} style={{
+              fontFamily: "Neuzeit Grotesk Bold"
+            }}>
+              {/* {user?.name || "User"} */}
+              Archie Bryann
             </Typography>
-            <Typography variant="body2" className={styles.userEmail}>
-              {user?.email || "user@example.com"}
+            <Typography variant="body2" className={styles.userEmail}  style={{
+              fontFamily: "Inter"
+            }}>
+              @ekomobong
             </Typography>
           </Box>
         )}
@@ -85,7 +90,9 @@ const AppLayout = () => {
           className={`${styles.navItem} ${isActive("/app/swipe") ? styles.active : ""}`}
         >
           <ListItemIcon className={styles.navIcon}><IoSearch /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="Discover" />}
+          {sidebarOpen && <ListItemText primary="Discover" style={{
+              fontFamily: "Inter"
+            }} />}
         </ListItem>
 
         <ListItem
@@ -96,7 +103,9 @@ const AppLayout = () => {
           className={`${styles.navItem} ${isActive("/app/watchlist") ? styles.active : ""}`}
         >
           <ListItemIcon className={styles.navIcon}><IoHeartOutline /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="My Likes" />}
+          {sidebarOpen && <ListItemText primary="Watchlist" style={{
+              fontFamily: "Inter"
+            }}  />}
         </ListItem>
 
         <ListItem
@@ -107,7 +116,9 @@ const AppLayout = () => {
           className={`${styles.navItem} ${isActive("/app/premium") ? styles.active : ""}`}
         >
           <ListItemIcon className={styles.navIcon}><AiOutlineFire /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="Premium" />}
+          {sidebarOpen && <ListItemText primary="Premium" style={{
+              fontFamily: "Inter"
+            }}  />}
         </ListItem>
 
         <ListItem
@@ -118,7 +129,9 @@ const AppLayout = () => {
           className={`${styles.navItem} ${isActive("/app/settings") ? styles.active : ""}`}
         >
           <ListItemIcon className={styles.navIcon}><IoSettingsOutline /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="Settings" />}
+          {sidebarOpen && <ListItemText primary="Settings" style={{
+              fontFamily: "Inter"
+            }}  />}
         </ListItem>
       </List>
 
@@ -138,7 +151,9 @@ const AppLayout = () => {
           className={`${styles.navItem}`}
         >
           <ListItemIcon className={styles.navIcon}><IoIosLogOut /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="Sign out" />}
+          {sidebarOpen && <ListItemText primary="Sign out" style={{
+              fontFamily: "Inter"
+            }}  />}
         </ListItem>
         </List>
       </Box>
@@ -167,7 +182,7 @@ const AppLayout = () => {
           <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
             <Menu />
           </IconButton>
-          <Typography variant="h6">MovieMatch</Typography>
+          <Typography variant="h6" style={{ fontFamily: 'Your-Font-Family' }}>MovieMatch</Typography>
         </Box>
       )}
 
@@ -186,7 +201,7 @@ const AppLayout = () => {
               width: drawerWidth,
               backgroundColor: "var(--background-white)",
               // backgroundColor: "#F7F7F7",
-              boxShadow: "2px 0 10px var(--shadow-color)",
+              // boxShadow: "2px 0 10px var(--shadow-color)",
             },
           }}
         >
@@ -205,7 +220,7 @@ const AppLayout = () => {
               overflowX: "hidden",
               backgroundColor: "var(--background-white)",
               // backgroundColor: "#F7F7F7",
-              boxShadow: "2px 0 10px var(--shadow-color)",
+              // boxShadow: "2px 0 10px var(--shadow-color)",
               transition: "width 0.3s ease",
             },
           }}
