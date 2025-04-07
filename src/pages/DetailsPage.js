@@ -149,9 +149,9 @@ const DetailsPage = () => {
           ← Back
         </button>
 
-        <button className={`like-button ${isLiked ? "liked" : ""}`} onClick={handleToggleLike}>
+        {/* <button className={`like-button ${isLiked ? "liked" : ""}`} onClick={handleToggleLike}>
           {isLiked ? "❤️" : "♡"}
-        </button>
+        </button> */}
       </div>
 
       <div className="movie-details">
@@ -169,10 +169,10 @@ const DetailsPage = () => {
             {movie.title} <span className="movie-year">({movie.year})</span>
           </h1>
 
-          <div className="movie-meta">
+          {/* <div className="movie-meta">
             <span className="movie-rating">⭐ {movie.rating}/10</span>
             <span className="movie-runtime">{movie.runtime} min</span>
-          </div>
+          </div> */}
 
           <div className="movie-director">
             Directed by <span className="director-name">{movie.director}</span>

@@ -60,6 +60,7 @@
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 4px 12px var(--shadow-color);
+  height: 100%;
 }
 
 .play-trailer-button {
@@ -185,4 +186,3 @@
     margin: 0 auto;
   }
 }
-

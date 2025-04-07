@@ -120,7 +120,7 @@ const AppLayout = () => {
               fontFamily: "Inter"
             }}  />}
         </ListItem>
-
+{/* 
         <ListItem
           button
           component={Link}
@@ -132,7 +132,7 @@ const AppLayout = () => {
           {sidebarOpen && <ListItemText primary="Settings" style={{
               fontFamily: "Inter"
             }}  />}
-        </ListItem>
+        </ListItem> */}
       </List>
 
       <Box sx={{ flexGrow: 1 }} />
@@ -145,8 +145,19 @@ const AppLayout = () => {
       <ListItem
           button
           component={Link}
+          to="/app/settings"
+          selected={isActive("/app/settings")}
+          className={`${styles.navItem} ${isActive("/app/settings") ? styles.active : ""}`}
+        >
+          <ListItemIcon className={styles.navIcon}><IoSettingsOutline /></ListItemIcon>
+          {sidebarOpen && <ListItemText primary="Manage Account" style={{
+              fontFamily: "Inter"
+            }}  />}
+        </ListItem>
+      {/* <ListItem
+          button
+          component={Link}
           onClick={handleLogout}
-          // to="/app/settings"
           // selected={isActive("/app/settings")}
           className={`${styles.navItem}`}
         >
@@ -154,7 +165,7 @@ const AppLayout = () => {
           {sidebarOpen && <ListItemText primary="Sign out" style={{
               fontFamily: "Inter"
             }}  />}
-        </ListItem>
+        </ListItem> */}
         </List>
       </Box>
     </>
