@@ -132,6 +132,7 @@ const AppLayout = () => {
       <ListItem
           button
           component={Link}
+          onClick={handleLogout}
           // to="/app/settings"
           // selected={isActive("/app/settings")}
           className={`${styles.navItem}`}
