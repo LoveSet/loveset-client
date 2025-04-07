@@ -8,7 +8,9 @@
 - adjust coding []
 
 - fix: space below modal title []
+
 - fix: swiping animation, animate with button clicks []
+- link movie title []
 
 - pages []
 
