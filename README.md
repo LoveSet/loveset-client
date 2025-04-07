@@ -14,19 +14,19 @@
 
 - pages []
 
-  - discover []
+  - discover [done]
   - details [done]
   - watchlist [done]
   - premium [done]
   - settings [done]
   - mobile []
 
-- modals []
+- modals [done]
 
-  - invite friend []
-  - out of swipes []
-  - terms of service []
-  - privacy policy []
+  - invite friend [done]
+  - out of swipes [done]
+  - terms of service [done]
+  - privacy policy [done]
 
 - emails []
 
