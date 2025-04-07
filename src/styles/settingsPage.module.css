@@ -1,20 +1,22 @@
 /* Settings Page Styles */
-.settings-container {
+.settingsContainer {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.settings-header {
+.settingsHeader {
   margin-bottom: 30px;
 }
 
-.settings-title {
+.settingsTitle {
+  font-family: "Neuzeit Grotesk Bold";
   font-size: 1.8rem;
   color: var(--primary-color);
 }
 
-.settings-section {
+.settingsSection {
+  font-family: "Inter";
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px var(--shadow-color);
@@ -22,7 +24,8 @@
   margin-bottom: 20px;
 }
 
-.section-title {
+.sectionTitle {
+  font-family: "Neuzeit Grotesk Bold";
   font-size: 1.2rem;
   color: var(--primary-color);
   margin-bottom: 20px;
@@ -30,13 +33,13 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.profile-info {
+.profileInfo {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.user-avatar {
+.userAvatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -50,29 +53,31 @@
   margin-right: 20px;
 }
 
-.user-details {
+.userDetails {
   flex: 1;
 }
 
-.user-name {
+.userName {
+  font-family: "Neuzeit Grotesk Bold";
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-.user-email {
+.userEmail {
+  font-family: "Inter";
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
 
-.subscription-info {
+.subscriptionInfo {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-.premium-badge {
+.premiumBadge {
   padding: 5px 15px;
   background-color: #ffc107;
   color: var(--text-primary);
@@ -81,22 +86,22 @@
   font-weight: 600;
 }
 
-.plan-details {
+.planDetails {
   flex: 1;
 }
 
-.plan-name {
+.planName {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-.plan-expiry {
+.planExpiry {
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
 
-.manage-subscription-button {
+.manageSubscriptionButton {
   padding: 8px 15px;
   background-color: var(--background-light);
   border-radius: 8px;
@@ -104,16 +109,16 @@
   transition: background-color 0.2s;
 }
 
-.manage-subscription-button:hover {
+.manageSubscriptionButton:hover {
   background-color: var(--background-dark);
 }
 
-.upgrade-prompt {
+.upgradePrompt {
   text-align: center;
   padding: 20px;
 }
 
-.upgrade-button {
+.upgradeButton {
   margin-top: 15px;
   padding: 10px 20px;
   background-color: var(--primary-color);
@@ -124,29 +129,30 @@
   display: inline-block;
 }
 
-.upgrade-button:hover {
-  background-color: var(--primary-dark);
+.upgradeButton:hover {
+  opacity: 0.85;
+  /* background-color: var(--primary-dark); */
 }
 
-.preferences-summary {
+.preferencesSummary {
   margin-bottom: 20px;
 }
 
-.preference-item {
+.preferenceItem {
   margin-bottom: 15px;
 }
 
-.preference-label {
+.preferenceLabel {
   font-size: 0.9rem;
   color: var(--text-secondary);
   margin-bottom: 5px;
 }
 
-.preference-value {
+.preferenceValue {
   font-size: 1rem;
 }
 
-.edit-preferences-button {
+.editPreferencesButton {
   width: 100%;
   padding: 10px 0;
   background-color: var(--background-light);
@@ -155,17 +161,17 @@
   transition: background-color 0.2s;
 }
 
-.edit-preferences-button:hover {
-  background-color: var(--background-dark);
+.editPreferencesButton:hover {
+  /* background-color: var(--background-dark); */
 }
 
-.account-actions {
+.accountActions {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.account-action-button {
+.accountActionButton {
   width: 100%;
   padding: 12px 0;
   background-color: var(--background-light);
@@ -176,11 +182,11 @@
   transition: background-color 0.2s;
 }
 
-.account-action-button:hover {
-  background-color: var(--background-dark);
+.accountActionButton:hover {
+  /* background-color: var(--background-dark); */
 }
 
-.logout-button {
+.logoutButton {
   width: 100%;
   padding: 12px 0;
   background-color: var(--error-color);
@@ -191,15 +197,14 @@
   transition: background-color 0.2s;
 }
 
-.logout-button:hover {
+.logoutButton:hover {
   background-color: #d32f2f;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .subscription-info {
+  .subscriptionInfo {
     flex-direction: column;
     align-items: flex-start;
   }
 }
-

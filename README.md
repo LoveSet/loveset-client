@@ -17,8 +17,9 @@
   - discover []
   - details [done]
   - watchlist [done]
-  - premium []
+  - premium [done]
   - settings []
+  - mobile []
 
 - modals []
 

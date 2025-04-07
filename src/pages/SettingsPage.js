@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import TermsOfServiceModal from "../modals/TermsOfServiceModal"
-import "../styles/settingsPage.css"
+import styles from "../styles/settingsPage.module.css"
 
 const SettingsPage = () => {
   const navigate = useNavigate()
@@ -63,33 +63,33 @@ const SettingsPage = () => {
   }
 
   return (
-    <div className="settings-container">
-      <div className="settings-header">
-        <h1 className="settings-title">Settings</h1>
+    <div className={styles.settingsContainer}>
+      <div className={styles.settingsHeader}>
+        <h1 className={styles.settingsTitle}>Settings</h1>
       </div>
 
-      <div className="settings-section">
-        <h2 className="section-title">Profile</h2>
+      <div className={styles.settingsSection}>
+        <h2 className={styles.sectionTitle}>Profile</h2>
 
-        <div className="profile-info">
-          <div className="user-avatar">{user?.name?.charAt(0) || "U"}</div>
+        <div className={styles.profileInfo}>
+          <div className={styles.userAvatar}>A</div>
 
-          <div className="user-details">
-            <div className="user-name">{user?.name || "User"}</div>
-            <div className="user-email">{user?.email || "user@example.com"}</div>
+          <div className={styles.userDetails}>
+            <div className={styles.userName}>Archie Bryann</div>
+            <div className={styles.userEmail}>@ekomobong</div>
           </div>
         </div>
       </div>
 
-      <div className="settings-section">
-        <h2 className="section-title">Subscription</h2>
+      <div className={styles.settingsSection}>
+        <h2 className={styles.sectionTitle}>Subscription</h2>
 
         {isPremium ? (
-          <div className="subscription-info">
-            <div className="premium-badge">Premium</div>
+          <div className={styles.subscriptionInfo}>
+            <div className={styles.premiumBadge}>Premium</div>
 
-            <div className="plan-details">
-              <div className="plan-name">
+            <div className={styles.planDetails}>
+              <div className={styles.planName}>
                 {premiumPlan === "weekly"
                   ? "1-Week Plan"
                   : premiumPlan === "monthly"
@@ -99,57 +99,64 @@ const SettingsPage = () => {
                       : "Premium Plan"}
               </div>
 
-              <div className="plan-expiry">Expires on {formatExpiryDate(premiumExpiry)}</div>
+              <div className={styles.planExpiry}>Expires on {formatExpiryDate(premiumExpiry)}</div>
             </div>
 
-            <button className="manage-subscription-button">Manage Subscription</button>
+            <button className={styles.manageSubscriptionButton}>Manage Subscription</button>
           </div>
         ) : (
-          <div className="upgrade-prompt">
+          <div className={styles.upgradePrompt}>
             <p>Upgrade to Premium for unlimited swipes and more features</p>
-            <button className="upgrade-button" onClick={handleUpgradePremium}>
+            <button className={styles.upgradeButton} onClick={handleUpgradePremium}>
               Upgrade Now
             </button>
           </div>
         )}
       </div>
 
-      <div className="settings-section">
-        <h2 className="section-title">Preferences</h2>
+      <div className={styles.settingsSection}>
+        <h2 className={styles.sectionTitle}>Preferences</h2>
 
-        <div className="preferences-summary">
-          <div className="preference-item">
-            <div className="preference-label">Content Types</div>
-            <div className="preference-value">{preferences.contentTypes.join(", ") || "Not set"}</div>
+        <div className={styles.preferencesSummary}>
+          <div className={styles.preferenceItem}>
+            <div className={styles.preferenceLabel}>Content Types</div>
+            <div className={styles.preferenceValue}>{preferences.contentTypes.join(", ") || "Not set"}</div>
           </div>
 
-          <div className="preference-item">
-            <div className="preference-label">Genres</div>
-            <div className="preference-value">{preferences.genres.join(", ") || "Not set"}</div>
+          <div className={styles.preferenceItem}>
+            <div className={styles.preferenceLabel}>Industries</div>
+            <div className={styles.preferenceValue}>{preferences.genres.join(", ") || "Not set"}</div>
           </div>
 
-          <div className="preference-item">
-            <div className="preference-label">Favorite Movie</div>
-            <div className="preference-value">{preferences.favoriteMovie || "Not set"}</div>
+          <div className={styles.preferenceItem}>
+            <div className={styles.preferenceLabel}>Genres</div>
+            <div className={styles.preferenceValue}>{preferences.favoriteMovie || "Not set"}</div>
+          </div>
+          <div className={styles.preferenceItem}>
+            <div className={styles.preferenceLabel}>Time Periods</div>
+            <div className={styles.preferenceValue}>{preferences.timePeriods || "Not set"}</div>
           </div>
         </div>
 
-        <button className="edit-preferences-button" onClick={handleEditPreferences}>
+        <button className={styles.editPreferencesButton} onClick={handleEditPreferences}>
           Edit Preferences
         </button>
       </div>
 
-      <div className="settings-section">
-        <h2 className="section-title">Account</h2>
+      <div className={styles.settingsSection}>
+        <h2 className={styles.sectionTitle}>Account</h2>
 
-        <div className="account-actions">
-          <button className="account-action-button" onClick={() => setShowTerms(true)}>
-            Terms of Service & Privacy Policy
+        <div className={styles.accountActions}>
+          <button className={styles.accountActionButton} onClick={() => setShowTerms(true)}>
+            Terms of Service
+          </button>
+          <button className={styles.accountActionButton} onClick={() => setShowTerms(true)}>
+          Privacy Policy
           </button>
 
-          <button className="account-action-button">Contact Support</button>
+          {/* <button className={styles.accountActionButton}>Contact Support</button> */}
 
-          <button className="logout-button" onClick={handleLogout}>
+          <button className={styles.logoutButton} onClick={handleLogout}>
             Logout
           </button>
         </div>
@@ -161,4 +168,3 @@ const SettingsPage = () => {
 }
 
 export default SettingsPage
-

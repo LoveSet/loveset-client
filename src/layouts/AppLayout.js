@@ -61,7 +61,7 @@ const AppLayout = () => {
       </Box> */}
 
       <Box className={styles.userProfile}>
-        <Box className={styles.userAvatar}>{"E"}</Box>
+        <Box className={styles.userAvatar}>{"A"}</Box>
         {sidebarOpen && (
           <Box className={styles.userInfo}>
             <Typography variant="subtitle1" className={styles.userName} style={{
