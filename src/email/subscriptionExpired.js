@@ -20,9 +20,9 @@ const Email = () => {
     <Html>
       <Tailwind>
         <Head>
-          <title>Your MovieSwipe Subscription Has Expired</title>
+          <title>Your LoveSet Subscription Has Expired</title>
         </Head>
-        <Preview>Your MovieSwipe subscription has expired. Resubscribe to continue finding your perfect movie matches.</Preview>
+        <Preview>Your LoveSet subscription has expired. Resubscribe to continue finding your perfect movie matches.</Preview>
         <Body className="bg-[#f5f5f5] font-sans py-[40px]">
           <Container className="bg-white rounded-[8px] mx-auto my-0 p-[20px]">
             <Section>
@@ -35,7 +35,7 @@ const Email = () => {
               </Text>
               
               <Text className="text-[16px] text-[#333333] mb-[16px]">
-                We noticed that your MovieSwipe subscription has expired. This means you'll no longer have access to premium features that help you find your perfect movie matches.
+                We noticed that your LoveSet subscription has expired. This means you'll no longer have access to premium features that help you find your perfect movie matches.
               </Text>
               
               <Section className="bg-[#f0f7ff] p-[16px] rounded-[8px] mb-[24px]">
@@ -57,25 +57,25 @@ const Email = () => {
               </Section>
               
               <Text className="text-[16px] text-[#333333] mb-[24px]">
-                Don't miss out on discovering your next favorite movies and shows. Resubscribe today to continue enjoying the full MovieSwipe experience.
+                Don't miss out on discovering your next favorite movies and shows. Resubscribe today to continue enjoying the full LoveSet experience.
               </Text>
               
               <Section className="text-center mb-[24px]">
                 <Button
                   className="bg-[#0066cc] text-white font-bold py-[12px] px-[24px] rounded-[8px] no-underline text-center box-border"
-                  href="https://movieswipe.example.com/resubscribe"
+                  href="https://loveset.platle.com/app/premium"
                 >
                   Resubscribe Now
                 </Button>
               </Section>
               
               <Text className="text-[16px] text-[#333333] mb-[24px]">
-                If you have any questions about your subscription, please contact our support team at support@movieswipe.example.com.
+                If you have any questions about your subscription, please contact our support team.
               </Text>
               
               <Text className="text-[16px] text-[#333333] mb-[24px]">
-                Thank you for being part of MovieSwipe!<br />
-                The MovieSwipe Team
+                Thank you for being part of LoveSet!<br />
+                The LoveSet Team
               </Text>
             </Section>
             
@@ -85,15 +85,15 @@ const Email = () => {
               <Row>
                 <Column>
                   <Text className="text-[12px] text-[#666666] m-0">
-                    © 2025 MovieSwipe. All rights reserved.
+                    © 2025 LoveSet. All rights reserved.
                   </Text>
-                  <Text className="text-[12px] text-[#666666] m-0">
+                  {/* <Text className="text-[12px] text-[#666666] m-0">
                     123 Movie Lane, Filmville, CA 90210
-                  </Text>
+                  </Text> */}
                 </Column>
                 <Column className="text-right">
                   <Text className="text-[12px] text-[#666666] m-0">
-                    <a href="https://movieswipe.example.com/unsubscribe" className="text-[#0066cc]">Unsubscribe</a>
+                    <a href="https://loveset.example.com/unsubscribe" className="text-[#0066cc]">Unsubscribe</a>
                   </Text>
                 </Column>
               </Row>

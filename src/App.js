@@ -8,7 +8,9 @@ import DetailsPage from "./pages/DetailsPage"
 import PremiumPage from "./pages/PremiumPage"
 import WatchlistPage from "./pages/WatchlistPage"
 import SettingsPage from "./pages/SettingsPage"
+import WelcomeEmail from "./email/welcome"
 import ReferralEmail from "./email/referralAward"
+import ExpiredEmail from "./email/subscriptionExpired"
 import "./styles/global.css"
 
 // Protected route component
@@ -31,6 +33,11 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/onboarding" element={<OnboardingPage />} />
           <Route path="/details/:id" element={<DetailsPage />} />
+          
+          {/* Emails */}
+          <Route path="welcome" element={<WelcomeEmail />} />
+          <Route path="referral" element={<ReferralEmail />} />
+          <Route path="expired" element={<ExpiredEmail />} />
 
           {/* Protected routes with AppLayout */}
           <Route
@@ -47,7 +54,6 @@ function App() {
             <Route path="settings" element={<SettingsPage />} />
 
 
-            <Route path="referral" element={<ReferralEmail />} />
 
           </Route>
         </Routes>

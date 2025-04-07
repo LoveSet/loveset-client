@@ -5,12 +5,10 @@
 - remove box shadow [done]
 - fix: space below modal title [done]
 
-- adjust ui []
-- adjust coding []
+- adjust ui [done]
+- adjust coding [done]
 
-- fix: swiping animation, animate with button clicks []
-
-- pages []
+- pages [done]
 
   - discover [done]
   - details [done]
@@ -26,16 +24,20 @@
   - terms of service [done]
   - privacy policy [done]
 
-- emails []
+- emails [done]
 
-  - referral award []
-  - subscription expired []
-  - welcome []
+  - referral award [done]
+  - subscription expired [done]
+  - welcome [done]
 
 - fonts: ui-serif, Inter (text), Biotif\*, Neuzeit Grotesk Bold
 
+- bugs []
+
+  - swiping animation, animate with button clicks []
+
 - frontend [sunday][done]
-- ui adjustments [monday][]
+- ui adjustments [monday][done]
 - backend [tuesday][]
 - coupling [wednesday][]
 - hosting + ms_startups + paddle [thursday][]

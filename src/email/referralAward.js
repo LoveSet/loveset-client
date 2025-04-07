@@ -20,9 +20,9 @@ const Email = () => {
     <Html>
       <Tailwind>
         <Head>
-          <title>You've Earned 10 Extra Swipes on MovieSwipe!</title>
+          <title>You've Earned 10 Extra Swipes on LoveSet!</title>
         </Head>
-        <Preview>Congratulations! You've earned 10 extra swipes for inviting a friend to MovieSwipe</Preview>
+        <Preview>Congratulations! You've earned 10 extra swipes for inviting a friend to LoveSet</Preview>
         <Body className="bg-[#f5f5f5] font-sans py-[40px]">
           <Container className="bg-white rounded-[8px] mx-auto my-0 p-[20px]">
             <Section>
@@ -35,7 +35,7 @@ const Email = () => {
               </Text>
               
               <Text className="text-[16px] text-[#333333] mb-[16px]">
-                Great news! Your friend has joined MovieSwipe using your invitation. As a thank you, we've added <span className="font-bold text-[#0066cc]">10 extra swipes</span> to your account.
+                Great news! Your friend has joined LoveSet using your invitation. As a thank you, we've added <span className="font-bold text-[#0066cc]">10 extra swipes</span> to your account.
               </Text>
               
               <Section className="bg-[#f0f7ff] p-[16px] rounded-[8px] mb-[24px] text-center">
@@ -54,7 +54,7 @@ const Email = () => {
               <Section className="text-center mb-[24px]">
                 <Button
                   className="bg-[#0066cc] text-white font-bold py-[12px] px-[24px] rounded-[8px] no-underline text-center box-border"
-                  href="https://movieswipe.example.com/app"
+                  href="https://loveset.platle.com/app/discover"
                 >
                   Use Your Swipes Now
                 </Button>
@@ -62,7 +62,7 @@ const Email = () => {
               
               <Text className="text-[16px] text-[#333333] mb-[24px]">
                 Happy swiping!<br />
-                The MovieSwipe Team
+                The LoveSet Team
               </Text>
             </Section>
             
@@ -72,15 +72,15 @@ const Email = () => {
               <Row>
                 <Column>
                   <Text className="text-[12px] text-[#666666] m-0">
-                    © 2025 MovieSwipe. All rights reserved.
+                    © 2025 LoveSet. All rights reserved.
                   </Text>
-                  <Text className="text-[12px] text-[#666666] m-0">
+                  {/* <Text className="text-[12px] text-[#666666] m-0">
                     123 Movie Lane, Filmville, CA 90210
-                  </Text>
+                  </Text> */}
                 </Column>
                 <Column className="text-right">
                   <Text className="text-[12px] text-[#666666] m-0">
-                    <a href="https://movieswipe.example.com/unsubscribe" className="text-[#0066cc]">Unsubscribe</a>
+                    <a href="https://LoveSet.example.com/unsubscribe" className="text-[#0066cc]">Unsubscribe</a>
                   </Text>
                 </Column>
               </Row>

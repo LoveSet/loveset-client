@@ -20,14 +20,14 @@ const Email = () => {
     <Html>
       <Tailwind>
         <Head>
-          <title>Welcome to MovieSwipe - Tinder for Movies</title>
+          <title>Welcome to LoveSet - Tinder for Movies</title>
         </Head>
-        <Preview>Welcome to MovieSwipe - Find your perfect movie match!</Preview>
+        <Preview>Welcome to LoveSet - Find your perfect movie match!</Preview>
         <Body className="bg-[#f5f5f5] font-sans py-[40px]">
           <Container className="bg-white rounded-[8px] mx-auto my-0 p-[20px]">
             <Section>
               <Heading className="text-[24px] font-bold text-[#0066cc] text-center mb-[24px]">
-                Welcome to MovieSwipe!
+                Welcome to LoveSet!
               </Heading>
               
               <Text className="text-[16px] text-[#333333] mb-[16px]">
@@ -35,12 +35,12 @@ const Email = () => {
               </Text>
               
               <Text className="text-[16px] text-[#333333] mb-[16px]">
-                We're excited to have you join MovieSwipe - the app that helps you find your perfect movie match without wasting time scrolling through endless options.
+                We're excited to have you join LoveSet - the app that helps you find your perfect movie match without wasting time scrolling through endless options.
               </Text>
               
               <Section className="bg-[#f0f7ff] p-[16px] rounded-[8px] mb-[24px]">
                 <Text className="text-[16px] text-[#333333] font-bold mb-[8px]">
-                  Here's how MovieSwipe works:
+                  Here's how LoveSet works:
                 </Text>
                 <Text className="text-[16px] text-[#333333] m-0">
                   1. Swipe right on movies you love
@@ -60,7 +60,7 @@ const Email = () => {
               <Section className="text-center mb-[24px]">
                 <Button
                   className="bg-[#0066cc] text-white font-bold py-[12px] px-[24px] rounded-[8px] no-underline text-center box-border"
-                  href="https://movieswipe.example.com/start"
+                  href="https://LoveSet.example.com/start"
                 >
                   Start Swiping Now
                 </Button>
@@ -72,7 +72,7 @@ const Email = () => {
               
               <Text className="text-[16px] text-[#333333] mb-[24px]">
                 Happy watching,<br />
-                The MovieSwipe Team
+                The LoveSet Team
               </Text>
             </Section>
             
@@ -82,15 +82,15 @@ const Email = () => {
               <Row>
                 <Column>
                   <Text className="text-[12px] text-[#666666] m-0">
-                    © 2025 MovieSwipe. All rights reserved.
+                    © 2025 LoveSet. All rights reserved.
                   </Text>
-                  <Text className="text-[12px] text-[#666666] m-0">
+                  {/* <Text className="text-[12px] text-[#666666] m-0">
                     123 Movie Lane, Filmville, CA 90210
-                  </Text>
+                  </Text> */}
                 </Column>
                 <Column className="text-right">
                   <Text className="text-[12px] text-[#666666] m-0">
-                    <a href="https://movieswipe.example.com/unsubscribe" className="text-[#0066cc]">Unsubscribe</a>
+                    <a href="https://loveset.platle.com/unsubscribe" className="text-[#0066cc]">Unsubscribe</a>
                   </Text>
                 </Column>
               </Row>
