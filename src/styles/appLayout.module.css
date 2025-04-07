@@ -74,6 +74,8 @@
 .navItem {
   padding: 12px 20px !important;
   margin-bottom: 5px !important;
+  color: #323b3f !important;
+  font-family: "Inter" !important;
 }
 
 .navItem:hover {
@@ -81,8 +83,10 @@
 }
 
 .active {
-  background-color: rgba(30, 136, 229, 0.1) !important;
-  color: var(--primary-color) !important;
+  /* background-color: rgba(30, 136, 229, 0.1) !important; */
+  background-color: #e5e5e5 !important;
+  /* color: var(--primary-color) !important; */
+  color: black !important;
   font-weight: 500 !important;
   border-left: 3px solid var(--primary-color) !important;
 }
@@ -96,7 +100,8 @@
 }
 
 .sidebarFooter {
-  padding: 20px;
+  /* padding: 20px; */
+  padding-bottom: 20px;
 }
 
 .logoutButton {

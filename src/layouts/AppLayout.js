@@ -124,18 +124,22 @@ const AppLayout = () => {
 
       <Box sx={{ flexGrow: 1 }} />
 
-      <Divider />
+      {/* <Divider /> */}
 
       <Box className={styles.sidebarFooter}>
-        <Button
-          className={styles.logoutButton}
-          onClick={handleLogout}
-          startIcon={<span className={styles.logoutIcon}><IoIosLogOut /></span>}
-          fullWidth
-          sx={{ justifyContent: sidebarOpen ? "flex-start" : "center" }}
+      <List className={styles.sidebarNav}>
+
+      <ListItem
+          button
+          component={Link}
+          // to="/app/settings"
+          // selected={isActive("/app/settings")}
+          className={`${styles.navItem}`}
         >
-          {sidebarOpen && "Logout"}
-        </Button>
+          <ListItemIcon className={styles.navIcon}><IoIosLogOut /></ListItemIcon>
+          {sidebarOpen && <ListItemText primary="Sign out" />}
+        </ListItem>
+        </List>
       </Box>
     </>
   )
