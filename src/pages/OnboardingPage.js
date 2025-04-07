@@ -23,7 +23,7 @@ const OnboardingPage = () => {
       setStep(step + 1)
     } else {
       localStorage.setItem("userPreferences", JSON.stringify(formData))
-      navigate("/app/swipe")
+      navigate("/app/discover")
     }
   }
 

@@ -3,7 +3,7 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext"
 import AppLayout from "./layouts/AppLayout"
 import HomePage from "./pages/HomePage"
 import OnboardingPage from "./pages/OnboardingPage"
-import SwipingPage from "./pages/SwipingPage"
+import Discover from "./pages/Discover"
 import DetailsPage from "./pages/DetailsPage"
 import PremiumPage from "./pages/PremiumPage"
 import WatchlistPage from "./pages/WatchlistPage"
@@ -40,7 +40,7 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="swipe" element={<SwipingPage />} />
+            <Route path="discover" element={<Discover />} />
             <Route path="premium" element={<PremiumPage />} />
             <Route path="watchlist" element={<WatchlistPage />} />
             <Route path="settings" element={<SettingsPage />} />

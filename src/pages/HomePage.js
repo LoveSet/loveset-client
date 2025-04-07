@@ -28,7 +28,7 @@ const HomePage = () => {
     if (mockUser.isNewUser) {
       navigate("/onboarding");
     } else {
-      navigate("/app/swipe");
+      navigate("/app/discover");
     }
   };
 

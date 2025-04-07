@@ -48,7 +48,7 @@ const PremiumPage = () => {
     localStorage.setItem("premiumExpiry", new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString())
 
     // Redirect to swiping page
-    navigate("/app/swipe")
+    navigate("/app/discover")
   }
 
   return (
@@ -115,7 +115,7 @@ const PremiumPage = () => {
           Continue
         </button>
 
-        <button className="cancel-button" onClick={() => navigate("/app/swipe")}>
+        <button className="cancel-button" onClick={() => navigate("/app/discover")}>
           No Thanks
         </button>
       </div>

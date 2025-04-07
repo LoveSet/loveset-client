@@ -85,9 +85,9 @@ const AppLayout = () => {
         <ListItem
           button
           component={Link}
-          to="/app/swipe"
-          selected={isActive("/app/swipe")}
-          className={`${styles.navItem} ${isActive("/app/swipe") ? styles.active : ""}`}
+          to="/app/discover"
+          selected={isActive("/app/discover")}
+          className={`${styles.navItem} ${isActive("/app/discover") ? styles.active : ""}`}
         >
           <ListItemIcon className={styles.navIcon}><IoSearch /></ListItemIcon>
           {sidebarOpen && <ListItemText primary="Discover" style={{

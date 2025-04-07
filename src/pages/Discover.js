@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import OutOfSwipesModal from "../modals/OutOfSwipesModal"
 import { useAuth } from "../contexts/AuthContext"
-import "../styles/swipingPage.css"
+import styles from "../styles/discover.module.css"
 
 // Mock movie data
 const mockMovies = [
@@ -70,7 +70,7 @@ const mockMovies = [
   },
 ]
 
-const SwipingPage = () => {
+const Discover = () => {
   const navigate = useNavigate()
   const { user } = useAuth()
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -212,25 +212,25 @@ const SwipingPage = () => {
   const currentMovie = mockMovies[currentIndex]
 
   return (
-    <div className="swiping-container">
-      <div className="swipes-counter">
+    <div className={styles.swipingContainer}>
+      {/* <div className={styles.swipesCounter}>
         {!isPremium && (
-          <div className="swipes-left">
-            <span className="swipes-icon">🎟️</span>
-            <span className="swipes-text">{swipesLeft} swipes left today</span>
+          <div className={styles.swipesLeft}>
+            <span className={styles.swipesIcon}>🎟️</span>
+            <span className={styles.swipesText}>{swipesLeft} swipes left today</span>
           </div>
         )}
 
-        <div className="action-buttons">
-          <button className="surprise-button" onClick={handleSurpriseMe}>
+        <div className={styles.actionButtons}>
+          <button className={styles.surpriseButton} onClick={handleSurpriseMe}>
             Surprise Me
           </button>
-          <button className="new-releases-button">New Releases</button>
+          <button className={styles.newReleasesButton}>New Releases</button>
         </div>
-      </div>
+      </div> */}
 
       <div
-        className="movie-card"
+        className={styles.movieCard}
         style={{
           transform: `translateX(${offsetX}px) rotate(${offsetX * 0.05}deg)`,
           opacity: 1 - Math.abs(offsetX) / 500,
@@ -243,59 +243,59 @@ const SwipingPage = () => {
         onTouchMove={handleSwipeMove}
         onTouchEnd={handleSwipeEnd}
       >
-        <div className="movie-poster">
+        <div className={styles.moviePoster}>
           <img src={currentMovie.poster || "/placeholder.svg"} alt={currentMovie.title} />
 
-          {swipeDirection === "right" && <div className="swipe-overlay like-overlay">LIKE</div>}
+          {swipeDirection === "right" && <div className={`${styles.swipeOverlay} ${styles.likeOverlay}`}>LIKE</div>}
 
-          {swipeDirection === "left" && <div className="swipe-overlay dislike-overlay">NOPE</div>}
+          {swipeDirection === "left" && <div className={`${styles.swipeOverlay} ${styles.dislikeOverlay}`}>NOPE</div>}
         </div>
 
-        <div className="movie-info">
-          <h2 className="movie-title">
-            {currentMovie.title} <span className="movie-year">({currentMovie.year})</span>
+        <div className={styles.movieInfo}>
+          <h2 className={styles.movieTitle}>
+            {currentMovie.title} <span className={styles.movieYear}>({currentMovie.year})</span>
           </h2>
 
-          <div className="movie-director">Directed by {currentMovie.director}</div>
+          <div className={styles.movieDirector}>Directed by {currentMovie.director}</div>
 
-          <div className="movie-genres">
+          <div className={styles.movieGenres}>
             {currentMovie.genres.map((genre, index) => (
-              <span key={index} className="genre-tag">
+              <span key={index} className={styles.genreTag}>
                 {genre}
               </span>
             ))}
           </div>
 
-          <div className="movie-rating">
-            <span className="rating-icon">⭐</span>
-            <span className="rating-value">{currentMovie.rating}/10</span>
+          <div className={styles.movieRating}>
+            <span className={styles.ratingIcon}>⭐</span>
+            <span className={styles.ratingValue}>{currentMovie.rating}/10</span>
           </div>
 
-          <div className="movie-actions">
-            <button className="trailer-button" onClick={handleViewDetails}>
-              <span className="trailer-icon">▶️</span>
+          <div className={styles.movieActions}>
+            <button className={styles.trailerButton} onClick={handleViewDetails}>
+              <span className={styles.trailerIcon}>▶️</span>
               <span>Watch Trailer</span>
             </button>
 
-            <button className="share-button" onClick={handleShareMovie}>
-              <span className="share-icon">📤</span>
+            <button className={styles.shareButton} onClick={handleShareMovie}>
+              <span className={styles.shareIcon}>📤</span>
               <span>Share</span>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="swipe-buttons">
-        <button className="dislike-button" onClick={handleDislike}>
-          <span className="dislike-icon">✕</span>
+      <div className={styles.swipeButtons}>
+        <button className={styles.dislikeButton} onClick={handleDislike}>
+          <span className={styles.dislikeIcon}>✕</span>
         </button>
 
-        <button className="details-button" onClick={handleViewDetails}>
-          <span className="details-icon">ℹ️</span>
+        <button className={styles.detailsButton} onClick={handleViewDetails}>
+          <span className={styles.detailsIcon}>ℹ️</span>
         </button>
 
-        <button className="like-button" onClick={handleLike}>
-          <span className="like-icon">♥</span>
+        <button className={styles.likeButton} onClick={handleLike}>
+          <span className={styles.likeIcon}>♥</span>
         </button>
       </div>
 
@@ -306,5 +306,4 @@ const SwipingPage = () => {
   )
 }
 
-export default SwipingPage
-
+export default Discover

@@ -48,7 +48,7 @@ const WatchlistPage = () => {
           <div className="empty-icon">🎬</div>
           <h2 className="empty-title">No liked movies yet</h2>
           <p className="empty-text">Start swiping to discover movies you'll love</p>
-          <button className="discover-button" onClick={() => navigate("/app/swipe")}>
+          <button className="discover-button" onClick={() => navigate("/app/discover")}>
             Discover Movies
           </button>
         </div>

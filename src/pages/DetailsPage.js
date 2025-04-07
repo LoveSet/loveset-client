@@ -106,7 +106,7 @@ const DetailsPage = () => {
 
   const handleBack = () => {
     if (user) {
-      navigate("/app/swipe")
+      navigate("/app/discover")
     } else {
       navigate("/")
     }
