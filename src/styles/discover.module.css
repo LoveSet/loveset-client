@@ -221,7 +221,8 @@
 }
 
 .trailerButton:hover {
-  background-color: #2b6cb0;
+  /* opacity: 0.85; */
+  /* background-color: #2b6cb0; */
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(49, 130, 206, 0.4);
 }
@@ -311,9 +312,14 @@
 
 .playButton:hover {
   transform: scale(1.05);
-  background-color: #2b6cb0;
+  /* opacity: 0.85; */
+  /* background-color: #2b6cb0; */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
+
+/* .playButton:hover .playIcon {
+  transform: scale(1.05);
+} */
 
 .playIcon {
   font-size: 27px;
