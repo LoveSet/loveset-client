@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import "../styles/watchlistPage.css"
+import styles from "../styles/watchlistPage.module.css"
 
 const WatchlistPage = () => {
   const navigate = useNavigate()
@@ -19,7 +19,7 @@ const WatchlistPage = () => {
     if (userPremium === "true") {
       setIsPremium(true)
     }
-  }, [])
+  }, [])  
 
   const handleRemoveFromLikes = (movieId) => {
     if (!isPremium) {
@@ -37,39 +37,39 @@ const WatchlistPage = () => {
   }
 
   return (
-    <div className="watchlist-container">
-      <div className="watchlist-header">
-        <h1 className="watchlist-title">My Likes</h1>
-        <p className="watchlist-subtitle">Movies and shows you've liked</p>
+    <div className={styles.watchlistContainer}>
+      <div className={styles.watchlistHeader}>
+        <h1 className={styles.watchlistTitle}>Watchlist</h1>
+        <p className={styles.watchlistSubtitle}>Movies and shows you've liked</p>
       </div>
 
       {likedMovies.length === 0 ? (
-        <div className="empty-watchlist">
-          <div className="empty-icon">🎬</div>
-          <h2 className="empty-title">No liked movies yet</h2>
-          <p className="empty-text">Start swiping to discover movies you'll love</p>
-          <button className="discover-button" onClick={() => navigate("/app/discover")}>
+        <div className={styles.emptyWatchlist}>
+          <div className={styles.emptyIcon}>🎬</div>
+          <h2 className={styles.emptyTitle}>No liked movies yet</h2>
+          <p className={styles.emptyText}>Start swiping to discover movies you'll love</p>
+          <button className={styles.discoverButton} onClick={() => navigate("/app/discover")}>
             Discover Movies
           </button>
         </div>
       ) : (
-        <div className="movie-grid">
+        <div className={styles.movieGrid}>
           {likedMovies.map((movie) => (
-            <div key={movie.id} className="movie-item">
-              <div className="movie-poster" onClick={() => handleViewDetails(movie.id)}>
-                <img src={movie.poster || "/placeholder.svg"} alt={movie.title} />
-                <div className="play-overlay">
-                  <span className="play-icon">▶</span>
+            <div key={movie.id} className={styles.movieItem}>
+              <div className={styles.moviePoster} onClick={() => handleViewDetails(movie.id)}>
+                <img src={"https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"} alt={movie.title} />
+                <div className={styles.playOverlay}>
+                  <span className={styles.playIcon}>▶</span>
                 </div>
               </div>
 
-              <div className="movie-info">
-                <h3 className="movie-title">{movie.title}</h3>
-                <p className="movie-director">{movie.director}</p>
+              <div className={styles.movieInfo}>
+                <h3 className={styles.movieTitle}>{movie.title}</h3>
+                <p className={styles.movieDirector}>{movie.director}</p>
 
-                <div className="movie-actions">
+                <div className={styles.movieActions}>
                   <button
-                    className="remove-button"
+                    className={styles.removeButton}
                     onClick={() => handleRemoveFromLikes(movie.id)}
                     disabled={!isPremium}
                   >
@@ -83,9 +83,9 @@ const WatchlistPage = () => {
       )}
 
       {!isPremium && likedMovies.length > 0 && (
-        <div className="premium-prompt">
+        <div className={styles.premiumPrompt}>
           <p>Upgrade to Premium to remove movies from your likes</p>
-          <button className="upgrade-button" onClick={() => navigate("/app/premium")}>
+          <button className={styles.upgradeButton} onClick={() => navigate("/app/premium")}>
             Upgrade Now
           </button>
         </div>
@@ -95,4 +95,3 @@ const WatchlistPage = () => {
 }
 
 export default WatchlistPage
-

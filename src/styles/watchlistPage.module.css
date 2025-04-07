@@ -1,26 +1,29 @@
-/* Watchlist Page Styles */
-.watchlist-container {
+/* watchlistPage.module.css */
+.watchlistContainer {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+  margin-top: 30px;
 }
 
-.watchlist-header {
+.watchlistHeader {
   margin-bottom: 30px;
 }
 
-.watchlist-title {
+.watchlistTitle {
   font-size: 1.8rem;
   color: var(--primary-color);
   margin-bottom: 5px;
+  font-family: "Neuzeit Grotesk Bold";
 }
 
-.watchlist-subtitle {
+.watchlistSubtitle {
   font-size: 1rem;
   color: var(--text-secondary);
+  font-family: "Inter";
 }
 
-.empty-watchlist {
+.emptyWatchlist {
   text-align: center;
   padding: 50px 20px;
   background-color: white;
@@ -28,24 +31,26 @@
   box-shadow: 0 4px 12px var(--shadow-color);
 }
 
-.empty-icon {
+.emptyIcon {
   font-size: 3rem;
   margin-bottom: 20px;
   color: var(--text-secondary);
 }
 
-.empty-title {
+.emptyTitle {
+  font-family: "Neuzeit Grotesk Bold";
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-.empty-text {
+.emptyText {
+  font-family: "Inter";
   font-size: 1rem;
   color: var(--text-secondary);
   margin-bottom: 20px;
 }
 
-.discover-button {
+.discoverButton {
   padding: 10px 20px;
   background-color: var(--primary-color);
   color: white;
@@ -55,42 +60,43 @@
   display: inline-block;
 }
 
-.discover-button:hover {
-  background-color: var(--primary-dark);
+.discoverButton:hover {
+  opacity: 0.85;
+  /* background-color: var(--primary-dark); */
 }
 
-.movie-grid {
+.movieGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
 }
 
-.movie-item {
+.movieItem {
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px var(--shadow-color);
   overflow: hidden;
 }
 
-.movie-poster {
+.moviePoster {
   position: relative;
   height: 250px;
   overflow: hidden;
   cursor: pointer;
 }
 
-.movie-poster img {
+.moviePoster img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.movie-poster:hover img {
+.moviePoster:hover img {
   transform: scale(1.05);
 }
 
-.play-overlay {
+.playOverlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -104,20 +110,22 @@
   transition: opacity 0.3s ease;
 }
 
-.movie-poster:hover .play-overlay {
+.moviePoster:hover .playOverlay {
   opacity: 1;
 }
 
-.play-icon {
+.playIcon {
   font-size: 3rem;
   color: white;
 }
 
-.movie-info {
+.movieInfo {
   padding: 15px;
 }
 
-.movie-title {
+.movieTitle {
+  cursor: pointer;
+  font-family: "Neuzeit Grotesk Bold";
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 5px;
@@ -126,7 +134,8 @@
   text-overflow: ellipsis;
 }
 
-.movie-director {
+.movieDirector {
+  font-family: "Inter";
   font-size: 0.9rem;
   color: var(--text-secondary);
   margin-bottom: 10px;
@@ -135,12 +144,13 @@
   text-overflow: ellipsis;
 }
 
-.movie-actions {
+.movieActions {
   display: flex;
   justify-content: flex-end;
 }
 
-.remove-button {
+.removeButton {
+  font-family: "Inter";
   padding: 6px 12px;
   background-color: var(--background-light);
   color: var(--text-primary);
@@ -149,26 +159,33 @@
   transition: background-color 0.2s;
 }
 
-.remove-button:hover:not(:disabled) {
+.removeButton:hover:not(:disabled) {
   background-color: var(--background-dark);
 }
 
-.remove-button:disabled {
+.removeButton:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.premium-prompt {
+.premiumPrompt {
   margin-top: 30px;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px var(--shadow-color);
 }
 
-.upgrade-button {
-  margin-top: 15px;
+.premiumPrompt p {
+  /* margin-top: 10px; */
+  font-family: "Inter";
+}
+
+.upgradeButton {
+  font-family: "Inter";
+  /* margin-top: 15px; */
+  /* margin-top: 5px; */
   padding: 10px 20px;
   background-color: var(--primary-color);
   color: white;
@@ -176,22 +193,22 @@
   font-weight: 500;
   transition: background-color 0.2s;
   display: inline-block;
+  margin-bottom: 5px;
 }
 
-.upgrade-button:hover {
+.upgradeButton:hover {
   background-color: var(--primary-dark);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .movie-grid {
+  .movieGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
-  .movie-grid {
+  .movieGrid {
     grid-template-columns: 1fr;
   }
 }
-

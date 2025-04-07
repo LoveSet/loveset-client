@@ -15,7 +15,8 @@
 - pages []
 
   - discover []
-  - watchlist []
+  - details [done]
+  - watchlist [done]
   - premium []
   - settings []
 
