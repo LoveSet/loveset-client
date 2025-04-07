@@ -1,8 +1,29 @@
 /* SwipingPage.module.css */
+
+.swipingContainerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .swipingContainerWrapper {
+    height: calc(
+      100vh - 64px
+    ); /* Subtract 64px for header on medium and below */
+  }
+}
+
 .swipingContainer {
-  max-width: 600px;
+  /* width: 600px; */
+  /* max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px; */
+
+  width: 100%; /* Allows it to scale with the screen size */
+  max-width: 600px; /* Ensures it doesn't get wider than 600px */
+  padding: 20px; /* Keep some padding for spacing */
 }
 
 .swipesCounter {
@@ -146,6 +167,7 @@
 
 .movieActions {
   display: flex;
+  /* justify-content: end; */
   gap: 10px;
 }
 

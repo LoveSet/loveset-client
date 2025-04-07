@@ -212,6 +212,7 @@ const Discover = () => {
   const currentMovie = mockMovies[currentIndex]
 
   return (
+    <div className={styles.swipingContainerWrapper}>
     <div className={styles.swipingContainer}>
       {/* <div className={styles.swipesCounter}>
         {!isPremium && (
@@ -265,11 +266,11 @@ const Discover = () => {
               </span>
             ))}
           </div>
-
+{/* 
           <div className={styles.movieRating}>
             <span className={styles.ratingIcon}>⭐</span>
             <span className={styles.ratingValue}>{currentMovie.rating}/10</span>
-          </div>
+          </div> */}
 
           <div className={styles.movieActions}>
             <button className={styles.trailerButton} onClick={handleViewDetails}>
@@ -302,6 +303,7 @@ const Discover = () => {
       {showOutOfSwipes && (
         <OutOfSwipesModal onClose={() => setShowOutOfSwipes(false)} onUpgrade={() => navigate("/app/premium")} />
       )}
+    </div>
     </div>
   )
 }

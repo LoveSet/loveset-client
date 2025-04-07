@@ -238,7 +238,7 @@ const AppLayout = () => {
             xs: 0,
             // md: sidebarOpen ? `${drawerWidth}px` : "70px",
           },
-          padding: "30px",
+          // padding: "30px",
           transition: "margin-left 0.3s ease",
           width: "100%",
           marginTop: isMobile ? "64px" : 0,
