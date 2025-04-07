@@ -3,7 +3,13 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import TermsOfServiceModal from "../modals/TermsOfServiceModal"
-import "../styles/premiumPage.css"
+import styles from "../styles/premiumPage.module.css"
+import { FiRefreshCcw } from "react-icons/fi";
+import { IoSearch } from "react-icons/io5";
+import { MdOutlineDelete } from "react-icons/md";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { LuSearch } from "react-icons/lu";
+import { CgInfinity } from "react-icons/cg";
 
 const PremiumPage = () => {
   const navigate = useNavigate()
@@ -24,7 +30,7 @@ const PremiumPage = () => {
       name: "Monthly",
       price: "$12",
       perWeek: "$3/wk",
-      savings: "40%",
+      savings: "0%",
       isBest: false,
     },
     {
@@ -52,78 +58,80 @@ const PremiumPage = () => {
   }
 
   return (
-    <div className="premium-container">
-      <div className="premium-header">
-        <h1 className="premium-title">MovieMatch Premium</h1>
-        <p className="premium-subtitle">Unlimited swipes, no ads, and more features</p>
+    <div className = {styles.premiumContainerWrapper}>
+    <div className={styles.premiumContainer}>
+      <div className={styles.premiumHeader}>
+        <h1 className={styles.premiumTitle}>LoveSet Premium</h1>
+        <p className={styles.premiumSubtitle}>Unlimited swipes, streaming availability, and more features</p>
       </div>
 
-      <div className="premium-features">
-        <div className="feature-item">
-          <span className="feature-icon">🔄</span>
-          <span className="feature-text">Unlimited Swipes</span>
+      <div className={styles.premiumFeatures}>
+        <div className={styles.featureItem}>
+          <span className={styles.featureIcon}><FiRefreshCcw /></span>
+          <span className={styles.featureText}>Unlimited Swipes</span>
         </div>
 
-        <div className="feature-item">
-          <span className="feature-icon">🔍</span>
-          <span className="feature-text">Where to Stream</span>
+        <div className={styles.featureItem}>
+          <span className={styles.featureIcon}><LuSearch /></span>
+          <span className={styles.featureText}>Where to Stream</span>
         </div>
 
-        <div className="feature-item">
-          <span className="feature-icon">🗑️</span>
-          <span className="feature-text">Delete from Watchlist</span>
+        <div className={styles.featureItem}>
+          <span className={styles.featureIcon}><FaRegTrashCan /></span>
+          <span className={styles.featureText}>Delete from Watchlist</span>
         </div>
 
-        <div className="feature-item">
-          <span className="feature-icon">🔔</span>
-          <span className="feature-text">New Release Alerts</span>
-        </div>
+        {/* <div className={styles.featureItem}>
+          <span className={styles.featureIcon}>🔔</span>
+          <span className={styles.featureText}>New Release Alerts</span>
+        </div> */}
       </div>
 
-      <div className="premium-plans">
+      <div className={styles.premiumPlans}>
         {plans.map((plan) => (
           <div
             key={plan.id}
-            className={`plan-card ${selectedPlan === plan.id ? "selected" : ""} ${plan.isBest ? "best-value" : ""}`}
+            className={`${styles.planCard} ${selectedPlan === plan.id ? styles.selected : ""} ${plan.isBest ? styles.bestValue : ""}`}
             onClick={() => handleSelectPlan(plan.id)}
           >
-            {plan.isBest && <div className="best-badge">Best value</div>}
+            {plan.isBest && <div className={styles.bestBadge}>Best value</div>}
 
-            <div className="plan-name">{plan.name}</div>
-            <div className="plan-price">{plan.price}</div>
-            <div className="plan-per-week">{plan.perWeek}</div>
+            <div className={styles.planName}>{plan.name}</div>
+            <div className={styles.planPrice}>{plan.price}</div>
+            <div className={styles.planPerWeek}>{plan.perWeek}</div>
 
-            {plan.savings !== "0%" && <div className="plan-savings">Save {plan.savings}</div>}
+            {plan.savings !== "0%" ? <div className={styles.planSavings}>Save {plan.savings}</div> : <div style = {{ height: "20.6px" }}></div>}
 
-            <div className="plan-radio">
-              <div className={`radio-button ${selectedPlan === plan.id ? "selected" : ""}`}></div>
+            <div className={styles.planRadio}>
+              <div className={`${styles.radioButton} ${selectedPlan === plan.id ? styles.radioButtonSelected : ""}`}></div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="subscription-terms">
+      <div className={styles.subscriptionTerms}>
         By tapping "Continue", you will be charged and your subscription will automatically renew for the same price and
         duration until you cancel via Account Settings.
-        <button className="terms-link" onClick={() => setShowTerms(true)}>
+        {/* <button className={styles.termsLink} onClick={() => setShowTerms(true)}>
           Terms
-        </button>
+        </button> */}
       </div>
 
-      <div className="subscription-actions">
-        <button className="subscribe-button" onClick={handleSubscribe}>
+      <div className={styles.subscriptionActions}>
+        <button className={styles.subscribeButton} onClick={handleSubscribe}>
           Continue
         </button>
 
-        <button className="cancel-button" onClick={() => navigate("/app/discover")}>
+        <button className={styles.cancelButton} onClick={() => navigate("/app/discover")}>
           No Thanks
         </button>
       </div>
 
       {showTerms && <TermsOfServiceModal onClose={() => setShowTerms(false)} />}
     </div>
+    </div>
+
   )
 }
 
 export default PremiumPage
-

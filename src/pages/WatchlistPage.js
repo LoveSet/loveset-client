@@ -57,7 +57,7 @@ const WatchlistPage = () => {
           {likedMovies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>
               <div className={styles.moviePoster} onClick={() => handleViewDetails(movie.id)}>
-                <img src={"https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"} alt={movie.title} />
+                <img src={"https://image.tmdb.org/t/p/w500/m0gM9jE1KmCkXZRqkeNYEQZdVsZ.jpg"} alt={movie.title} />
                 <div className={styles.playOverlay}>
                   <span className={styles.playIcon}>▶</span>
                 </div>
