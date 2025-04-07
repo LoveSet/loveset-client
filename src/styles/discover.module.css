@@ -229,7 +229,7 @@
 
 .shareButton:hover {
   /* background-color: #edf2f7; */
-  opacity: 0.85;
+  /* opacity: 0.85; */
   transform: translateY(-1px);
 }
 
