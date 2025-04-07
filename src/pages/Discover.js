@@ -236,7 +236,7 @@ const Discover = () => {
           onTouchEnd={handleSwipeEnd}
         >
           <div className={styles.moviePoster}>
-            <img src={currentMovie.poster || "/placeholder.svg"} alt={currentMovie.title} />
+            <img src={"https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"} alt={currentMovie.title} />
 
             {swipeDirection === "right" && <div className={`${styles.swipeOverlay} ${styles.likeOverlay}`}>LIKE</div>}
 

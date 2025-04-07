@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
-import "../styles/detailsPage.css"
+import styles from "../styles/detailsPage.module.css"
 
 // Mock movie data
 const mockMovies = [
@@ -139,74 +139,74 @@ const DetailsPage = () => {
   }
 
   if (!movie) {
-    return <div className="loading">Loading...</div>
+    return <div className={styles.loading}>Loading...</div>
   }
 
   return (
-    <div className="details-container">
-      <div className="details-header">
-        <button className="back-button" onClick={handleBack}>
+    <div className={styles.detailsContainer}>
+      <div className={styles.detailsHeader}>
+        <button className={styles.backButton} onClick={handleBack}>
           ← Back
         </button>
 
-        {/* <button className={`like-button ${isLiked ? "liked" : ""}`} onClick={handleToggleLike}>
+        {/* <button className={`${styles.likeButton} ${isLiked ? styles.liked : ""}`} onClick={handleToggleLike}>
           {isLiked ? "❤️" : "♡"}
         </button> */}
       </div>
 
-      <div className="movie-details">
-        <div className="poster-container">
-          <img src={movie.poster || "/placeholder.svg"} alt={movie.title} className="movie-poster" />
+      <div className={styles.movieDetails}>
+        <div className={styles.posterContainer}>
+          <img src={"https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"} alt={movie.title} className={styles.moviePoster} />
 
-          <button className="play-trailer-button" onClick={handlePlayTrailer}>
-            <span className="play-icon">▶</span>
+          <button className={styles.playTrailerButton} onClick={handlePlayTrailer}>
+            <span className={styles.playIcon}>▶</span>
             <span>Watch Trailer</span>
           </button>
         </div>
 
-        <div className="info-container">
-          <h1 className="movie-title">
-            {movie.title} <span className="movie-year">({movie.year})</span>
+        <div className={styles.infoContainer}>
+          <h1 className={styles.movieTitle}>
+            {movie.title} <span className={styles.movieYear}>({movie.year})</span>
           </h1>
 
-          {/* <div className="movie-meta">
-            <span className="movie-rating">⭐ {movie.rating}/10</span>
-            <span className="movie-runtime">{movie.runtime} min</span>
+          {/* <div className={styles.movieMeta}>
+            <span className={styles.movieRating}>⭐ {movie.rating}/10</span>
+            <span className={styles.movieRuntime}>{movie.runtime} min</span>
           </div> */}
 
-          <div className="movie-director">
-            Directed by <span className="director-name">{movie.director}</span>
+          <div className={styles.movieDirector}>
+            Directed by <span className={styles.directorName}>{movie.director}</span>
           </div>
 
-          <div className="movie-genres">
+          <div className={styles.movieGenres}>
             {movie.genres.map((genre, index) => (
-              <span key={index} className="genre-tag">
+              <span key={index} className={styles.genreTag}>
                 {genre}
               </span>
             ))}
           </div>
 
-          <div className="movie-description">
+          <div className={styles.movieDescription}>
             <h3>Synopsis</h3>
             <p>{movie.description}</p>
           </div>
 
-          <div className="movie-cast">
+          <div className={styles.movieCast}>
             <h3>Cast</h3>
-            <div className="cast-list">
+            <div className={styles.castList}>
               {movie.cast.map((actor, index) => (
-                <span key={index} className="cast-member">
+                <span key={index} className={styles.castMember}>
                   {actor}
                 </span>
               ))}
             </div>
           </div>
 
-          <div className="streaming-options">
+          <div className={styles.streamingOptions}>
             <h3>Where to Watch</h3>
-            <div className="streaming-platforms">
+            <div className={styles.streamingPlatforms}>
               {movie.streamingOn.map((platform, index) => (
-                <span key={index} className="platform-tag">
+                <span key={index} className={styles.platformTag}>
                   {platform}
                 </span>
               ))}
@@ -219,4 +219,3 @@ const DetailsPage = () => {
 }
 
 export default DetailsPage
-

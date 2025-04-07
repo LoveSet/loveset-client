@@ -1,18 +1,18 @@
-/* Details Page Styles */
-.details-container {
+/* detailsPage.module.css */
+.detailsContainer {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.details-header {
+.detailsHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.back-button {
+.backButton {
   padding: 8px 15px;
   background-color: var(--background-light);
   border-radius: 8px;
@@ -20,11 +20,11 @@
   transition: background-color 0.2s;
 }
 
-.back-button:hover {
+.backButton:hover {
   background-color: var(--background-dark);
 }
 
-.like-button {
+.likeButton {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -38,32 +38,32 @@
   transition: transform 0.2s;
 }
 
-.like-button:hover {
+.likeButton:hover {
   transform: scale(1.1);
 }
 
-.like-button.liked {
+.liked {
   color: #f44336;
 }
 
-.movie-details {
+.movieDetails {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 30px;
 }
 
-.poster-container {
+.posterContainer {
   position: relative;
 }
 
-.movie-poster {
+.moviePoster {
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 4px 12px var(--shadow-color);
   height: 100%;
 }
 
-.play-trailer-button {
+.playTrailerButton {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -76,97 +76,118 @@
   border-radius: 30px;
   font-weight: 500;
   transition: background-color 0.2s;
+  margin-bottom: -70px;
 }
 
-.play-trailer-button:hover {
+.playTrailerButton:hover {
   background-color: var(--primary-dark);
 }
 
-.play-icon {
+.playIcon {
   margin-right: 8px;
 }
 
-.info-container {
+.infoContainer {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.movie-title {
+.movieTitle {
   font-size: 2rem;
   margin-bottom: 5px;
   display: flex;
   align-items: center;
 }
 
-.movie-year {
+.movieYear {
   font-size: 1.2rem;
   color: var(--text-secondary);
   margin-left: 10px;
   font-weight: 400;
 }
 
-.movie-meta {
+.movieMeta {
   display: flex;
   gap: 20px;
   color: var(--text-secondary);
 }
 
-.movie-director {
+.movieDirector {
   margin-bottom: 10px;
 }
 
-.director-name {
+.directorName {
   font-weight: 500;
 }
 
-.movie-genres {
+.movieGenres {
+  font-family: "Inter";
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-.genre-tag {
-  padding: 5px 15px;
-  background-color: var(--background-light);
-  border-radius: 20px;
-  font-size: 0.9rem;
+.genreTag {
+  padding: 5px 12px;
+  background-color: #f0f4f8;
+  border-radius: 30px;
+  font-size: 0.85rem;
   font-weight: 500;
+  color: #2c5282;
+  letter-spacing: 0.2px;
+  transition: all 0.2s ease;
 }
 
-.movie-description h3,
-.movie-cast h3,
-.streaming-options h3 {
+.genreTag:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.movieDescription h3,
+.movieCast h3,
+.streamingOptions h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
   color: var(--primary-color);
 }
 
-.movie-description p {
+.movieDescription p {
   line-height: 1.6;
 }
 
-.cast-list {
+.castList {
+  font-family: "Inter";
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.castMember {
+  padding: 5px 12px;
+  background-color: #f0f4f8;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #2c5282;
+  letter-spacing: 0.2px;
+  transition: all 0.2s ease;
+}
+
+.castMember:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.streamingPlatforms {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.cast-member {
-  padding: 5px 15px;
-  background-color: var(--background-light);
-  border-radius: 20px;
-  font-size: 0.9rem;
-}
-
-.streaming-platforms {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.platform-tag {
+.platformTag {
   padding: 8px 15px;
   background-color: var(--primary-light);
   color: white;
@@ -175,13 +196,21 @@
   font-weight: 500;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
-  .movie-details {
+  .movieDetails {
     grid-template-columns: 1fr;
   }
 
-  .poster-container {
+  .posterContainer {
     max-width: 300px;
     margin: 0 auto;
   }
