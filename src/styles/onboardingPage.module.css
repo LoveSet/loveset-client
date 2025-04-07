@@ -162,7 +162,9 @@ input.textInput {
   padding: 12px 25px;
   /* background-color: var(--background-dark); */
   color: var(--text-primary);
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
+  border: 1px solid #e2e8f0;
+
   border-radius: 8px;
   font-weight: 500;
   transition: background-color 0.2s;

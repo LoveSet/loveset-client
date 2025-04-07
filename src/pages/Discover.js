@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 import OutOfSwipesModal from "../modals/OutOfSwipesModal"
 import { useAuth } from "../contexts/AuthContext"
 import styles from "../styles/discover.module.css"
+import { FaHeart } from "react-icons/fa";
+import { IoMdHeart } from "react-icons/io";
 
 // Mock movie data
 const mockMovies = [
@@ -209,103 +211,92 @@ const Discover = () => {
     alert(`Share URL: moviematch.com/movie/${mockMovies[currentIndex].id}`)
   }
 
+  const handleWatchTrailer = (e) => {
+    e.stopPropagation()
+    window.open(mockMovies[currentIndex].trailer, "_blank")
+  }
+
   const currentMovie = mockMovies[currentIndex]
 
   return (
     <div className={styles.swipingContainerWrapper}>
-    <div className={styles.swipingContainer}>
-      {/* <div className={styles.swipesCounter}>
-        {!isPremium && (
-          <div className={styles.swipesLeft}>
-            <span className={styles.swipesIcon}>🎟️</span>
-            <span className={styles.swipesText}>{swipesLeft} swipes left today</span>
-          </div>
-        )}
+      <div className={styles.swipingContainer}>
+        <div
+          className={styles.movieCard}
+          style={{
+            transform: `translateX(${offsetX}px) rotate(${offsetX * 0.05}deg)`,
+            opacity: 1 - Math.abs(offsetX) / 500,
+          }}
+          onMouseDown={handleSwipeStart}
+          onMouseMove={handleSwipeMove}
+          onMouseUp={handleSwipeEnd}
+          onMouseLeave={handleSwipeEnd}
+          onTouchStart={handleSwipeStart}
+          onTouchMove={handleSwipeMove}
+          onTouchEnd={handleSwipeEnd}
+        >
+          <div className={styles.moviePoster}>
+            <img src={currentMovie.poster || "/placeholder.svg"} alt={currentMovie.title} />
 
-        <div className={styles.actionButtons}>
-          <button className={styles.surpriseButton} onClick={handleSurpriseMe}>
-            Surprise Me
+            {swipeDirection === "right" && <div className={`${styles.swipeOverlay} ${styles.likeOverlay}`}>LIKE</div>}
+
+            {swipeDirection === "left" && <div className={`${styles.swipeOverlay} ${styles.dislikeOverlay}`}>NOPE</div>}
+          </div>
+
+          <div className={styles.movieInfo}>
+            <button className={styles.playButton} onClick={handleWatchTrailer} aria-label="Play trailer">
+              <span className={styles.playIcon}>▶</span>
+            </button>
+
+            <h2 className={styles.movieTitle}>
+              {currentMovie.title} <span className={styles.movieYear}>({currentMovie.year})</span>
+            </h2>
+
+            <div className={styles.movieDirector}>Directed by {currentMovie.director}</div>
+
+            <div className={styles.movieGenres}>
+              {currentMovie.genres.map((genre, index) => (
+                <span key={index} className={styles.genreTag}>
+                  {genre}
+                </span>
+              ))}
+            </div>
+
+            <div className={styles.movieActions}>
+              <button className={styles.trailerButton} onClick={handleWatchTrailer}>
+                <span className={styles.trailerIcon}>▶</span>
+                <span>Watch Trailer</span>
+              </button>
+
+              <button className={styles.shareButton} onClick={handleShareMovie}>
+                <span className={styles.shareIcon}>📤</span>
+                <span>Share</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.swipeButtons}>
+          <button className={styles.dislikeButton} onClick={handleDislike}>
+            <span className={styles.dislikeIcon}>✕</span>
           </button>
-          <button className={styles.newReleasesButton}>New Releases</button>
-        </div>
-      </div> */}
 
-      <div
-        className={styles.movieCard}
-        style={{
-          transform: `translateX(${offsetX}px) rotate(${offsetX * 0.05}deg)`,
-          opacity: 1 - Math.abs(offsetX) / 500,
-        }}
-        onMouseDown={handleSwipeStart}
-        onMouseMove={handleSwipeMove}
-        onMouseUp={handleSwipeEnd}
-        onMouseLeave={handleSwipeEnd}
-        onTouchStart={handleSwipeStart}
-        onTouchMove={handleSwipeMove}
-        onTouchEnd={handleSwipeEnd}
-      >
-        <div className={styles.moviePoster}>
-          <img src={currentMovie.poster || "/placeholder.svg"} alt={currentMovie.title} />
+          <button className={styles.detailsButton} onClick={handleViewDetails}>
+            <span className={styles.detailsIcon}>ℹ️</span>
+          </button>
 
-          {swipeDirection === "right" && <div className={`${styles.swipeOverlay} ${styles.likeOverlay}`}>LIKE</div>}
-
-          {swipeDirection === "left" && <div className={`${styles.swipeOverlay} ${styles.dislikeOverlay}`}>NOPE</div>}
+          <button className={styles.likeButton} onClick={handleLike}>
+            <span className={styles.likeIcon}>♥</span>
+          </button>
         </div>
 
-        <div className={styles.movieInfo}>
-          <h2 className={styles.movieTitle}>
-            {currentMovie.title} <span className={styles.movieYear}>({currentMovie.year})</span>
-          </h2>
-
-          <div className={styles.movieDirector}>Directed by {currentMovie.director}</div>
-
-          <div className={styles.movieGenres}>
-            {currentMovie.genres.map((genre, index) => (
-              <span key={index} className={styles.genreTag}>
-                {genre}
-              </span>
-            ))}
-          </div>
-{/* 
-          <div className={styles.movieRating}>
-            <span className={styles.ratingIcon}>⭐</span>
-            <span className={styles.ratingValue}>{currentMovie.rating}/10</span>
-          </div> */}
-
-          <div className={styles.movieActions}>
-            <button className={styles.trailerButton} onClick={handleViewDetails}>
-              <span className={styles.trailerIcon}>▶️</span>
-              <span>Watch Trailer</span>
-            </button>
-
-            <button className={styles.shareButton} onClick={handleShareMovie}>
-              <span className={styles.shareIcon}>📤</span>
-              <span>Share</span>
-            </button>
-          </div>
-        </div>
+        {showOutOfSwipes && (
+          <OutOfSwipesModal onClose={() => setShowOutOfSwipes(false)} onUpgrade={() => navigate("/app/premium")} />
+        )}
       </div>
-
-      <div className={styles.swipeButtons}>
-        <button className={styles.dislikeButton} onClick={handleDislike}>
-          <span className={styles.dislikeIcon}>✕</span>
-        </button>
-
-        <button className={styles.detailsButton} onClick={handleViewDetails}>
-          <span className={styles.detailsIcon}>ℹ️</span>
-        </button>
-
-        <button className={styles.likeButton} onClick={handleLike}>
-          <span className={styles.likeIcon}>♥</span>
-        </button>
-      </div>
-
-      {showOutOfSwipes && (
-        <OutOfSwipesModal onClose={() => setShowOutOfSwipes(false)} onUpgrade={() => navigate("/app/premium")} />
-      )}
-    </div>
     </div>
   )
 }
 
 export default Discover
+
