@@ -12,9 +12,14 @@ code {
     monospace;
 } */
 
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @font-face {
-  font-family: 'Neuzeit Grotesk Bold';
-  src: url('./assets/fonts/Neuzeit-Grotesk-Bold.otf') format('opentype');
+  font-family: "Neuzeit Grotesk Bold";
+  src: url("./assets/fonts/Neuzeit-Grotesk-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Biotif";
+  src: url("./assets/fonts/Fontspring-DEMO-biotif-regular.otf")
+    format("opentype");
 }

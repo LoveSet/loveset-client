@@ -110,6 +110,16 @@
   text-align: center;
 }
 
+.invite-button {
+  padding: 12px 0;
+  background-color: #f2f2f2;
+  /* color: white; */
+  border-radius: 30px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  text-align: center;
+}
+
 /* Invite Friend Modal */
 .invite-form {
   display: flex;
