@@ -2,20 +2,22 @@
 
 import { useState } from "react"
 import "../styles/modals.css"
+import { ClipboardCopy } from "lucide-react"
 
-const InviteFriendModal = ({ onClose }) => {
-  const [email, setEmail] = useState("")
-  const [isSent, setIsSent] = useState(false)
+const GetFreeSwipesModal = ({ onClose }) => {
+  const [isCopied, setIsCopied] = useState(false)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  // This would be your unique referral URL
+  const referralUrl = "https://moviematch.com/ref/2CCF3A"
 
-    if (email) {
-      // Simulate sending invitation
-      setTimeout(() => {
-        setIsSent(true)
-      }, 1000)
-    }
+  const handleCopyUrl = () => {
+    navigator.clipboard.writeText(referralUrl)
+    setIsCopied(true)
+
+    // Reset the copied state after 2 seconds
+    setTimeout(() => {
+      setIsCopied(false)
+    }, 2000)
   }
 
   return (
@@ -26,54 +28,46 @@ const InviteFriendModal = ({ onClose }) => {
         </button>
 
         <div className="modal-header">
-          <h2 className="modal-title">Invite a Friend</h2>
+          <h2 className="modal-title modal-title-center">Get Free Swipes!</h2>
         </div>
 
         <div className="modal-content">
-          {!isSent ? (
-            <>
-              <p className="modal-description">
-                Share MovieMatch with your friends and help them discover movies they'll love.
-              </p>
+          {/* <div className="free-swipes-icon">
+            <img src="/coins.png" alt="Gold coins" className="coins-image" />
+          </div> */}
 
-              <form onSubmit={handleSubmit} className="invite-form">
-                <div className="form-group">
-                  <label htmlFor="email" className="form-label">
-                    Friend's Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="form-input"
-                    placeholder="Enter your friend's email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
+          <p className="modal-description">
+            Invite friends to MovieMatch and get 10 free swipes when they sign up using your referral link!
+          </p>
 
-                <button type="submit" className="submit-button">
-                  Send Invitation
+          <div className="invite-form">
+            <div className="form-group">
+              <label htmlFor="referral-url" className="form-label">
+                Your Referral Link
+              </label>
+              <div className="url-input-container">
+                <input type="text" id="referral-url" className="form-input url-input" value={referralUrl} readOnly />
+                <button className="copy-button" onClick={handleCopyUrl} aria-label="Copy referral link">
+                  <ClipboardCopy size={18} />
                 </button>
-              </form>
-            </>
-          ) : (
-            <div className="success-message">
-              <div className="success-icon">✓</div>
-              <h3 className="success-title">Invitation Sent!</h3>
-              <p className="success-text">
-                We've sent an invitation to {email}. They'll receive a link to join MovieMatch.
-              </p>
-              <button className="close-button" onClick={onClose}>
-                Close
-              </button>
+              </div>
+              {isCopied && <p className="copied-message">Copied to clipboard!</p>}
             </div>
-          )}
+
+            <div className="referral-info">
+              <h3 className="referral-title">How it works:</h3>
+              <ol className="referral-steps">
+                <li>Share your unique link with friends</li>
+                <li>Friend downloads MovieMatch</li>
+                <li>You get 10 free swipes when they sign up!</li>
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-export default InviteFriendModal
+export default GetFreeSwipesModal
 

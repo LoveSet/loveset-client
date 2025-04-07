@@ -65,7 +65,7 @@ const HomePage = () => {
           Terms of Service
         </button> {" "}
         &
-        <button className={styles.termsLink} onClick={() => setShowTerms(true)}>
+        <button className={styles.termsLink} onClick={() => setShowInvite(true)}>
           Privacy Policy
         </button>
       </div>
