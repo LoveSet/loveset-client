@@ -182,7 +182,7 @@ const AppLayout = () => {
           <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
             <Menu />
           </IconButton>
-          <Typography variant="h6" style={{ fontFamily: 'Your-Font-Family' }}>MovieMatch</Typography>
+          <Typography variant="h6" style={{ fontFamily: 'Neuzeit Grotesk Bold' }}>LoveSet</Typography>
         </Box>
       )}
 

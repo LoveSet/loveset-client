@@ -1,14 +1,33 @@
 - sketch how many pages and components i need. [done]
 - design them in v0. [done]
 - generate the "get 10 more swipes -> invite friend" modal from the "platle v2" document [done]
+- change options font [done]
+- remove box shadow [done]
 
 - adjust ui []
 - adjust coding []
 
-- fonts: ui-serif, Inter (text), Biotif\*, Neuzeit Grotesk Bold
+- pages []
 
-- change options font []
-- remove box shadow []
+  - discover []
+  - watchlist []
+  - premium []
+  - settings []
+
+- modals []
+
+  - invite friend []
+  - out of swipes []
+  - terms of service []
+  - privacy policy []
+
+- emails []
+
+  - referral award []
+  - subscription expired []
+  - welcome []
+
+- fonts: ui-serif, Inter (text), Biotif\*, Neuzeit Grotesk Bold
 
 - frontend [sunday][done]
 - ui adjustments [monday][]
