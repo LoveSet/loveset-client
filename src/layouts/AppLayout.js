@@ -18,9 +18,14 @@ import {
   useTheme,
 } from "@mui/material"
 import { Menu } from "@mui/icons-material"
+import { IoSearch,IoHeartOutline } from "react-icons/io5";
+import { TbHeart } from "react-icons/tb";
+import { AiOutlineFire } from "react-icons/ai";
+import { IoSettingsOutline } from "react-icons/io5";
+import { IoIosLogOut } from "react-icons/io";
 import styles from "../styles/appLayout.module.css"
 
-const drawerWidth = 250
+const drawerWidth = 256.8
 
 const AppLayout = () => {
   const { user, logout } = useAuth()
@@ -45,16 +50,15 @@ const AppLayout = () => {
 
   const drawerContent = (
     <>
-      <Box className={styles.sidebarHeader}>
+      {/* <Box className={styles.sidebarHeader}>
         <Box className={styles.logo}>
-          <span className={styles.logoIcon}>🎬</span>
           {sidebarOpen && (
             <Typography variant="h6" className={styles.logoText}>
               MovieMatch
             </Typography>
           )}
         </Box>
-      </Box>
+      </Box> */}
 
       <Box className={styles.userProfile}>
         <Box className={styles.userAvatar}>{user?.name?.charAt(0) || "U"}</Box>
@@ -80,7 +84,7 @@ const AppLayout = () => {
           selected={isActive("/app/swipe")}
           className={`${styles.navItem} ${isActive("/app/swipe") ? styles.active : ""}`}
         >
-          <ListItemIcon className={styles.navIcon}>🔍</ListItemIcon>
+          <ListItemIcon className={styles.navIcon}><IoSearch /></ListItemIcon>
           {sidebarOpen && <ListItemText primary="Discover" />}
         </ListItem>
 
@@ -91,7 +95,7 @@ const AppLayout = () => {
           selected={isActive("/app/watchlist")}
           className={`${styles.navItem} ${isActive("/app/watchlist") ? styles.active : ""}`}
         >
-          <ListItemIcon className={styles.navIcon}>❤️</ListItemIcon>
+          <ListItemIcon className={styles.navIcon}><IoHeartOutline /></ListItemIcon>
           {sidebarOpen && <ListItemText primary="My Likes" />}
         </ListItem>
 
@@ -102,7 +106,7 @@ const AppLayout = () => {
           selected={isActive("/app/premium")}
           className={`${styles.navItem} ${isActive("/app/premium") ? styles.active : ""}`}
         >
-          <ListItemIcon className={styles.navIcon}>⭐</ListItemIcon>
+          <ListItemIcon className={styles.navIcon}><AiOutlineFire /></ListItemIcon>
           {sidebarOpen && <ListItemText primary="Premium" />}
         </ListItem>
 
@@ -113,7 +117,7 @@ const AppLayout = () => {
           selected={isActive("/app/settings")}
           className={`${styles.navItem} ${isActive("/app/settings") ? styles.active : ""}`}
         >
-          <ListItemIcon className={styles.navIcon}>⚙️</ListItemIcon>
+          <ListItemIcon className={styles.navIcon}><IoSettingsOutline /></ListItemIcon>
           {sidebarOpen && <ListItemText primary="Settings" />}
         </ListItem>
       </List>
@@ -126,7 +130,7 @@ const AppLayout = () => {
         <Button
           className={styles.logoutButton}
           onClick={handleLogout}
-          startIcon={<span className={styles.logoutIcon}>🚪</span>}
+          startIcon={<span className={styles.logoutIcon}><IoIosLogOut /></span>}
           fullWidth
           sx={{ justifyContent: sidebarOpen ? "flex-start" : "center" }}
         >
@@ -176,6 +180,7 @@ const AppLayout = () => {
               boxSizing: "border-box",
               width: drawerWidth,
               backgroundColor: "var(--background-white)",
+              // backgroundColor: "#F7F7F7",
               boxShadow: "2px 0 10px var(--shadow-color)",
             },
           }}
@@ -194,6 +199,7 @@ const AppLayout = () => {
               boxSizing: "border-box",
               overflowX: "hidden",
               backgroundColor: "var(--background-white)",
+              // backgroundColor: "#F7F7F7",
               boxShadow: "2px 0 10px var(--shadow-color)",
               transition: "width 0.3s ease",
             },
