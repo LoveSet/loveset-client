@@ -235,6 +235,7 @@ const MovieCard = ({
       className={styles.movieCard}
       style={{
         x,
+        // opacity, // no need for opacity since we are working with like and dislike
         rotate,
         zIndex,
         position: "absolute",
