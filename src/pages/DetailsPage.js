@@ -6,6 +6,84 @@ import { useAuth } from "../contexts/AuthContext"
 import styles from "../styles/detailsPage.module.css"
 
 // Mock movie data
+// const mockMovies = [
+//   {
+//     id: 1,
+//     title: "Inception",
+//     director: "Christopher Nolan",
+//     year: 2010,
+//     genres: ["Science Fiction", "Action", "Thriller"],
+//     poster: "/placeholder.svg?height=500&width=350",
+//     rating: 8.8,
+//     description:
+//       "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+//     trailer: "https://www.youtube.com/watch?v=YoHD9XEInc0",
+//     streamingOn: ["Netflix", "Amazon Prime", "HBO Max"],
+//     cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page", "Tom Hardy"],
+//     runtime: 148,
+//   },
+//   {
+//     id: 2,
+//     title: "The Shawshank Redemption",
+//     director: "Frank Darabont",
+//     year: 1994,
+//     genres: ["Drama", "Crime"],
+//     poster: "/placeholder.svg?height=500&width=350",
+//     rating: 9.3,
+//     description:
+//       "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+//     trailer: "https://www.youtube.com/watch?v=6hB3S9bIaco",
+//     streamingOn: ["Netflix", "Disney+"],
+//     cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
+//     runtime: 142,
+//   },
+//   {
+//     id: 3,
+//     title: "Parasite",
+//     director: "Bong Joon Ho",
+//     year: 2019,
+//     genres: ["Thriller", "Drama", "Comedy"],
+//     poster: "/placeholder.svg?height=500&width=350",
+//     rating: 8.6,
+//     description:
+//       "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+//     trailer: "https://www.youtube.com/watch?v=5xH0HfJHsaY",
+//     streamingOn: ["Hulu", "Amazon Prime"],
+//     cast: ["Song Kang-ho", "Lee Sun-kyun", "Cho Yeo-jeong", "Choi Woo-shik"],
+//     runtime: 132,
+//   },
+//   {
+//     id: 4,
+//     title: "Pulp Fiction",
+//     director: "Quentin Tarantino",
+//     year: 1994,
+//     genres: ["Crime", "Drama"],
+//     poster: "/placeholder.svg?height=500&width=350",
+//     rating: 8.9,
+//     description:
+//       "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+//     trailer: "https://www.youtube.com/watch?v=s7EdQ4FqbhY",
+//     streamingOn: ["Netflix", "HBO Max"],
+//     cast: ["John Travolta", "Uma Thurman", "Samuel L. Jackson", "Bruce Willis"],
+//     runtime: 154,
+//   },
+//   {
+//     id: 5,
+//     title: "The Dark Knight",
+//     director: "Christopher Nolan",
+//     year: 2008,
+//     genres: ["Action", "Crime", "Drama"],
+//     poster: "/placeholder.svg?height=500&width=350",
+//     rating: 9.0,
+//     description:
+//       "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+//     trailer: "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+//     streamingOn: ["HBO Max", "Disney+"],
+//     cast: ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"],
+//     runtime: 152,
+//   },
+// ]
+
 const mockMovies = [
   {
     id: 1,
@@ -82,6 +160,115 @@ const mockMovies = [
     cast: ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"],
     runtime: 152,
   },
+
+
+  {
+    id: 6,
+    title: "Inception",
+    director: "Christopher Nolan",
+    year: 2010,
+    genres: ["Science Fiction", "Action", "Thriller"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 8.8,
+    description:
+      "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    trailer: "https://www.youtube.com/watch?v=YoHD9XEInc0",
+    streamingOn: ["Netflix", "Amazon Prime", "HBO Max"],
+    cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page", "Tom Hardy"],
+    runtime: 148,
+  },
+  {
+    id: 7,
+    title: "The Shawshank Redemption",
+    director: "Frank Darabont",
+    year: 1994,
+    genres: ["Drama", "Crime"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 9.3,
+    description:
+      "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    trailer: "https://www.youtube.com/watch?v=6hB3S9bIaco",
+    streamingOn: ["Netflix", "Disney+"],
+    cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
+    runtime: 142,
+  },
+  {
+    id: 8,
+    title: "Parasite",
+    director: "Bong Joon Ho",
+    year: 2019,
+    genres: ["Thriller", "Drama", "Comedy"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 8.6,
+    description:
+      "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+    trailer: "https://www.youtube.com/watch?v=5xH0HfJHsaY",
+    streamingOn: ["Hulu", "Amazon Prime"],
+    cast: ["Song Kang-ho", "Lee Sun-kyun", "Cho Yeo-jeong", "Choi Woo-shik"],
+    runtime: 132,
+  },
+  {
+    id: 9,
+    title: "Pulp Fiction",
+    director: "Quentin Tarantino",
+    year: 1994,
+    genres: ["Crime", "Drama"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 8.9,
+    description:
+      "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    trailer: "https://www.youtube.com/watch?v=s7EdQ4FqbhY",
+    streamingOn: ["Netflix", "HBO Max"],
+    cast: ["John Travolta", "Uma Thurman", "Samuel L. Jackson", "Bruce Willis"],
+    runtime: 154,
+  },
+  {
+    id: 10,
+    title: "The Dark Knight",
+    director: "Christopher Nolan",
+    year: 2008,
+    genres: ["Action", "Crime", "Drama"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 9.0,
+    description:
+      "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    trailer: "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+    streamingOn: ["HBO Max", "Disney+"],
+    cast: ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"],
+    runtime: 152,
+  },
+
+  {
+    id: 11,
+    title: "Inception",
+    director: "Christopher Nolan",
+    year: 2010,
+    genres: ["Science Fiction", "Action", "Thriller"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 8.8,
+    description:
+      "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    trailer: "https://www.youtube.com/watch?v=YoHD9XEInc0",
+    streamingOn: ["Netflix", "Amazon Prime", "HBO Max"],
+    cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page", "Tom Hardy"],
+    runtime: 148,
+  },
+  {
+    id: 12,
+    title: "The Shawshank Redemption",
+    director: "Frank Darabont",
+    year: 1994,
+    genres: ["Drama", "Crime"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 9.3,
+    description:
+      "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    trailer: "https://www.youtube.com/watch?v=6hB3S9bIaco",
+    streamingOn: ["Netflix", "Disney+"],
+    cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
+    runtime: 142,
+  },
+ 
 ]
 
 const DetailsPage = () => {
