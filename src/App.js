@@ -12,6 +12,7 @@ import WelcomeEmail from "./email/welcome"
 import ReferralEmail from "./email/referralAward"
 import ExpiredEmail from "./email/subscriptionExpired"
 import "./styles/global.css"
+import SwipeCards from "./pages/SwipeCards"
 
 // Protected route component
 const ProtectedRoute = ({ children }) => {
@@ -38,6 +39,8 @@ function App() {
           <Route path="welcome" element={<WelcomeEmail />} />
           <Route path="referral" element={<ReferralEmail />} />
           <Route path="expired" element={<ExpiredEmail />} />
+
+          {/* Test */}
 
           {/* Protected routes with AppLayout */}
           <Route
