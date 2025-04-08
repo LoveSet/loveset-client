@@ -69,6 +69,90 @@ const mockMovies = [
       "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
     trailer: "https://www.youtube.com/watch?v=EXeTwQWrcwY",
   },
+  {
+    id: 6,
+    title: "Oppenheimer",
+    director: "Christopher Nolan",
+    year: 2023,
+    genres: ["Biography", "Drama", "History"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 8.4,
+    description:
+      "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+    trailer: "https://www.youtube.com/watch?v=bK6ldnjE3Y0",
+  },
+  {
+    id: 7,
+    title: "Killers of the Flower Moon",
+    director: "Martin Scorsese",
+    year: 2023,
+    genres: ["Crime", "Drama", "History"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 7.8,
+    description:
+      "Members of the Osage tribe in the United States are murdered under mysterious circumstances in the 1920s, sparking a major FBI investigation.",
+    trailer: "https://www.youtube.com/watch?v=3Rivj3z6nVs",
+  },
+  {
+    id: 8,
+    title: "Spider-Man: Across the Spider-Verse",
+    director: "Joaquim Dos Santos",
+    year: 2023,
+    genres: ["Animation", "Action", "Adventure"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 8.6,
+    description:
+      "Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence.",
+    trailer: "https://www.youtube.com/watch?v=shW9i6k8cB0",
+  },
+  {
+    id: 9,
+    title: "Barbie",
+    director: "Greta Gerwig",
+    year: 2023,
+    genres: ["Comedy", "Fantasy"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 7.5,
+    description:
+      "Barbie suffers a crisis that leads her to question her world and her existence.",
+    trailer: "https://www.youtube.com/watch?v=8zIf0XvoL9Y",
+  },
+  {
+    id: 10,
+    title: "Mission: Impossible – Dead Reckoning Part One",
+    director: "Christopher McQuarrie",
+    year: 2023,
+    genres: ["Action", "Adventure", "Thriller"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 7.7,
+    description:
+      "Ethan Hunt and his IMF team embark on their most dangerous mission yet: to track down a terrifying new weapon that threatens all of humanity.",
+    trailer: "https://www.youtube.com/watch?v=avz06PDqDbM",
+  },
+  {
+    id: 11,
+    title: "Asteroid City",
+    director: "Wes Anderson",
+    year: 2023,
+    genres: ["Comedy", "Drama", "Romance"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 7.2,
+    description:
+      "The itinerary of a Junior Stargazer convention is spectacularly disrupted by world-changing events.",
+    trailer: "https://www.youtube.com/watch?v=9FXCSXuGTF4",
+  },
+  {
+    id: 12,
+    title: "The Killer",
+    director: "David Fincher",
+    year: 2023,
+    genres: ["Action", "Crime", "Drama"],
+    poster: "/placeholder.svg?height=500&width=350",
+    rating: 6.9,
+    description:
+      "An assassin begins to psychologically crack as he develops a conscience, even as his clients continue to demand his skills.",
+    trailer: "https://www.youtube.com/watch?v=vs1epO_zLG8",
+  },
 ]
 
 const MovieCard = ({
@@ -137,7 +221,7 @@ const MovieCard = ({
         stiffness: 400,
       }}
     >
-      <div className={styles.moviePoster}>
+      <div className={styles.moviePoster} style={{ pointerEvents: "none" }}>
         <img src={"https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"} alt={movie.title} />
 
         <motion.div
@@ -156,7 +240,15 @@ const MovieCard = ({
       </div>
 
       <div className={styles.movieInfo}>
-        <button className={styles.playButton} onClick={() => handleWatchTrailer(movie)} aria-label="Play trailer">
+        <button
+          className={styles.playButton}
+          onClick={(e) => {
+            e.stopPropagation()
+            handleWatchTrailer(movie)
+          }}
+          style={{ pointerEvents: "auto" }}
+          aria-label="Play trailer"
+        >
           <span className={styles.playIcon}>▶</span>
         </button>
 
