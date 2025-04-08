@@ -39,7 +39,7 @@
   - swiping animation, animate with button clicks [done]
   - the item being swiped away should fade away to make it more graceful [done]
   - like batch should be more visible [done]
-  - what to do about the buttons []
+  - what to do about the buttons [done]
   - animation should also work when you like and dislike []
 
 - frontend [sunday][done]
