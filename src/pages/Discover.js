@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import OutOfSwipesModal from "../modals/OutOfSwipesModal"
 import { useAuth } from "../contexts/AuthContext"
 import styles from "../styles/discover.module.css"
+import { motion, useMotionValue, useTransform } from "framer-motion"
 
 // Mock movie data
 const mockMovies = [
@@ -70,17 +71,133 @@ const mockMovies = [
   },
 ]
 
+const MovieCard = ({
+  movie,
+  index,
+  totalCards,
+  handleLike,
+  handleDislike,
+  handleViewDetails,
+  handleWatchTrailer,
+  handleShareMovie,
+}) => {
+  const x = useMotionValue(0)
+  const rotateRaw = useTransform(x, [-150, 150], [-18, 18])
+  const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0])
+
+  // Check if this card is at the front of the stack
+  const isFront = index === totalCards - 1
+
+  const rotate = useTransform(() => {
+    const offset = isFront ? 0 : index % 2 ? 6 : -6
+    return `${rotateRaw.get() + offset}deg`
+  })
+
+  const handleDragEnd = () => {
+    if (Math.abs(x.get()) > 100) {
+      if (x.get() > 0) {
+        handleLike()
+      } else {
+        handleDislike()
+      }
+    }
+  }
+
+  const scale = isFront ? 1 : 0.98 - (totalCards - index - 1) * 0.02
+  const zIndex = index
+
+  return (
+    <motion.div
+      className={styles.movieCard}
+      style={{
+        x,
+        rotate,
+        zIndex,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        boxShadow: isFront
+          ? "0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5)"
+          : "0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3)",
+      }}
+      animate={{
+        scale,
+        y: (totalCards - index - 1) * 10, // Slight vertical offset for stacked appearance
+      }}
+      drag={isFront ? "x" : false}
+      dragConstraints={{
+        left: 0,
+        right: 0,
+      }}
+      onDragEnd={handleDragEnd}
+      transition={{
+        type: "spring",
+        damping: 50,
+        stiffness: 400,
+      }}
+    >
+      <div className={styles.moviePoster}>
+        <img src={"https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"} alt={movie.title} />
+
+        <motion.div
+          className={`${styles.swipeOverlay} ${styles.likeOverlay}`}
+          style={{ opacity: useTransform(x, [0, 100], [0, 1]) }}
+        >
+          LIKE
+        </motion.div>
+
+        <motion.div
+          className={`${styles.swipeOverlay} ${styles.dislikeOverlay}`}
+          style={{ opacity: useTransform(x, [-100, 0], [1, 0]) }}
+        >
+          NOPE
+        </motion.div>
+      </div>
+
+      <div className={styles.movieInfo}>
+        <button className={styles.playButton} onClick={() => handleWatchTrailer(movie)} aria-label="Play trailer">
+          <span className={styles.playIcon}>▶</span>
+        </button>
+
+        <h2 className={styles.movieTitle}>
+          {movie.title} <span className={styles.movieYear}>({movie.year})</span>
+        </h2>
+
+        <div className={styles.movieDirector}>Directed by {movie.director}</div>
+
+        <div className={styles.movieGenres}>
+          {movie.genres.map((genre, index) => (
+            <span key={index} className={styles.genreTag}>
+              {genre}
+            </span>
+          ))}
+        </div>
+
+        <div className={styles.movieActions}>
+          <button className={styles.trailerButton} onClick={() => handleWatchTrailer(movie)}>
+            <span className={styles.trailerIcon}>▶</span>
+            <span>Watch Trailer</span>
+          </button>
+
+          <button className={styles.shareButton} onClick={() => handleShareMovie(movie)}>
+            <span className={styles.shareIcon}>📤</span>
+            <span>Share</span>
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 const Discover = () => {
   const navigate = useNavigate()
   const { user } = useAuth()
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [movies, setMovies] = useState([...mockMovies])
   const [swipesLeft, setSwipesLeft] = useState(10) // Free tier: 10 swipes per day
   const [showOutOfSwipes, setShowOutOfSwipes] = useState(false)
   const [likedMovies, setLikedMovies] = useState([])
   const [dislikedMovies, setDislikedMovies] = useState([])
-  const [swipeDirection, setSwipeDirection] = useState(null)
-  const [startX, setStartX] = useState(0)
-  const [offsetX, setOffsetX] = useState(0)
   const [isPremium, setIsPremium] = useState(false)
 
   useEffect(() => {
@@ -120,53 +237,26 @@ const Discover = () => {
     localStorage.setItem("swipesLeft", swipesLeft.toString())
   }, [likedMovies, dislikedMovies, swipesLeft])
 
-  const handleSwipeStart = (e) => {
-    setStartX(e.clientX || e.touches[0].clientX)
-  }
-
-  const handleSwipeMove = (e) => {
-    if (!startX) return
-
-    const currentX = e.clientX || e.touches[0].clientX
-    const diff = currentX - startX
-
-    setOffsetX(diff)
-
-    if (diff > 50) {
-      setSwipeDirection("right")
-    } else if (diff < -50) {
-      setSwipeDirection("left")
-    } else {
-      setSwipeDirection(null)
-    }
-  }
-
-  const handleSwipeEnd = () => {
-    if (swipeDirection === "right") {
-      handleLike()
-    } else if (swipeDirection === "left") {
-      handleDislike()
-    }
-
-    setStartX(0)
-    setOffsetX(0)
-    setSwipeDirection(null)
-  }
-
   const handleLike = () => {
     if (swipesLeft <= 0 && !isPremium) {
       setShowOutOfSwipes(true)
       return
     }
 
-    const currentMovie = mockMovies[currentIndex]
+    const currentMovie = movies[movies.length - 1]
     setLikedMovies([...likedMovies, currentMovie])
 
     if (!isPremium) {
       setSwipesLeft(swipesLeft - 1)
     }
 
-    goToNextMovie()
+    // Remove the top card
+    setMovies(movies.slice(0, -1))
+
+    // If we've gone through all movies, reset
+    if (movies.length <= 1) {
+      setMovies([...mockMovies])
+    }
   }
 
   const handleDislike = () => {
@@ -175,103 +265,59 @@ const Discover = () => {
       return
     }
 
-    const currentMovie = mockMovies[currentIndex]
+    const currentMovie = movies[movies.length - 1]
     setDislikedMovies([...dislikedMovies, currentMovie])
 
     if (!isPremium) {
       setSwipesLeft(swipesLeft - 1)
     }
 
-    goToNextMovie()
-  }
+    // Remove the top card
+    setMovies(movies.slice(0, -1))
 
-  const goToNextMovie = () => {
-    if (currentIndex < mockMovies.length - 1) {
-      setCurrentIndex(currentIndex + 1)
-    } else {
-      // Reset to beginning when we've gone through all movies
-      setCurrentIndex(0)
+    // If we've gone through all movies, reset
+    if (movies.length <= 1) {
+      setMovies([...mockMovies])
     }
   }
 
   const handleSurpriseMe = () => {
-    // Randomly select a movie index
-    const randomIndex = Math.floor(Math.random() * mockMovies.length)
-    setCurrentIndex(randomIndex)
+    // Shuffle the movies array
+    const shuffled = [...mockMovies].sort(() => Math.random() - 0.5)
+    setMovies(shuffled)
   }
 
-  const handleViewDetails = () => {
-    navigate(`/details/${mockMovies[currentIndex].id}`)
+  const handleViewDetails = (movie) => {
+    navigate(`/details/${movie.id}`)
   }
 
-  const handleShareMovie = () => {
+  const handleShareMovie = (movie) => {
     // Implement share functionality
-    alert(`Share URL: moviematch.com/movie/${mockMovies[currentIndex].id}`)
+    alert(`Share URL: moviematch.com/movie/${movie.id}`)
   }
 
-  const handleWatchTrailer = (e) => {
-    e.stopPropagation()
-    window.open(mockMovies[currentIndex].trailer, "_blank")
+  const handleWatchTrailer = (movie, e) => {
+    if (e) e.stopPropagation()
+    window.open(movie.trailer, "_blank")
   }
-
-  const currentMovie = mockMovies[currentIndex]
 
   return (
     <div className={styles.swipingContainerWrapper}>
       <div className={styles.swipingContainer}>
-        <div
-          className={styles.movieCard}
-          style={{
-            transform: `translateX(${offsetX}px) rotate(${offsetX * 0.05}deg)`,
-            opacity: 1 - Math.abs(offsetX) / 500,
-          }}
-          onMouseDown={handleSwipeStart}
-          onMouseMove={handleSwipeMove}
-          onMouseUp={handleSwipeEnd}
-          onMouseLeave={handleSwipeEnd}
-          onTouchStart={handleSwipeStart}
-          onTouchMove={handleSwipeMove}
-          onTouchEnd={handleSwipeEnd}
-        >
-          <div className={styles.moviePoster}>
-            <img src={"https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"} alt={currentMovie.title} />
-
-            {swipeDirection === "right" && <div className={`${styles.swipeOverlay} ${styles.likeOverlay}`}>LIKE</div>}
-
-            {swipeDirection === "left" && <div className={`${styles.swipeOverlay} ${styles.dislikeOverlay}`}>NOPE</div>}
-          </div>
-
-          <div className={styles.movieInfo}>
-            <button className={styles.playButton} onClick={handleWatchTrailer} aria-label="Play trailer">
-              <span className={styles.playIcon}>▶</span>
-            </button>
-
-            <h2 className={styles.movieTitle}>
-              {currentMovie.title} <span className={styles.movieYear}>({currentMovie.year})</span>
-            </h2>
-
-            <div className={styles.movieDirector}>Directed by {currentMovie.director}</div>
-
-            <div className={styles.movieGenres}>
-              {currentMovie.genres.map((genre, index) => (
-                <span key={index} className={styles.genreTag}>
-                  {genre}
-                </span>
-              ))}
-            </div>
-
-            <div className={styles.movieActions}>
-              <button className={styles.trailerButton} onClick={handleWatchTrailer}>
-                <span className={styles.trailerIcon}>▶</span>
-                <span>Watch Trailer</span>
-              </button>
-
-              <button className={styles.shareButton} onClick={handleShareMovie}>
-                <span className={styles.shareIcon}>📤</span>
-                <span>Share</span>
-              </button>
-            </div>
-          </div>
+        <div className={styles.cardStack}>
+          {movies.map((movie, index) => (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              index={index}
+              totalCards={movies.length}
+              handleLike={handleLike}
+              handleDislike={handleDislike}
+              handleViewDetails={() => handleViewDetails(movie)}
+              handleWatchTrailer={(movie, e) => handleWatchTrailer(movie, e)}
+              handleShareMovie={() => handleShareMovie(movie)}
+            />
+          ))}
         </div>
 
         <div className={styles.swipeButtons}>
@@ -279,7 +325,7 @@ const Discover = () => {
             <span className={styles.dislikeIcon}>✕</span>
           </button>
 
-          <button className={styles.detailsButton} onClick={handleViewDetails}>
+          <button className={styles.detailsButton} onClick={() => handleViewDetails(movies[movies.length - 1])}>
             <span className={styles.detailsIcon}>ℹ️</span>
           </button>
 
@@ -297,4 +343,3 @@ const Discover = () => {
 }
 
 export default Discover
-
