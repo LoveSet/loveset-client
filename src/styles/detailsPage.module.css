@@ -129,6 +129,7 @@
 }
 
 .movieMeta {
+  font-family: "Neuzeit Grotesk Bold";
   display: flex;
   gap: 20px;
   color: var(--text-secondary);

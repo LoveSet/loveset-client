@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import { useAuth } from "../contexts/AuthContext"
-import styles from "../styles/detailsPage.module.css"
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import styles from "../styles/detailsPage.module.css";
 
 // Mock movie data
 // const mockMovies = [
@@ -97,7 +97,12 @@ const mockMovies = [
       "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
     trailer: "https://www.youtube.com/watch?v=YoHD9XEInc0",
     streamingOn: ["Netflix", "Amazon Prime", "HBO Max"],
-    cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page", "Tom Hardy"],
+    cast: [
+      "Leonardo DiCaprio",
+      "Joseph Gordon-Levitt",
+      "Ellen Page",
+      "Tom Hardy",
+    ],
     runtime: 148,
   },
   {
@@ -161,7 +166,6 @@ const mockMovies = [
     runtime: 152,
   },
 
-
   {
     id: 6,
     title: "Inception",
@@ -174,7 +178,12 @@ const mockMovies = [
       "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
     trailer: "https://www.youtube.com/watch?v=YoHD9XEInc0",
     streamingOn: ["Netflix", "Amazon Prime", "HBO Max"],
-    cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page", "Tom Hardy"],
+    cast: [
+      "Leonardo DiCaprio",
+      "Joseph Gordon-Levitt",
+      "Ellen Page",
+      "Tom Hardy",
+    ],
     runtime: 148,
   },
   {
@@ -250,7 +259,12 @@ const mockMovies = [
       "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
     trailer: "https://www.youtube.com/watch?v=YoHD9XEInc0",
     streamingOn: ["Netflix", "Amazon Prime", "HBO Max"],
-    cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page", "Tom Hardy"],
+    cast: [
+      "Leonardo DiCaprio",
+      "Joseph Gordon-Levitt",
+      "Ellen Page",
+      "Tom Hardy",
+    ],
     runtime: 148,
   },
   {
@@ -268,65 +282,68 @@ const mockMovies = [
     cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
     runtime: 142,
   },
- 
-]
+];
 
 const DetailsPage = () => {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const { user } = useAuth()
-  const [movie, setMovie] = useState(null)
-  const [isLiked, setIsLiked] = useState(false)
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [movie, setMovie] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     // Find movie by id
-    const foundMovie = mockMovies.find((m) => m.id === Number.parseInt(id))
+    const foundMovie = mockMovies.find((m) => m.id === Number.parseInt(id));
     if (foundMovie) {
-      setMovie(foundMovie)
+      setMovie(foundMovie);
 
       // Check if movie is in liked list
-      const likedMovies = JSON.parse(localStorage.getItem("likedMovies") || "[]")
-      const isMovieLiked = likedMovies.some((m) => m.id === Number.parseInt(id))
-      setIsLiked(isMovieLiked)
+      const likedMovies = JSON.parse(
+        localStorage.getItem("likedMovies") || "[]"
+      );
+      const isMovieLiked = likedMovies.some(
+        (m) => m.id === Number.parseInt(id)
+      );
+      setIsLiked(isMovieLiked);
     }
-  }, [id])
+  }, [id]);
 
   const handleBack = () => {
     if (user) {
-      navigate("/app/discover")
+      navigate("/app/discover");
     } else {
-      navigate("/")
+      navigate("/");
     }
-  }
+  };
 
   const handleToggleLike = () => {
     if (!user) {
       // Redirect to login if not logged in
-      navigate("/")
-      return
+      navigate("/");
+      return;
     }
 
-    const likedMovies = JSON.parse(localStorage.getItem("likedMovies") || "[]")
+    const likedMovies = JSON.parse(localStorage.getItem("likedMovies") || "[]");
 
     if (isLiked) {
       // Remove from likes
-      const updatedLikes = likedMovies.filter((m) => m.id !== movie.id)
-      localStorage.setItem("likedMovies", JSON.stringify(updatedLikes))
-      setIsLiked(false)
+      const updatedLikes = likedMovies.filter((m) => m.id !== movie.id);
+      localStorage.setItem("likedMovies", JSON.stringify(updatedLikes));
+      setIsLiked(false);
     } else {
       // Add to likes
-      const updatedLikes = [...likedMovies, movie]
-      localStorage.setItem("likedMovies", JSON.stringify(updatedLikes))
-      setIsLiked(true)
+      const updatedLikes = [...likedMovies, movie];
+      localStorage.setItem("likedMovies", JSON.stringify(updatedLikes));
+      setIsLiked(true);
     }
-  }
+  };
 
   const handlePlayTrailer = () => {
-    window.open(movie.trailer, "_blank")
-  }
+    window.open(movie.trailer, "_blank");
+  };
 
   if (!movie) {
-    return <div className={styles.loading}>Loading...</div>
+    return <div className={styles.loading}>Loading...</div>;
   }
 
   return (
@@ -343,9 +360,18 @@ const DetailsPage = () => {
 
       <div className={styles.movieDetails}>
         <div className={styles.posterContainer}>
-          <img src={"https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"} alt={movie.title} className={styles.moviePoster} />
+          <img
+            src={
+              "https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"
+            }
+            alt={movie.title}
+            className={styles.moviePoster}
+          />
 
-          <button className={styles.playTrailerButton} onClick={handlePlayTrailer}>
+          <button
+            className={styles.playTrailerButton}
+            onClick={handlePlayTrailer}
+          >
             <span className={styles.playIcon}>▶</span>
             <span>Watch Trailer</span>
           </button>
@@ -353,16 +379,19 @@ const DetailsPage = () => {
 
         <div className={styles.infoContainer}>
           <h1 className={styles.movieTitle}>
-            {movie.title} <span className={styles.movieYear}>({movie.year})</span>
+            {movie.title}{" "}
+            <span className={styles.movieYear}>({movie.year})</span>
           </h1>
 
-          {/* <div className={styles.movieMeta}>
-            <span className={styles.movieRating}>⭐ {movie.rating}/10</span>
+          <div className={styles.movieMeta}>
+            {/* <span className={styles.movieRating}>⭐ {movie.rating}/10</span> */}
             <span className={styles.movieRuntime}>{movie.runtime} min</span>
-          </div> */}
+            {/* // todo: 12 seasons */}
+          </div>
 
           <div className={styles.movieDirector}>
-            Directed by <span className={styles.directorName}>{movie.director}</span>
+            Directed by{" "}
+            <span className={styles.directorName}>{movie.director}</span>
           </div>
 
           <div className={styles.movieGenres}>
@@ -394,10 +423,10 @@ const DetailsPage = () => {
             <div className={styles.streamingPlatforms}>
               {movie.streamingOn.map((platform, index) => (
                 <>
-                <span key={index} className={styles.platformTag}>
-                {/* <img src = {'https://media.movieofthenight.com/services/hbo/logo-light-theme.svg'} className = {styles.platformLogo} /> */}
-                  {platform}
-                </span>
+                  <span key={index} className={styles.platformTag}>
+                    {/* <img src = {'https://media.movieofthenight.com/services/hbo/logo-light-theme.svg'} className = {styles.platformLogo} /> */}
+                    {platform}
+                  </span>
                 </>
               ))}
             </div>
@@ -405,7 +434,7 @@ const DetailsPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DetailsPage
+export default DetailsPage;
