@@ -453,8 +453,10 @@ const Discover = () => {
           ))}
         </div>
 
-        <div className={styles.swipeButtons}>
-          <button className={styles.dislikeButton} onClick={handleDislike}>
+        <div className={styles.swipeButtons} style = {{
+          height:"56px"
+        }}>
+          {/* <button className={styles.dislikeButton} onClick={handleDislike}>
             <span className={styles.dislikeIcon}>✕</span>
           </button>
 
@@ -464,7 +466,7 @@ const Discover = () => {
 
           <button className={styles.likeButton} onClick={handleLike}>
             <span className={styles.likeIcon}>♥</span>
-          </button>
+          </button> */}
         </div>
 
         {showOutOfSwipes && (
