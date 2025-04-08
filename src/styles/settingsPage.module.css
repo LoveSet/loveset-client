@@ -117,7 +117,7 @@
 }
 
 .manageSubscriptionButton:hover {
-  background-color: var(--background-dark);
+  /* background-color: var(--background-dark); */
 }
 
 .upgradePrompt {
