@@ -34,11 +34,17 @@
 
 - bugs []
 
-  - swiping animation, animate with button clicks []
+  - https://v0.dev/chat/swiping-animation-code-WJNbidJ7KMk [done]
+  - https://www.hover.dev/components/cards + https://www.youtube.com/watch?app=desktop&v=bzJHOoiu1Bs [done]
+  - swiping animation, animate with button clicks [done]
+  - the item being swiped away should fade away to make it more graceful [done]
+  - like batch should be more visible [done]
+  - what to do about the buttons []
+  - animation should also work when you like and dislike []
 
 - frontend [sunday][done]
 - ui adjustments [monday][done]
 - backend [tuesday][]
 - coupling [wednesday][]
-- hosting + ms_startups + paddle [thursday][]
+- hosting + ms_startups + 776 + paddle [thursday][]
 - launch after paddle verification []
