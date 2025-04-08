@@ -32,7 +32,7 @@
 
 - fonts: ui-serif, Inter (text), Biotif\*, Neuzeit Grotesk Bold
 
-- bugs []
+- bugs [done]
 
   - https://v0.dev/chat/swiping-animation-code-WJNbidJ7KMk [done]
   - https://www.hover.dev/components/cards + https://www.youtube.com/watch?app=desktop&v=bzJHOoiu1Bs [done]
@@ -40,7 +40,7 @@
   - the item being swiped away should fade away to make it more graceful [done]
   - like batch should be more visible [done]
   - what to do about the buttons [done]
-  - animation should also work when you like and dislike []
+  - animation should also work when you like and dislike [done]
 
 - frontend [sunday][done]
 - ui adjustments [monday][done]
