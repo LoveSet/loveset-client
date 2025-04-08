@@ -46,5 +46,5 @@
 - ui adjustments [monday][done]
 - backend [tuesday][]
 - coupling [wednesday][]
-- hosting + ms_startups + 776 + paddle [thursday][]
+- hosting + 776 + ms_startups + ycombinator + paddle [thursday][]
 - launch after paddle verification []

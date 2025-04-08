@@ -285,8 +285,10 @@ const MovieCard = ({
           className={styles.playButton}
           onClick={(e) => {
             e.stopPropagation()
-            handleWatchTrailer(movie)
+            // handleWatchTrailer(movie)
+            handleViewDetails(movie)
           }}
+          // onClick={() => handleViewDetails(movies[movies.length - 1])}
           style={{ pointerEvents: "auto" }}
           aria-label="Play trailer"
         >
