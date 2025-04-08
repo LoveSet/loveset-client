@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom"
 import OutOfSwipesModal from "../modals/OutOfSwipesModal"
 import { useAuth } from "../contexts/AuthContext"
 import styles from "../styles/discover.module.css"
-import { FaHeart } from "react-icons/fa";
-import { IoMdHeart } from "react-icons/io";
 
 // Mock movie data
 const mockMovies = [
