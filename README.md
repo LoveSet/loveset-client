@@ -44,7 +44,8 @@
 
 - frontend [sunday][done]
 - ui adjustments [monday][done]
-- backend [tuesday][]
-- coupling [wednesday][]
-- hosting + 776 + ms_startups + ycombinator + paddle [thursday][]
+- backend [tuesday,wednesday,thursday][]
+- coupling + emitting [friday][]
+  - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling []
+- hosting + paddle [saturday][]
 - launch after paddle verification []
