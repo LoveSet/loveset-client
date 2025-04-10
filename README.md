@@ -47,5 +47,8 @@
 - backend [tuesday,wednesday,thursday][]
 - coupling + emitting [friday][]
   - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling []
+    - show toast notification from `getContent`, never `getCache` []
+  - test everything billing + `subscription cron job` + `subscription expired email` in coupling []
+  - test `all emails` in coupling []
 - hosting + paddle [saturday][]
 - launch after paddle verification []
