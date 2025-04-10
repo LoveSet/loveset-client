@@ -44,7 +44,7 @@
 
 - frontend [sunday][done]
 - ui adjustments [monday][done]
-- backend [tuesday,wednesday,thursday][]
+- backend [tuesday,wednesday,thursday][done]
 - coupling + emitting [friday][]
   - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling []
     - show error toast notification from all rate limit errors []
