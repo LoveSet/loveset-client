@@ -283,7 +283,8 @@ const mockMovies = [
 ];
 
 function Content() {
-  const { id } = useParams();
+  const { slug } = useParams();
+  const id = slug;
   const navigate = useNavigate();
   // const { user } = useAuth();
   const user = {

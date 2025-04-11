@@ -24,6 +24,7 @@ import { AiOutlineFire } from "react-icons/ai";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 import styles from "./appLayout.module.css";
+import { pages } from "../../../routes";
 
 const drawerWidth = 256.8;
 
@@ -91,7 +92,31 @@ function AppLayout({ children }) {
       <Divider />
 
       <List className={styles.sidebarNav}>
-        <ListItem
+        {pages
+          .filter((page) => page?.app && page?.nav?.top)
+          .map((item) => (
+            <ListItem
+              key={item.path}
+              button
+              component={Link}
+              to={item?.path}
+              selected={isActive(item?.path)}
+              className={`${styles.navItem} ${isActive(item?.path) ? styles.active : ""}`}
+            >
+              <ListItemIcon className={styles.navIcon}>
+                {item?.nav?.icon}
+              </ListItemIcon>
+              {sidebarOpen && (
+                <ListItemText
+                  primary={item?.nav.name}
+                  style={{
+                    fontFamily: "Inter",
+                  }}
+                />
+              )}
+            </ListItem>
+          ))}
+        {/* <ListItem
           button
           component={Link}
           to="/app/discover"
@@ -149,7 +174,7 @@ function AppLayout({ children }) {
               }}
             />
           )}
-        </ListItem>
+        </ListItem> */}
         {/* 
         <ListItem
           button
@@ -171,7 +196,32 @@ function AppLayout({ children }) {
 
       <Box className={styles.sidebarFooter}>
         <List className={styles.sidebarNav}>
-          <ListItem
+          {pages
+            .filter((page) => page?.app && page?.nav?.bottom)
+            .map((item) => (
+              <ListItem
+                key={item.path}
+                button
+                component={Link}
+                to={item?.path}
+                selected={isActive(item?.path)}
+                className={`${styles.navItem} ${isActive(item?.path) ? styles.active : ""}`}
+              >
+                <ListItemIcon className={styles.navIcon}>
+                  {item?.nav?.icon}
+                </ListItemIcon>
+                {sidebarOpen && (
+                  <ListItemText
+                    primary={item?.nav.name}
+                    style={{
+                      fontFamily: "Inter",
+                    }}
+                  />
+                )}
+              </ListItem>
+            ))}
+
+          {/* <ListItem
             button
             component={Link}
             to="/app/settings"
@@ -189,7 +239,7 @@ function AppLayout({ children }) {
                 }}
               />
             )}
-          </ListItem>
+          </ListItem> */}
           {/* <ListItem
           button
           component={Link}

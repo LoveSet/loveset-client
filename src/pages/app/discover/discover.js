@@ -453,7 +453,7 @@ function Discover() {
   };
 
   const handleViewDetails = (movie) => {
-    navigate(`/details/${movie.id}`);
+    navigate(`/content/${movie.id}`);
   };
 
   const handleShareMovie = (movie) => {
