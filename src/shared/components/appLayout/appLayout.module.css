@@ -1,0 +1,121 @@
+.appLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--background-light);
+}
+
+/* Sidebar */
+.sidebarHeader {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoIcon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.logoText {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.userProfile {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  overflow: hidden;
+}
+
+.userName {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userEmail {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebarNav {
+  padding: 0 !important;
+}
+
+.navItem {
+  padding: 12px 20px !important;
+  margin-bottom: 5px !important;
+  color: #323b3f !important;
+  font-family: "Inter" !important;
+}
+
+.navItem:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.active {
+  /* background-color: rgba(30, 136, 229, 0.1) !important; */
+  background-color: #e5e5e5 !important;
+  /* color: var(--primary-color) !important; */
+  color: black !important;
+  font-weight: 500 !important;
+  border-left: 3px solid var(--primary-color) !important;
+}
+
+.navIcon {
+  font-size: 1.2rem !important;
+  margin-right: 15px !important;
+  width: 20px !important;
+  text-align: center !important;
+  min-width: unset !important;
+}
+
+.sidebarFooter {
+  /* padding: 20px; */
+  padding-bottom: 20px;
+}
+
+.logoutButton {
+  text-transform: none !important;
+  justify-content: flex-start !important;
+  color: var(--text-secondary) !important;
+}
+
+.logoutButton:hover {
+  color: var(--error-color) !important;
+  background-color: transparent !important;
+}
+
+.logoutIcon {
+  margin-right: 15px;
+  font-size: 1.2rem;
+}

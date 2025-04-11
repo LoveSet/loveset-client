@@ -1,0 +1,212 @@
+/* Onboarding Page Styles */
+.onboardingContainerWrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--background-light);
+}
+
+.onboardingContainer {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 70%;
+  max-width: 500px;
+}
+
+.progressStep {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.stepNumber {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #94a3b8; /* Gray for incomplete steps */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.progressStep.active .stepNumber {
+  background-color: #3b82f6; /* Blue for current step */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.progressStep.completed .stepNumber {
+  background-color: #3b82f6; /* Blue for completed steps */
+}
+
+.stepConnector {
+  height: 2px;
+  width: 60px;
+  background-color: #e2e8f0; /* Light gray for incomplete connectors */
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.progressStep.completed .stepConnector {
+  background-color: #3b82f6; /* Blue for completed connectors */
+}
+
+.onboardingContent {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  padding: 30px;
+  width: 100%;
+  max-width: 650px;
+}
+
+.stepContent {
+  margin-bottom: 30px;
+}
+
+.stepContent h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-family: "Neuzeit Grotesk Bold";
+}
+
+/* Card-style option selection */
+.optionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  width: 100%;
+}
+
+.optionCard {
+  position: relative;
+  padding: 15px;
+  border-radius: 8px;
+  /* background-color: rgba(0, 0, 0, 0.05); */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-family: "Inter";
+}
+
+.optionCard:hover {
+  background-color: rgba(176, 173, 173, 0.08);
+}
+
+.optionCard.selected {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 12px;
+}
+
+/* Keep existing styles for text inputs */
+.textInput {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 10px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+input.textInput {
+  min-height: auto;
+}
+
+.navigationButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.navigationButtons:has(.backButton) {
+  justify-content: space-between;
+}
+
+.backButton {
+  padding: 12px 25px;
+  /* background-color: var(--background-dark); */
+  color: var(--text-primary);
+  /* border: 1px solid gray; */
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  /* background-color: #d0d0d0; */
+  opacity: 0.85;
+}
+
+.nextButton {
+  padding: 12px 25px;
+  background-color: var(--primary-color);
+  /* background-color: #3b82f6;  */
+  /* Blue for buttons */
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.nextButton:hover {
+  /* background-color: #2563eb;  */
+  /* Darker blue on hover */
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .onboardingContainer {
+    padding: 20px 15px;
+  }
+
+  .stepConnector {
+    width: 30px;
+  }
+
+  .optionsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .progressBar {
+    width: 90%;
+  }
+}

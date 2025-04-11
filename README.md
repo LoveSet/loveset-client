@@ -48,10 +48,13 @@
 - coupling [friday][]
   - totalSwipes in user.model.js, add with like + pass [done]
   - referredSomeone : true/false in user.model.js [done]
+  - adjust coding [done]
   - all emitting []
   - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling []
-    - show error toast notification from all rate limit errors []
+  - show error toast notification from all rate limit errors []
   - test everything billing + `subscription cron job` + `subscription expired email` in coupling []
   - test `all emails` in coupling []
 - hosting + paddle [saturday][]
 - launch after paddle verification []
+
+package to install: react-query

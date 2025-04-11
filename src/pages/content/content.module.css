@@ -1,0 +1,254 @@
+/* detailsPage.module.css */
+.detailsContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.detailsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.backButton {
+  padding: 8px 15px;
+  background-color: var(--background-light);
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background-color: var(--background-dark);
+}
+
+.likeButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  color: #f44336;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: transform 0.2s;
+}
+
+.likeButton:hover {
+  transform: scale(1.1);
+}
+
+.liked {
+  color: #f44336;
+}
+
+.movieDetails {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+}
+
+.posterContainer {
+  position: relative;
+}
+
+.moviePoster {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  height: 100%;
+}
+
+.playTrailerButton {
+  font-family: "Inter";
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-bottom: -70px;
+}
+
+@media (max-width: 768px) {
+  .playTrailerButton {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-bottom: 0px !important;
+  }
+}
+
+.playTrailerButton:hover {
+  opacity: 0.85;
+  /* background-color: var(--primary-dark); */
+}
+
+.playIcon {
+  margin-right: 8px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.movieTitle {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  font-family: "Neuzeit Grotesk Bold";
+}
+
+.movieYear {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-left: 10px;
+  font-weight: 400;
+}
+
+.movieMeta {
+  font-family: "Neuzeit Grotesk Bold";
+  display: flex;
+  gap: 20px;
+  color: var(--text-secondary);
+}
+
+.movieDirector {
+  /* margin-bottom: 10px; */
+  font-family: "Inter";
+}
+
+.directorName {
+  font-weight: 500;
+}
+
+.movieGenres {
+  font-family: "Inter";
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  /* margin-bottom: 20px; */
+  margin-bottom: 10px;
+}
+
+.genreTag {
+  font-family: "Inter";
+  padding: 5px 12px;
+  background-color: #f0f4f8;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #2c5282;
+  letter-spacing: 0.2px;
+  transition: all 0.2s ease;
+}
+
+.genreTag:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.movieDescription h3,
+.movieCast h3,
+.streamingOptions h3 {
+  font-family: "Neuzeit Grotesk Bold";
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.movieDescription p {
+  font-family: "Inter";
+  line-height: 1.6;
+}
+
+.castList {
+  font-family: "Inter";
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.castMember {
+  font-family: "Inter";
+  padding: 5px 12px;
+  background-color: #f0f4f8;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #2c5282;
+  letter-spacing: 0.2px;
+  transition: all 0.2s ease;
+}
+
+.castMember:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.streamingPlatforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.platformLogo {
+  width: 40px;
+}
+
+.platformTag {
+  padding: 8px 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.platformTag:hover {
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .movieDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .posterContainer {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Outlet, Link, useLocation, useNavigate } from "react-router-dom"
-import { useAuth } from "../contexts/AuthContext"
+import { useState } from "react";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import {
   Drawer,
   Box,
@@ -16,37 +16,37 @@ import {
   Button,
   useMediaQuery,
   useTheme,
-} from "@mui/material"
-import { Menu } from "@mui/icons-material"
-import { IoSearch,IoHeartOutline } from "react-icons/io5";
+} from "@mui/material";
+import { Menu } from "@mui/icons-material";
+import { IoSearch, IoHeartOutline } from "react-icons/io5";
 import { TbHeart } from "react-icons/tb";
 import { AiOutlineFire } from "react-icons/ai";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
-import styles from "../styles/appLayout.module.css"
+import styles from "../styles/appLayout.module.css";
 
-const drawerWidth = 256.8
+const drawerWidth = 256.8;
 
 const AppLayout = () => {
-  const { user, logout } = useAuth()
-  const location = useLocation()
-  const navigate = useNavigate()
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"))
-  const [sidebarOpen, setSidebarOpen] = useState(!isMobile)
+  const { user, logout } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
 
   const handleLogout = () => {
-    logout()
-    navigate("/")
-  }
+    logout();
+    navigate("/");
+  };
 
   const isActive = (path) => {
-    return location.pathname === path
-  }
+    return location.pathname === path;
+  };
 
   const handleDrawerToggle = () => {
-    setSidebarOpen(!sidebarOpen)
-  }
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const drawerContent = (
     <>
@@ -64,15 +64,23 @@ const AppLayout = () => {
         <Box className={styles.userAvatar}>{"A"}</Box>
         {sidebarOpen && (
           <Box className={styles.userInfo}>
-            <Typography variant="subtitle1" className={styles.userName} style={{
-              fontFamily: "Neuzeit Grotesk Bold"
-            }}>
+            <Typography
+              variant="subtitle1"
+              className={styles.userName}
+              style={{
+                fontFamily: "Neuzeit Grotesk Bold",
+              }}
+            >
               {/* {user?.name || "User"} */}
               Archie Bryann
             </Typography>
-            <Typography variant="body2" className={styles.userEmail}  style={{
-              fontFamily: "Inter"
-            }}>
+            <Typography
+              variant="body2"
+              className={styles.userEmail}
+              style={{
+                fontFamily: "Inter",
+              }}
+            >
               @ekomobong
             </Typography>
           </Box>
@@ -89,10 +97,17 @@ const AppLayout = () => {
           selected={isActive("/app/discover")}
           className={`${styles.navItem} ${isActive("/app/discover") ? styles.active : ""}`}
         >
-          <ListItemIcon className={styles.navIcon}><IoSearch /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="Discover" style={{
-              fontFamily: "Inter"
-            }} />}
+          <ListItemIcon className={styles.navIcon}>
+            <IoSearch />
+          </ListItemIcon>
+          {sidebarOpen && (
+            <ListItemText
+              primary="Discover"
+              style={{
+                fontFamily: "Inter",
+              }}
+            />
+          )}
         </ListItem>
 
         <ListItem
@@ -102,10 +117,17 @@ const AppLayout = () => {
           selected={isActive("/app/watchlist")}
           className={`${styles.navItem} ${isActive("/app/watchlist") ? styles.active : ""}`}
         >
-          <ListItemIcon className={styles.navIcon}><IoHeartOutline /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="Watchlist" style={{
-              fontFamily: "Inter"
-            }}  />}
+          <ListItemIcon className={styles.navIcon}>
+            <IoHeartOutline />
+          </ListItemIcon>
+          {sidebarOpen && (
+            <ListItemText
+              primary="Watchlist"
+              style={{
+                fontFamily: "Inter",
+              }}
+            />
+          )}
         </ListItem>
 
         <ListItem
@@ -115,12 +137,19 @@ const AppLayout = () => {
           selected={isActive("/app/premium")}
           className={`${styles.navItem} ${isActive("/app/premium") ? styles.active : ""}`}
         >
-          <ListItemIcon className={styles.navIcon}><AiOutlineFire /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="Premium" style={{
-              fontFamily: "Inter"
-            }}  />}
+          <ListItemIcon className={styles.navIcon}>
+            <AiOutlineFire />
+          </ListItemIcon>
+          {sidebarOpen && (
+            <ListItemText
+              primary="Premium"
+              style={{
+                fontFamily: "Inter",
+              }}
+            />
+          )}
         </ListItem>
-{/* 
+        {/* 
         <ListItem
           button
           component={Link}
@@ -140,21 +169,27 @@ const AppLayout = () => {
       {/* <Divider /> */}
 
       <Box className={styles.sidebarFooter}>
-      <List className={styles.sidebarNav}>
-
-      <ListItem
-          button
-          component={Link}
-          to="/app/settings"
-          selected={isActive("/app/settings")}
-          className={`${styles.navItem} ${isActive("/app/settings") ? styles.active : ""}`}
-        >
-          <ListItemIcon className={styles.navIcon}><IoSettingsOutline /></ListItemIcon>
-          {sidebarOpen && <ListItemText primary="Manage Account" style={{
-              fontFamily: "Inter"
-            }}  />}
-        </ListItem>
-      {/* <ListItem
+        <List className={styles.sidebarNav}>
+          <ListItem
+            button
+            component={Link}
+            to="/app/settings"
+            selected={isActive("/app/settings")}
+            className={`${styles.navItem} ${isActive("/app/settings") ? styles.active : ""}`}
+          >
+            <ListItemIcon className={styles.navIcon}>
+              <IoSettingsOutline />
+            </ListItemIcon>
+            {sidebarOpen && (
+              <ListItemText
+                primary="Manage Account"
+                style={{
+                  fontFamily: "Inter",
+                }}
+              />
+            )}
+          </ListItem>
+          {/* <ListItem
           button
           component={Link}
           onClick={handleLogout}
@@ -169,7 +204,7 @@ const AppLayout = () => {
         </List>
       </Box>
     </>
-  )
+  );
 
   return (
     <Box className={styles.appLayout}>
@@ -190,10 +225,21 @@ const AppLayout = () => {
             boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
           }}
         >
-          <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2 }}
+          >
             <Menu />
           </IconButton>
-          <Typography variant="h6" style={{ fontFamily: 'Neuzeit Grotesk Bold' }}>LoveSet</Typography>
+          <Typography
+            variant="h6"
+            style={{ fontFamily: "Neuzeit Grotesk Bold" }}
+          >
+            LoveSet
+          </Typography>
         </Box>
       )}
 
@@ -258,8 +304,7 @@ const AppLayout = () => {
         <Outlet />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default AppLayout
-
+export default AppLayout;

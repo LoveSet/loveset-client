@@ -1,71 +1,66 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import AppLayout from "./layouts/AppLayout";
-import HomePage from "./pages/HomePage";
-import OnboardingPage from "./pages/OnboardingPage";
-import Discover from "./pages/Discover";
-import DetailsPage from "./pages/DetailsPage";
-import PremiumPage from "./pages/PremiumPage";
-import WatchlistPage from "./pages/WatchlistPage";
-import SettingsPage from "./pages/SettingsPage";
-import WelcomeEmail from "./email/welcome";
-import ReferralEmail from "./email/referralAward";
-import ExpiredEmail from "./email/subscriptionExpired";
-import "./styles/global.css";
-import Renderer from "./email/renderer";
-// import SwipeCards from "./pages/SwipeCards" // inspiration
+import React, { useRef } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { routes } from "./routes";
+import { useAuthState } from "./shared/context/useAuthContext";
 
-// Protected route component
-const ProtectedRoute = ({ children }) => {
-  const { user } = useAuth();
+// components
+import CustomHead from "./shared/components/customHead/customHead";
+import ScrollToTop from "./shared/components/scrollToTop/scrollToTop";
 
-  if (!user) {
-    return <Navigate to="/" replace />;
-  }
+// CSS files
+import "./shared/styles/global.css";
+import "./shared/styles/modals.css";
+import AppLayout from "./shared/components/appLayout/appLayout";
 
-  return children;
-};
-
-// App with routing
 function App() {
+  const { user } = useAuthState();
+
+  const renderGuardedRoutes = ({ i, ...route }) => {
+    if (user?.token) {
+      return (
+        <Route
+          key={i}
+          path={route.path}
+          // element={route.element || r0 ? route.noRedirect : route.redirect}
+          element={route.element}
+          {...route}
+        />
+      );
+    } else {
+      return (
+        <Route
+          key={i}
+          path={route.path}
+          element={
+            <Navigate
+              to={`/?return_to=${encodeURIComponent(
+                window.location.pathname +
+                  window.location.search +
+                  window.location.hash
+              )}`}
+              replace
+            />
+          }
+        />
+      );
+    }
+  };
+
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/onboarding" element={<OnboardingPage />} />
-          <Route path="/details/:id" element={<DetailsPage />} />
-
-          {/* Emails */}
-          <Route path="renderer" element={<Renderer />} />
-          <Route path="welcome" element={<WelcomeEmail />} />
-          <Route path="referral" element={<ReferralEmail />} />
-          <Route path="expired" element={<ExpiredEmail />} />
-
-          {/* Test */}
-
-          {/* Protected routes with AppLayout */}
-          <Route
-            path="/app"
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="discover" element={<Discover />} />
-            <Route path="premium" element={<PremiumPage />} />
-            <Route path="watchlist" element={<WatchlistPage />} />
-            <Route path="settings" element={<SettingsPage />} />
-          </Route>
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <div style={{ paddingTop: "env(safe-area-inset-top)" }}>
+      <CustomHead />
+      <ScrollToTop />
+      <Routes>
+        {routes.map((route, i) =>
+          route.guarded ? (
+            renderGuardedRoutes({ i, ...route })
+          ) : (
+            <Route key={i} {...route} />
+          )
+        )}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </div>
   );
 }
 
