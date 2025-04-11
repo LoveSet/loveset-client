@@ -46,6 +46,8 @@
 - ui adjustments [monday][done]
 - backend [tuesday,wednesday,thursday][done]
 - coupling [friday][]
+  - totalSwipes in user.model.js, add with like + pass [done]
+  - referredSomeone : true/false in user.model.js [done]
   - all emitting []
   - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling []
     - show error toast notification from all rate limit errors []
