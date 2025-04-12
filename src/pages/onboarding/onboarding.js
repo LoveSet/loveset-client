@@ -56,11 +56,11 @@ function Onboarding() {
     await handleDiscovery();
   };
 
-  useEffect(() => {
-    if (step == 2) {
-      handleOnStep();
-    }
-  }, [step]);
+  // useEffect(() => {
+  //   if (step == 2) {
+  //     handleOnStep();
+  //   }
+  // }, [step]);
 
   const handleNext = async () => {
     if (step < totalSteps) {
@@ -70,6 +70,10 @@ function Onboarding() {
 
       // save onboarding
       await handleOnboarding();
+
+      // call handleDiscovery (don't await)
+      handleDiscovery();
+
       // update local user
       const userObj = {
         token: user?.token,

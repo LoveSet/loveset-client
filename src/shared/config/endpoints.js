@@ -17,7 +17,7 @@ const API_ENDPOINTS = {
   GET_CONTENT: "discover/content",
   GET_CACHE: "discover/cache",
   LIKE: "discover/like",
-  DISLIKE: "discover/dislike",
+  PASS: "discover/pass",
   GET_YOUTUBE_URL: "discover/youtube",
 };
 

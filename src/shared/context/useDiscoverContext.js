@@ -34,15 +34,15 @@ const DiscoverProvider = ({ children }) => {
     }
   }
 
-  async function handleDiscovery() {
+  async function handleDiscovery(_movies) {
     setLoading(true);
     const cache = await handleGetCache();
     if (cache?.length > 0) {
-      setMovies([...movies, ...cache.reverse()]);
+      setMovies([..._movies, ...cache.reverse()]);
     } else {
       const content = await handleGetContent();
       if (content?.length > 0) {
-        setMovies([...movies, ...content.reverse()]);
+        setMovies([..._movies, ...content.reverse()]);
       } else {
         toast.error("An error occurred. Please try again or contact support");
       }

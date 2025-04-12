@@ -14,14 +14,14 @@ async function getCache() {
   return response;
 }
 
-async function like(payload) {
+async function like({ payload }) {
   let url = API_ENDPOINTS.LIKE;
   const response = await api.post(url, payload);
   return response;
 }
 
-async function dislike(payload) {
-  let url = API_ENDPOINTS.DISLIKE;
+async function pass({ payload }) {
+  let url = API_ENDPOINTS.PASS;
   const response = await api.post(url, payload);
   return response;
 }
@@ -45,9 +45,9 @@ export default {
     useMutation({
       mutationFn: like,
     }),
-  useDislikeService: () =>
+  usePassService: () =>
     useMutation({
-      mutationFn: dislike,
+      mutationFn: pass,
     }),
   useGetYoutubeUrlService: () =>
     useMutation({

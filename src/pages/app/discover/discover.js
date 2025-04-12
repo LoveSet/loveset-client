@@ -15,6 +15,9 @@ import useDiscoverService from "../../../shared/hooks/api/useDiscoverService";
 import { useModal } from "../../../shared/hooks/useModal";
 import YouTubeVideoModal from "../../../shared/components/modal/youtubeVideoModal";
 import { GridLoader, HashLoader, PacmanLoader } from "react-spinners";
+import { CircularProgress, Skeleton } from "@mui/material";
+import { AuthActionSuccess } from "../../../shared/context/reducers/authActions";
+import { useAuthState } from "../../../shared/context/useAuthContext";
 
 // Mock movie data
 const mockMovies = [
@@ -226,7 +229,9 @@ const MovieCard = ({
   handleViewDetails,
   handleWatchTrailer,
   handleShareMovie,
+  trailerLoading,
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false); // State to track image load
   const x = useMotionValue(0);
   const rotateRaw = useTransform(x, [-150, 150], [-18, 18]);
   const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
@@ -287,6 +292,15 @@ const MovieCard = ({
       }
     >
       <div className={styles.moviePoster} style={{ pointerEvents: "none" }}>
+        {!imageLoaded && (
+          <Skeleton
+            variant="rectangular"
+            width="100%"
+            height="100%"
+            animation="wave"
+            style={{ position: "absolute", top: 0, left: 0 }}
+          />
+        )}
         <img
           src={
             movie?.posterUrl?.includes("https")
@@ -294,6 +308,8 @@ const MovieCard = ({
               : FILES_URL + movie?.posterUrl
           }
           alt={movie.title}
+          onLoad={() => setImageLoaded(true)} // Set imageLoaded to true when the image loads
+          style={{ display: imageLoaded ? "block" : "none" }} // Hide the image until it loads
         />
         <motion.div
           className={`${styles.swipeOverlay} ${styles.likeOverlay}`}
@@ -347,13 +363,24 @@ const MovieCard = ({
           <button
             className={styles.trailerButton}
             onClick={
-              () => handleWatchTrailer(movie)
+              !trailerLoading ? () => handleWatchTrailer(movie) : () => {}
 
               // openInNewTab(movie?.trailerUrl)
             }
           >
-            <span className={styles.trailerIcon}>▶</span>
-            <span>Watch Trailer</span>
+            {trailerLoading ? (
+              <CircularProgress
+                style={{
+                  color: "white",
+                }}
+                size={20}
+              />
+            ) : (
+              <>
+                <span className={styles.trailerIcon}>▶</span>
+                <span>Watch Trailer</span>
+              </>
+            )}
           </button>
           {/* </a> */}
           {/* <CopyToClipboard
@@ -382,66 +409,110 @@ const MovieCard = ({
 };
 
 function Discover() {
+  const { user, dispatch } = useAuthState();
+
   const navigate = useNavigate();
 
   const { movies, setMovies, handleDiscovery, loading } = useDiscover();
 
   useEffect(() => {
-    if (movies?.length < 1 && !loading) {
-      handleDiscovery();
+    if (movies?.length < 5 && !loading) {
+      handleDiscovery(movies);
     }
-  }, [loading]);
+  }, [loading, movies]);
 
   // const { user } = useAuth();
-  const user = {
-    id: "user123",
-    name: "Movie Lover",
-    email: "user@example.com",
-    isNewUser: true,
-  };
+  // const user = {
+  //   id: "user123",
+  //   name: "Movie Lover",
+  //   email: "user@example.com",
+  //   isNewUser: true,
+  // };
   // const [movies, setMovies] = useState([...mockMovies]);
-  const [swipesLeft, setSwipesLeft] = useState(10); // Free tier: 10 swipes per day
+  const [swipesLeft, setSwipesLeft] = useState(10 - user?.user?.swipesUsed); // Free tier: 10 swipes per day
   const [showOutOfSwipes, setShowOutOfSwipes] = useState(false);
   const [likedMovies, setLikedMovies] = useState([]);
   const [dislikedMovies, setDislikedMovies] = useState([]);
-  const [isPremium, setIsPremium] = useState(false);
+  const [isPremium, setIsPremium] = useState(user?.user?.premium);
 
-  useEffect(() => {
-    // Check if user is premium
-    const userPremium = localStorage.getItem("isPremium");
-    if (userPremium === "true") {
-      setIsPremium(true);
+  // useEffect(() => {
+  //   // Check if user is premium
+  //   const userPremium = localStorage.getItem("isPremium");
+  //   if (userPremium === "true") {
+  //     setIsPremium(true);
+  //   }
+
+  //   // Load liked movies from localStorage
+  //   const storedLikedMovies = localStorage.getItem("likedMovies");
+  //   if (storedLikedMovies) {
+  //     setLikedMovies(JSON.parse(storedLikedMovies));
+  //   }
+
+  //   // Load disliked movies from localStorage
+  //   const storedDislikedMovies = localStorage.getItem("dislikedMovies");
+  //   if (storedDislikedMovies) {
+  //     setDislikedMovies(JSON.parse(storedDislikedMovies));
+  //   }
+
+  //   // Load remaining swipes from localStorage
+  //   const storedSwipes = localStorage.getItem("swipesLeft");
+  //   if (storedSwipes) {
+  //     setSwipesLeft(Number.parseInt(storedSwipes));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   // Save liked movies to localStorage
+  //   localStorage.setItem("likedMovies", JSON.stringify(likedMovies));
+
+  //   // Save disliked movies to localStorage
+  //   localStorage.setItem("dislikedMovies", JSON.stringify(dislikedMovies));
+
+  //   // Save remaining swipes to localStorage
+  //   localStorage.setItem("swipesLeft", swipesLeft.toString());
+  // }, [likedMovies, dislikedMovies, swipesLeft]);
+
+  const { mutateAsync: like } = useDiscoverService.useLikeService();
+  const { mutateAsync: pass } = useDiscoverService.usePassService();
+
+  const handleLikeShow = async (contentId) => {
+    try {
+      const response = await like({
+        payload: {
+          contentId,
+        },
+      });
+      if (response) {
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
     }
+  };
 
-    // Load liked movies from localStorage
-    const storedLikedMovies = localStorage.getItem("likedMovies");
-    if (storedLikedMovies) {
-      setLikedMovies(JSON.parse(storedLikedMovies));
+  const handlePassShow = async (contentId) => {
+    try {
+      const response = await pass({
+        payload: {
+          contentId,
+        },
+      });
+
+      if (response) {
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
     }
+  };
 
-    // Load disliked movies from localStorage
-    const storedDislikedMovies = localStorage.getItem("dislikedMovies");
-    if (storedDislikedMovies) {
-      setDislikedMovies(JSON.parse(storedDislikedMovies));
-    }
-
-    // Load remaining swipes from localStorage
-    const storedSwipes = localStorage.getItem("swipesLeft");
-    if (storedSwipes) {
-      setSwipesLeft(Number.parseInt(storedSwipes));
-    }
-  }, []);
-
-  useEffect(() => {
-    // Save liked movies to localStorage
-    localStorage.setItem("likedMovies", JSON.stringify(likedMovies));
-
-    // Save disliked movies to localStorage
-    localStorage.setItem("dislikedMovies", JSON.stringify(dislikedMovies));
-
-    // Save remaining swipes to localStorage
-    localStorage.setItem("swipesLeft", swipesLeft.toString());
-  }, [likedMovies, dislikedMovies, swipesLeft]);
+  const handleUpdateSwipesUsed = () => {
+    // update `swipesUsed` in local user
+    const userObj = {
+      token: user?.token,
+      currentUser: { ...user?.user, swipesUsed: user?.user?.swipesUsed + 1 },
+      permission: user?.permission,
+    };
+    dispatch(AuthActionSuccess(userObj));
+  };
 
   const handleLike = () => {
     if (swipesLeft <= 0 && !isPremium) {
@@ -450,19 +521,22 @@ function Discover() {
     }
 
     const currentMovie = movies[movies.length - 1];
-    setLikedMovies([...likedMovies, currentMovie]);
+    handleLikeShow(currentMovie?.id);
+
+    // setLikedMovies([...likedMovies, currentMovie]);
 
     if (!isPremium) {
       setSwipesLeft(swipesLeft - 1);
+      handleUpdateSwipesUsed();
     }
 
     // Remove the top card
     setMovies(movies.slice(0, -1));
 
     // If we've gone through all movies, reset
-    if (movies.length <= 1) {
-      setMovies([...mockMovies]);
-    }
+    // if (movies.length <= 1) {
+    //   setMovies([...mockMovies]);
+    // }
   };
 
   const handleDislike = () => {
@@ -472,19 +546,21 @@ function Discover() {
     }
 
     const currentMovie = movies[movies.length - 1];
-    setDislikedMovies([...dislikedMovies, currentMovie]);
+    handlePassShow(currentMovie?.id);
+    // setDislikedMovies([...dislikedMovies, currentMovie]);
 
     if (!isPremium) {
       setSwipesLeft(swipesLeft - 1);
+      handleUpdateSwipesUsed();
     }
 
     // Remove the top card
     setMovies(movies.slice(0, -1));
 
     // If we've gone through all movies, reset
-    if (movies.length <= 1) {
-      setMovies([...mockMovies]);
-    }
+    // if (movies.length <= 1) {
+    //   setMovies([...mockMovies]);
+    // }
   };
 
   const handleSurpriseMe = () => {
@@ -506,10 +582,12 @@ function Discover() {
   const [videoId, setVideoId] = useState(null);
   const { mutateAsync: getYoutubeVideo } =
     useDiscoverService.useGetYoutubeUrlService();
+  const [trailerLoading, setTrailerLoading] = useState(false);
 
   const handleWatchTrailer = async (movie, e) => {
     try {
       if (e) e.stopPropagation();
+      setTrailerLoading(true);
 
       if (movie?.trailerUrl?.includes("search_query")) {
         // Fetch actual YouTube URL
@@ -538,6 +616,7 @@ function Discover() {
         setVideoId(movie?.trailerUrl.split("v=")[1]);
         modal.handleOpen();
       }
+      setTrailerLoading(false);
     } catch (error) {
       console.error("Error fetching trailer:", error);
       toast.error("Something went wrong. Please try again.");
@@ -562,6 +641,7 @@ function Discover() {
                 handleViewDetails={() => handleViewDetails(movie)}
                 handleWatchTrailer={(movie, e) => handleWatchTrailer(movie, e)}
                 handleShareMovie={() => handleShareMovie(movie)}
+                trailerLoading={trailerLoading}
               />
             ))}
             {loading && (

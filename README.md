@@ -46,9 +46,10 @@
 
 - get youtube trailer -> react-modal-video [done]
 - loader for discovery [done]
-- like, dislike []
+- loader for content images [done]
+- loader for watch trailer [done]
+- like, dislike [done]
 - more getContent []
-- loader for content images []
 - detail page []
 - streaming availability []
 
