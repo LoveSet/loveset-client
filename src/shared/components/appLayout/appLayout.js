@@ -25,6 +25,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 import styles from "./appLayout.module.css";
 import { pages } from "../../../routes";
+import { ToastContainer, toast } from "react-toastify";
 
 const drawerWidth = 256.8;
 
@@ -258,104 +259,117 @@ function AppLayout({ children }) {
   );
 
   return (
-    <Box className={styles.appLayout}>
-      {/* App Bar for mobile - only shown when drawer is closed */}
-      {isMobile && !sidebarOpen && (
-        <Box
-          sx={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "64px",
-            backgroundColor: "white",
-            zIndex: 99,
-            display: "flex",
-            alignItems: "center",
-            padding: "0 16px",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-          }}
-        >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2 }}
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        // hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Box className={styles.appLayout}>
+        {/* App Bar for mobile - only shown when drawer is closed */}
+        {isMobile && !sidebarOpen && (
+          <Box
+            sx={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: "64px",
+              backgroundColor: "white",
+              zIndex: 99,
+              display: "flex",
+              alignItems: "center",
+              padding: "0 16px",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            }}
           >
-            <Menu />
-          </IconButton>
-          <Typography
-            variant="h6"
-            style={{ fontFamily: "Neuzeit Grotesk Bold" }}
-          >
-            LoveSet
-          </Typography>
-        </Box>
-      )}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2 }}
+            >
+              <Menu />
+            </IconButton>
+            <Typography
+              variant="h6"
+              style={{ fontFamily: "Neuzeit Grotesk Bold" }}
+            >
+              LoveSet
+            </Typography>
+          </Box>
+        )}
 
-      {/* Drawer - different behavior based on screen size */}
-      {isMobile ? (
-        <Drawer
-          variant="temporary"
-          open={sidebarOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile
-          }}
-          sx={{
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-              backgroundColor: "var(--background-white)",
-              // backgroundColor: "#F7F7F7",
-              // boxShadow: "2px 0 10px var(--shadow-color)",
-            },
-          }}
-        >
-          {drawerContent}
-        </Drawer>
-      ) : (
-        <Drawer
-          variant="persistent"
-          open={sidebarOpen}
-          sx={{
-            width: sidebarOpen ? drawerWidth : 70,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
+        {/* Drawer - different behavior based on screen size */}
+        {isMobile ? (
+          <Drawer
+            variant="temporary"
+            open={sidebarOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile
+            }}
+            sx={{
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+                backgroundColor: "var(--background-white)",
+                // backgroundColor: "#F7F7F7",
+                // boxShadow: "2px 0 10px var(--shadow-color)",
+              },
+            }}
+          >
+            {drawerContent}
+          </Drawer>
+        ) : (
+          <Drawer
+            variant="persistent"
+            open={sidebarOpen}
+            sx={{
               width: sidebarOpen ? drawerWidth : 70,
-              boxSizing: "border-box",
-              overflowX: "hidden",
-              backgroundColor: "var(--background-white)",
-              // backgroundColor: "#F7F7F7",
-              // boxShadow: "2px 0 10px var(--shadow-color)",
-              transition: "width 0.3s ease",
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: sidebarOpen ? drawerWidth : 70,
+                boxSizing: "border-box",
+                overflowX: "hidden",
+                backgroundColor: "var(--background-white)",
+                // backgroundColor: "#F7F7F7",
+                // boxShadow: "2px 0 10px var(--shadow-color)",
+                transition: "width 0.3s ease",
+              },
+            }}
+          >
+            {drawerContent}
+          </Drawer>
+        )}
+
+        {/* Main Content */}
+        <Box
+          component="main"
+          className={styles.mainContent}
+          sx={{
+            marginLeft: {
+              xs: 0,
+              // md: sidebarOpen ? `${drawerWidth}px` : "70px",
             },
+            // padding: "30px",
+            transition: "margin-left 0.3s ease",
+            width: "100%",
+            marginTop: isMobile ? "64px" : 0,
           }}
         >
-          {drawerContent}
-        </Drawer>
-      )}
-
-      {/* Main Content */}
-      <Box
-        component="main"
-        className={styles.mainContent}
-        sx={{
-          marginLeft: {
-            xs: 0,
-            // md: sidebarOpen ? `${drawerWidth}px` : "70px",
-          },
-          // padding: "30px",
-          transition: "margin-left 0.3s ease",
-          width: "100%",
-          marginTop: isMobile ? "64px" : 0,
-        }}
-      >
-        {/* <Outlet /> */}
-        {children}
+          {/* <Outlet /> */}
+          {children}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }
 

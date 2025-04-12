@@ -7,10 +7,13 @@ import styles from "./onboarding.module.css";
 import PageLoader from "../../shared/components/pageLoader/pageLoader";
 import { useAuthState } from "../../shared/context/useAuthContext";
 import { AuthActionSuccess } from "../../shared/context/reducers/authActions";
+import { useDiscover } from "../../shared/context/useDiscoverContext";
 
 function Onboarding() {
   const { mutateAsync: onboarding } = useUserService.useOnboardingService();
-  const { mutateAsync: getContent } = useDiscoverService.useGetContentService();
+  // const { mutateAsync: getContent } = useDiscoverService.useGetContentService();
+
+  const { handleGetContent } = useDiscover();
 
   const [loading, setLoading] = useState(false);
 
@@ -37,16 +40,6 @@ function Onboarding() {
         },
       });
 
-      if (response) {
-      }
-    } catch (error) {
-      toast.error("An error occurred. Please try again or contact support");
-    }
-  }
-
-  async function handleGetContent() {
-    try {
-      const response = await getContent();
       if (response) {
       }
     } catch (error) {

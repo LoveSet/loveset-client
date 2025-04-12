@@ -9,6 +9,7 @@ import { AuthProvider } from "./shared/context/useAuthContext";
 import { LocationProvider } from "./shared/context/useLocationContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GOOGLE_CLIENT_ID } from "./shared/config/integrations";
+import { DiscoverProvider } from "./shared/context/useDiscoverContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,7 +30,9 @@ root.render(
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <LocationProvider>
-              <App />
+              <DiscoverProvider>
+                <App />
+              </DiscoverProvider>
             </LocationProvider>
           </AuthProvider>
         </QueryClientProvider>
