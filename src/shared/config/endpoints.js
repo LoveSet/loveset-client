@@ -16,6 +16,8 @@ const API_ENDPOINTS = {
   // discover
   GET_CONTENT: "discover/content",
   GET_CACHE: "discover/cache",
+  LIKE: "discover/like",
+  DISLIKE: "discover/dislike",
 };
 
 // const FILES_URL2 = `https://fanbear-app.s3.amazonaws.com/`;

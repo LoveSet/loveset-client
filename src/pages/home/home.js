@@ -20,7 +20,7 @@ function Home() {
 
   const [loading, setLoading] = useState(false);
 
-  const { dispatch } = useAuthState();
+  const { user, dispatch } = useAuthState();
 
   const [searchParams] = useSearchParams();
 
@@ -135,14 +135,25 @@ function Home() {
           </p>
 
           <div className={styles.authButtons}>
-            <button
-              className={styles.googleAuthButton}
-              // onClick={handleGoogleAuth}
-              onClick={() => login()}
-            >
-              <span className={styles.googleIcon}>G</span>
-              <span>Continue with Google</span>
-            </button>
+            {user?.token ? (
+              <button
+                className={styles.googleAuthButton}
+                onClick={() => {
+                  navigate("/app/discover");
+                }}
+              >
+                Open LoveSet
+              </button>
+            ) : (
+              <button
+                className={styles.googleAuthButton}
+                // onClick={handleGoogleAuth}
+                onClick={() => login()}
+              >
+                <span className={styles.googleIcon}>G</span>
+                <span>Continue with Google</span>
+              </button>
+            )}
 
             {/* <button className={styles.inviteButton} onClick={() => setShowInvite(true)}>
           Invite a friend
