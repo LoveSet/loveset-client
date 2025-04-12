@@ -45,7 +45,7 @@
 - frontend [sunday][done]
 - ui adjustments [monday][done]
 - backend [tuesday,wednesday,thursday][done]
-- coupling [friday][]
+- coupling [friday,saturday][]
   - totalSwipes in user.model.js, add with like + pass [done]
   - referredSomeone : true/false in user.model.js [done]
   - adjust coding [done]
@@ -54,7 +54,8 @@
   - show error toast notification from all rate limit errors []
   - test everything billing + `subscription cron job` + `subscription expired email` in coupling []
   - test `all emails` in coupling []
-- hosting + paddle [saturday][]
+  - google analytics []
+- terms + hosting + paddle [sunday][]
 - launch after paddle verification []
 
 package to install: react-query

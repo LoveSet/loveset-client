@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
 import styles from "./onboarding.module.css";
 
 function Onboarding() {
@@ -207,39 +209,52 @@ function Onboarding() {
   };
 
   return (
-    <div className={styles.onboardingContainerWrapper}>
-      <div className={styles.onboardingContainer}>
-        <div className={styles.progressBar}>
-          {Array.from({ length: totalSteps }).map((_, index) => (
-            <div
-              key={index}
-              className={`${styles.progressStep} ${index + 1 === step ? styles.active : index + 1 < step ? styles.completed : ""}`}
-            >
-              <div className={styles.stepNumber}>{index + 1}</div>
-              {index < totalSteps - 1 && (
-                <div className={styles.stepConnector}></div>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        // hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className={styles.onboardingContainerWrapper}>
+        <div className={styles.onboardingContainer}>
+          <div className={styles.progressBar}>
+            {Array.from({ length: totalSteps }).map((_, index) => (
+              <div
+                key={index}
+                className={`${styles.progressStep} ${index + 1 === step ? styles.active : index + 1 < step ? styles.completed : ""}`}
+              >
+                <div className={styles.stepNumber}>{index + 1}</div>
+                {index < totalSteps - 1 && (
+                  <div className={styles.stepConnector}></div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.onboardingContent}>
+            {renderStepContent()}
+
+            <div className={styles.navigationButtons}>
+              {step > 1 && (
+                <button className={styles.backButton} onClick={handleBack}>
+                  Back
+                </button>
               )}
-            </div>
-          ))}
-        </div>
 
-        <div className={styles.onboardingContent}>
-          {renderStepContent()}
-
-          <div className={styles.navigationButtons}>
-            {step > 1 && (
-              <button className={styles.backButton} onClick={handleBack}>
-                Back
+              <button className={styles.nextButton} onClick={handleNext}>
+                {step === totalSteps ? "Finish" : "Next"}
               </button>
-            )}
-
-            <button className={styles.nextButton} onClick={handleNext}>
-              {step === totalSteps ? "Finish" : "Next"}
-            </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

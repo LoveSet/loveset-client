@@ -19,8 +19,16 @@ async function unsubscribe(payload) {
 }
 
 export default {
-  useGetCustomerService: (...args) => useMutation(getCustomer, ...args),
-  useGetBillingHistoryService: (...args) =>
-    useMutation(getBillingHistory, ...args),
-  useUnsubscribeService: (...args) => useMutation(unsubscribe, ...args),
+  useGetCustomerService: () =>
+    useMutation({
+      mutationFn: getCustomer,
+    }),
+  useGetBillingHistoryService: () =>
+    useMutation({
+      mutationFn: getBillingHistory,
+    }),
+  useUnsubscribeService: () =>
+    useMutation({
+      mutationFn: unsubscribe,
+    }),
 };
