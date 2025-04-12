@@ -6,6 +6,11 @@ import OutOfSwipesModal from "../../../shared/components/modal/outOfSwipesModal"
 import styles from "./discover.module.css";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import AppLayout from "../../../shared/components/appLayout/appLayout";
+import { useDiscover } from "../../../shared/context/useDiscoverContext";
+import { FILES_URL } from "../../../shared/config/endpoints";
+import openInNewTab from "../../../shared/utils/openInNewTab";
+// import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "react-toastify";
 
 // Mock movie data
 const mockMovies = [
@@ -278,11 +283,12 @@ const MovieCard = ({
       <div className={styles.moviePoster} style={{ pointerEvents: "none" }}>
         <img
           src={
-            "https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"
+            movie?.posterUrl?.includes("https")
+              ? movie?.posterUrl
+              : FILES_URL + movie?.posterUrl
           }
           alt={movie.title}
         />
-
         <motion.div
           className={`${styles.swipeOverlay} ${styles.likeOverlay}`}
           style={{ opacity: useTransform(x, [0, 100], [0, 1]) }}
@@ -314,13 +320,16 @@ const MovieCard = ({
         </button>
 
         <h2 className={styles.movieTitle}>
-          {movie.title} <span className={styles.movieYear}>({movie.year})</span>
+          {movie.title}{" "}
+          <span className={styles.movieYear}>({movie?.year})</span>
         </h2>
 
-        <div className={styles.movieDirector}>Directed by {movie.director}</div>
+        <div className={styles.movieDirector}>
+          Directed by {movie?.director}
+        </div>
 
         <div className={styles.movieGenres}>
-          {movie.genres.map((genre, index) => (
+          {movie?.genres.map((genre, index) => (
             <span key={index} className={styles.genreTag}>
               {genre}
             </span>
@@ -328,21 +337,37 @@ const MovieCard = ({
         </div>
 
         <div className={styles.movieActions}>
+          {/* <a href={movie?.trailer} target="_blank"> */}
           <button
             className={styles.trailerButton}
-            onClick={() => handleWatchTrailer(movie)}
+            onClick={() =>
+              //  handleWatchTrailer(movie)
+              openInNewTab(movie?.trailerUrl)
+            }
           >
             <span className={styles.trailerIcon}>▶</span>
             <span>Watch Trailer</span>
           </button>
-
+          {/* </a> */}
+          {/* <CopyToClipboard
+            text={this.state.value}
+            onCopy={() => {
+              toast.info("Copied to Clipboard!");
+            }}
+          > */}
           <button
             className={styles.shareButton}
-            onClick={() => handleShareMovie(movie)}
+            onClick={() => {
+              navigator.clipboard.writeText(
+                `https://loveset.platle.com/content/${movie?.slug}`
+              );
+              toast.info("Copied to clipboard!");
+            }}
           >
             <span className={styles.shareIcon}>📤</span>
             <span>Share</span>
           </button>
+          {/* </CopyToClipboard> */}
         </div>
       </div>
     </motion.div>
@@ -351,6 +376,15 @@ const MovieCard = ({
 
 function Discover() {
   const navigate = useNavigate();
+
+  const { movies, setMovies, handleDiscovery } = useDiscover();
+
+  useEffect(() => {
+    if (movies?.length < 1) {
+      handleDiscovery();
+    }
+  }, []);
+
   // const { user } = useAuth();
   const user = {
     id: "user123",
@@ -358,7 +392,7 @@ function Discover() {
     email: "user@example.com",
     isNewUser: true,
   };
-  const [movies, setMovies] = useState([...mockMovies]);
+  // const [movies, setMovies] = useState([...mockMovies]);
   const [swipesLeft, setSwipesLeft] = useState(10); // Free tier: 10 swipes per day
   const [showOutOfSwipes, setShowOutOfSwipes] = useState(false);
   const [likedMovies, setLikedMovies] = useState([]);
@@ -453,7 +487,7 @@ function Discover() {
   };
 
   const handleViewDetails = (movie) => {
-    navigate(`/content/${movie.id}`);
+    navigate(`/content/${movie?.slug}`);
   };
 
   const handleShareMovie = (movie) => {

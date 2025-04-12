@@ -42,6 +42,16 @@
   - what to do about the buttons [done]
   - animation should also work when you like and dislike [done]
 
+- move getContent to `useDiscoveryContext` [done]
+
+- get youtube trailer -> react-modal-video []
+- like, dislike []
+- more getContent []
+- loader for discovery []
+- loader for content images []
+- detail page []
+- streaming availability []
+
 - frontend [sunday][done]
 - ui adjustments [monday][done]
 - backend [tuesday,wednesday,thursday][done]

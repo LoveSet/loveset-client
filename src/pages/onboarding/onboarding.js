@@ -13,7 +13,7 @@ function Onboarding() {
   const { mutateAsync: onboarding } = useUserService.useOnboardingService();
   // const { mutateAsync: getContent } = useDiscoverService.useGetContentService();
 
-  const { handleGetContent } = useDiscover();
+  const { handleDiscovery } = useDiscover();
 
   const [loading, setLoading] = useState(false);
 
@@ -24,10 +24,10 @@ function Onboarding() {
 
   // from local data
   const [formData, setFormData] = useState({
-    contentTypes: user?.user?.contentTypes,
-    filmIndustries: user?.user?.filmIndustries,
-    genres: user?.user?.genres,
-    timePeriods: user?.user?.timePeriods,
+    contentTypes: user?.user?.contentTypes || [],
+    filmIndustries: user?.user?.filmIndustries || [],
+    genres: user?.user?.genres || [],
+    timePeriods: user?.user?.timePeriods || [],
     // favorites: "",
     // favoriteMovie: "",
   });
@@ -49,16 +49,16 @@ function Onboarding() {
 
   const totalSteps = 4;
 
-  const handleAfterThirdStep = async () => {
+  const handleOnStep = async () => {
     // save onboarding
     await handleOnboarding();
     // fetch content
-    await handleGetContent();
+    await handleDiscovery();
   };
 
   useEffect(() => {
-    if (step == 4) {
-      handleAfterThirdStep();
+    if (step == 2) {
+      handleOnStep();
     }
   }, [step]);
 
