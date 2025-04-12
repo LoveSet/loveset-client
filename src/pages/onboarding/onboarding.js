@@ -1,39 +1,91 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-
+import { ToastContainer, toast } from "react-toastify";
+import useUserService from "../../shared/hooks/api/useUserService";
+import useDiscoverService from "../../shared/hooks/api/useDiscoverService";
 import styles from "./onboarding.module.css";
+import PageLoader from "../../shared/components/pageLoader/pageLoader";
+import { useAuthState } from "../../shared/context/useAuthContext";
+import { AuthActionSuccess } from "../../shared/context/reducers/authActions";
 
 function Onboarding() {
+  const { mutateAsync: onboarding } = useUserService.useOnboardingService;
+  const { mutateAsync: getContent } = useDiscoverService.useGetContentService();
+
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
+
+  const { user, dispatch } = useAuthState();
+
+  // from local data
   const [formData, setFormData] = useState({
-    contentTypes: [],
-    filmIndustries: [],
-    genres: [],
-    timePeriods: [],
-    favorites: "",
-    favoriteMovie: "",
+    contentTypes: user?.user?.contentTypes,
+    filmIndustries: user?.user?.filmIndustries,
+    genres: user?.user?.genres,
+    timePeriods: user?.user?.timePeriods,
+    // favorites: "",
+    // favoriteMovie: "",
   });
+
+  async function handleOnboarding() {
+    try {
+      const response = await onboarding({
+        payload: {
+          ...formData,
+        },
+      });
+
+      if (response) {
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again or contact support");
+    }
+  }
+
+  async function handleGetContent() {
+    try {
+      const response = await getContent();
+      if (response) {
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again or contact support");
+    }
+  }
 
   const totalSteps = 4;
 
+  const handleAfterThirdStep = async () => {
+    // save onboarding
+    await handleOnboarding();
+    // fetch content
+    await handleGetContent();
+  };
+
   useEffect(() => {
     if (step == 4) {
-      // save onboarding
-      // fetch content
+      handleAfterThirdStep();
     }
   }, [step]);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step < totalSteps) {
       setStep(step + 1);
     } else {
-      // localStorage.setItem("userPreferences", JSON.stringify(formData));
-      // navigate("/app/discover");
+      setLoading(true);
+
       // save onboarding
-      // get user
+      await handleOnboarding();
+      // update local user
+      const userObj = {
+        token: user?.token,
+        currentUser: { ...user?.user, ...formData },
+        permission: user?.permission,
+      };
+      dispatch(AuthActionSuccess(userObj));
       // redirect
+      navigate("/app/discover");
     }
   };
 
@@ -231,6 +283,7 @@ function Onboarding() {
         draggable
         pauseOnHover
       />
+      <PageLoader loading={false} />
       <div className={styles.onboardingContainerWrapper}>
         <div className={styles.onboardingContainer}>
           <div className={styles.progressBar}>
