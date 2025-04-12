@@ -9,7 +9,7 @@ import { useAuthState } from "../../shared/context/useAuthContext";
 import { AuthActionSuccess } from "../../shared/context/reducers/authActions";
 
 function Onboarding() {
-  const { mutateAsync: onboarding } = useUserService.useOnboardingService;
+  const { mutateAsync: onboarding } = useUserService.useOnboardingService();
   const { mutateAsync: getContent } = useDiscoverService.useGetContentService();
 
   const [loading, setLoading] = useState(false);
@@ -283,7 +283,7 @@ function Onboarding() {
         draggable
         pauseOnHover
       />
-      <PageLoader loading={false} />
+      <PageLoader loading={loading} />
       <div className={styles.onboardingContainerWrapper}>
         <div className={styles.onboardingContainer}>
           <div className={styles.progressBar}>
