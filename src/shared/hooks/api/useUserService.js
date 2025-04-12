@@ -1,7 +1,12 @@
 import api from "../../utils/api";
-// import { useMutation } from "react-query";
 import { useMutation } from "@tanstack/react-query";
 import { API_ENDPOINTS } from "../../config/endpoints";
+
+async function onboarding({ payload }) {
+  let url = API_ENDPOINTS.ONBOARDING;
+  const response = await api.patch(url, payload);
+  return response;
+}
 
 async function getUser({ params }) {
   let url = `${API_ENDPOINTS.GET_USER}/${params?.username}`;
@@ -10,6 +15,10 @@ async function getUser({ params }) {
 }
 
 export default {
+  useOnboardingService: () =>
+    useMutation({
+      mutationFn: onboarding,
+    }),
   useGetUserService: () =>
     useMutation({
       mutationFn: getUser,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
@@ -18,12 +18,22 @@ function Onboarding() {
 
   const totalSteps = 4;
 
+  useEffect(() => {
+    if (step == 4) {
+      // save onboarding
+      // fetch content
+    }
+  }, [step]);
+
   const handleNext = () => {
     if (step < totalSteps) {
       setStep(step + 1);
     } else {
-      localStorage.setItem("userPreferences", JSON.stringify(formData));
-      navigate("/app/discover");
+      // localStorage.setItem("userPreferences", JSON.stringify(formData));
+      // navigate("/app/discover");
+      // save onboarding
+      // get user
+      // redirect
     }
   };
 

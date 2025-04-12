@@ -2,15 +2,15 @@ import api from "../../utils/api";
 import { useMutation } from "@tanstack/react-query";
 import { API_ENDPOINTS } from "../../config/endpoints";
 
-async function google({ payload }) {
-  let googleUrl = `${API_ENDPOINTS.GOOGLE}`;
-  const response = await api.post(googleUrl, payload);
+async function getContent() {
+  let url = API_ENDPOINTS.GET_CONTENT;
+  const response = await api.get(url);
   return response;
 }
 
 export default {
-  useGoogleService: () =>
+  useGetContentService: () =>
     useMutation({
-      mutationFn: google,
+      mutationFn: getContent,
     }),
 };

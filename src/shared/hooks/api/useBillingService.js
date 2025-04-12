@@ -1,5 +1,4 @@
 import api from "../../utils/api";
-// import { useMutation } from "react-query";
 import { useMutation } from "@tanstack/react-query";
 import { API_ENDPOINTS } from "../../config/endpoints";
 

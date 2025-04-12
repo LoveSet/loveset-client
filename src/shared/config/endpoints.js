@@ -8,6 +8,10 @@ const BASE_URL = `${ROOT_URL}/v1/`;
 const API_ENDPOINTS = {
   // auth
   GOOGLE: "auth/google",
+
+  // user
+  ONBOARDING: "user/onboarding",
+  GET_USER: "user",
 };
 
 // const FILES_URL2 = `https://fanbear-app.s3.amazonaws.com/`;
