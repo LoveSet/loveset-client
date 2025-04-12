@@ -7,6 +7,7 @@ const DiscoverContext = createContext();
 const DiscoverProvider = ({ children }) => {
   // const [content, setContent] = useState();
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { mutateAsync: getCache } = useDiscoverService.useGetCacheService();
   const { mutateAsync: getContent } = useDiscoverService.useGetContentService();
@@ -34,17 +35,19 @@ const DiscoverProvider = ({ children }) => {
   }
 
   async function handleDiscovery() {
+    setLoading(true);
     const cache = await handleGetCache();
     if (cache?.length > 0) {
-      setMovies([...cache, ...movies]);
+      setMovies([...movies, ...cache.reverse()]);
     } else {
       const content = await handleGetContent();
       if (content?.length > 0) {
-        setMovies([...content, ...movies]);
+        setMovies([...movies, ...content.reverse()]);
       } else {
         toast.error("An error occurred. Please try again or contact support");
       }
     }
+    setLoading(false);
   }
 
   const value = {
@@ -52,6 +55,7 @@ const DiscoverProvider = ({ children }) => {
     movies,
     setMovies,
     handleDiscovery,
+    loading,
   };
 
   return (

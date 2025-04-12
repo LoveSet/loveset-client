@@ -281,3 +281,10 @@
 .accept-button:hover {
   background-color: var(--primary-dark);
 }
+
+/* youtube modal */
+.youtube-modal {
+  width: 70vw; /* Reduced from 80vw */
+  max-width: 900px; /* Reduced from 1200px */
+  overflow: hidden;
+}

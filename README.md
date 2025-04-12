@@ -44,10 +44,10 @@
 
 - move getContent to `useDiscoveryContext` [done]
 
-- get youtube trailer -> react-modal-video []
+- get youtube trailer -> react-modal-video [done]
+- loader for discovery [done]
 - like, dislike []
 - more getContent []
-- loader for discovery []
 - loader for content images []
 - detail page []
 - streaming availability []
@@ -67,6 +67,7 @@
   - test `all emails` in coupling []
   - App.js -> getUser []
   - google analytics []
+  - enable emails []
 - terms + hosting + paddle [sunday][]
 - launch after paddle verification []
 

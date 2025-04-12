@@ -11,6 +11,10 @@ import { FILES_URL } from "../../../shared/config/endpoints";
 import openInNewTab from "../../../shared/utils/openInNewTab";
 // import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
+import useDiscoverService from "../../../shared/hooks/api/useDiscoverService";
+import { useModal } from "../../../shared/hooks/useModal";
+import YouTubeVideoModal from "../../../shared/components/modal/youtubeVideoModal";
+import { GridLoader, HashLoader, PacmanLoader } from "react-spinners";
 
 // Mock movie data
 const mockMovies = [
@@ -274,11 +278,13 @@ const MovieCard = ({
         right: 0,
       }}
       onDragEnd={handleDragEnd}
-      transition={{
-        type: "spring",
-        damping: 50,
-        stiffness: 400,
-      }}
+      transition={
+        {
+          // type: "spring",
+          // damping: 50,
+          // stiffness: 400,
+        }
+      }
     >
       <div className={styles.moviePoster} style={{ pointerEvents: "none" }}>
         <img
@@ -340,9 +346,10 @@ const MovieCard = ({
           {/* <a href={movie?.trailer} target="_blank"> */}
           <button
             className={styles.trailerButton}
-            onClick={() =>
-              //  handleWatchTrailer(movie)
-              openInNewTab(movie?.trailerUrl)
+            onClick={
+              () => handleWatchTrailer(movie)
+
+              // openInNewTab(movie?.trailerUrl)
             }
           >
             <span className={styles.trailerIcon}>▶</span>
@@ -377,13 +384,13 @@ const MovieCard = ({
 function Discover() {
   const navigate = useNavigate();
 
-  const { movies, setMovies, handleDiscovery } = useDiscover();
+  const { movies, setMovies, handleDiscovery, loading } = useDiscover();
 
   useEffect(() => {
-    if (movies?.length < 1) {
+    if (movies?.length < 1 && !loading) {
       handleDiscovery();
     }
-  }, []);
+  }, [loading]);
 
   // const { user } = useAuth();
   const user = {
@@ -495,13 +502,52 @@ function Discover() {
     alert(`Share URL: moviematch.com/movie/${movie.id}`);
   };
 
-  const handleWatchTrailer = (movie, e) => {
-    if (e) e.stopPropagation();
-    window.open(movie.trailer, "_blank");
+  const modal = useModal();
+  const [videoId, setVideoId] = useState(null);
+  const { mutateAsync: getYoutubeVideo } =
+    useDiscoverService.useGetYoutubeUrlService();
+
+  const handleWatchTrailer = async (movie, e) => {
+    try {
+      if (e) e.stopPropagation();
+
+      if (movie?.trailerUrl?.includes("search_query")) {
+        // Fetch actual YouTube URL
+        const response = await getYoutubeVideo({
+          query: {
+            contentId: movie?.id,
+          },
+        });
+
+        if (response?.data?.trailerUrl) {
+          const youtubeUrl = response.data.trailerUrl;
+
+          const updatedMovies = movies.map((m) =>
+            m.id === movie.id ? { ...m, trailerUrl: youtubeUrl } : m
+          );
+          setMovies(updatedMovies);
+
+          // open modal here
+          setVideoId(youtubeUrl.split("v=")[1]);
+          modal.handleOpen();
+        } else {
+          toast.error("Failed to fetch YouTube trailer. Please try again.");
+        }
+      } else {
+        // Use existing URL and open modal
+        setVideoId(movie?.trailerUrl.split("v=")[1]);
+        modal.handleOpen();
+      }
+    } catch (error) {
+      console.error("Error fetching trailer:", error);
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   return (
     <AppLayout>
+      <YouTubeVideoModal modal={modal} videoId={videoId} />
+
       <div className={styles.swipingContainerWrapper}>
         <div className={styles.swipingContainer}>
           <div className={styles.cardStack}>
@@ -518,6 +564,16 @@ function Discover() {
                 handleShareMovie={() => handleShareMovie(movie)}
               />
             ))}
+            {loading && (
+              <HashLoader
+                color={"#5891ff"}
+                loading={true}
+                // cssOverride={override}
+                size={86}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            )}
           </div>
 
           <div

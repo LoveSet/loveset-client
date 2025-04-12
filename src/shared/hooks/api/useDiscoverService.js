@@ -26,6 +26,12 @@ async function dislike(payload) {
   return response;
 }
 
+async function getYoutubeUrl({ query }) {
+  let url = `${API_ENDPOINTS.GET_YOUTUBE_URL}?contentId=${query?.contentId}`;
+  const response = await api.get(url);
+  return response;
+}
+
 export default {
   useGetContentService: () =>
     useMutation({
@@ -42,5 +48,9 @@ export default {
   useDislikeService: () =>
     useMutation({
       mutationFn: dislike,
+    }),
+  useGetYoutubeUrlService: () =>
+    useMutation({
+      mutationFn: getYoutubeUrl,
     }),
 };
