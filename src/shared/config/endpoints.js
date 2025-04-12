@@ -12,6 +12,10 @@ const API_ENDPOINTS = {
   // user
   ONBOARDING: "user/onboarding",
   GET_USER: "user",
+
+  // discover
+  GET_CONTENT: "discover/content",
+  GET_CACHE: "discover/cache",
 };
 
 // const FILES_URL2 = `https://fanbear-app.s3.amazonaws.com/`;
