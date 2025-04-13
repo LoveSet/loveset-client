@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 // import OutOfSwipesModal from "../modals/OutOfSwipesModal";
 import OutOfSwipesModal from "../../../shared/components/modal/outOfSwipesModal";
@@ -413,13 +413,16 @@ function Discover() {
 
   const navigate = useNavigate();
 
-  const { movies, setMovies, handleDiscovery, loading } = useDiscover();
+  const { movies, setMovies, handleDiscovery, loading, handleReplenish } =
+    useDiscover();
 
+  const hasRun = useRef(false);
   useEffect(() => {
-    if (movies?.length < 5 && !loading) {
-      handleDiscovery(movies);
+    if (!hasRun.current && !loading) {
+      handleDiscovery([]);
+      hasRun.current = true; // Mark as executed
     }
-  }, [loading, movies]);
+  }, [loading]);
 
   // const { user } = useAuth();
   // const user = {
@@ -530,6 +533,9 @@ function Discover() {
       handleUpdateSwipesUsed();
     }
 
+    handleReplenish();
+    // handleDiscovery(movies.slice(0, -1));
+
     // Remove the top card
     setMovies(movies.slice(0, -1));
 
@@ -553,6 +559,9 @@ function Discover() {
       setSwipesLeft(swipesLeft - 1);
       handleUpdateSwipesUsed();
     }
+
+    // handleDiscovery(movies.slice(0, -1));
+    handleReplenish();
 
     // Remove the top card
     setMovies(movies.slice(0, -1));

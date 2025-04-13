@@ -49,7 +49,7 @@
 - loader for content images [done]
 - loader for watch trailer [done]
 - like, dislike [done]
-- more getContent []
+- more getContent [done]
 - detail page []
 - streaming availability []
 

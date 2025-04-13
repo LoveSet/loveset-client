@@ -34,7 +34,7 @@ const DiscoverProvider = ({ children }) => {
     }
   }
 
-  async function handleDiscovery(_movies) {
+  async function handleDiscovery(_movies = []) {
     setLoading(true);
     const cache = await handleGetCache();
     if (cache?.length > 0) {
@@ -50,12 +50,26 @@ const DiscoverProvider = ({ children }) => {
     setLoading(false);
   }
 
+  async function handleReplenish() {
+    if (loading) return;
+    if (movies?.length > 4) return;
+    setLoading(true);
+    const content = await handleGetContent();
+    if (content?.length > 0) {
+      setMovies((prev) => [...[...prev].reverse(), ...content].reverse());
+    } else {
+      toast.error("An error occurred. Please try again or contact support");
+    }
+    setLoading(false);
+  }
+
   const value = {
     handleGetContent,
     movies,
     setMovies,
     handleDiscovery,
     loading,
+    handleReplenish,
   };
 
   return (
