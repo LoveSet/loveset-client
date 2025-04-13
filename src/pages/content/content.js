@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import styles from "./content.module.css";
 import useContentService from "../../shared/hooks/api/useContent";
 import { toast } from "react-toastify";
@@ -9,6 +9,7 @@ import { Skeleton, CircularProgress } from "@mui/material";
 import { useModal } from "../../shared/hooks/useModal";
 import YouTubeVideoModal from "../../shared/components/modal/youtubeVideoModal";
 import useDiscoverService from "../../shared/hooks/api/useDiscoverService";
+import openInNewTab from "../../shared/utils/openInNewTab";
 
 const mockMovies = [
   {
@@ -130,7 +131,7 @@ function Content() {
   };
 
   const handleBack = () => {
-    if (user) {
+    if (user?.token) {
       navigate("/app/discover");
     } else {
       navigate("/");
@@ -190,6 +191,92 @@ function Content() {
     handleGetContent();
   }, [id]);
 
+  const [streamingLoading, setStreamingLoading] = useState(true);
+
+  const { mutateAsync: getStreamingAvailability } =
+    useContentService.useGetStreamingAvailabilityService();
+
+  const [streamingStatus, setStreamingStatus] = useState(null);
+
+  const handleStreamingAvailability = async () => {
+    try {
+      setStreamingLoading(true);
+
+      const response = await getStreamingAvailability({
+        params: { contentId: id },
+        query: { userId: user?.user?.id },
+      });
+
+      if (response?.data?.length > 0) {
+        setMovie((prev) => ({
+          ...prev,
+          streamingAvailability: response.data,
+        }));
+        setStreamingStatus(null); // Clear any previous status
+      } else {
+        setStreamingStatus("No streaming platforms available.");
+      }
+    } catch (error) {
+      toast.error("Failed to fetch streaming availability. Please try again.");
+      setStreamingStatus("Error fetching streaming availability.");
+    } finally {
+      setStreamingLoading(false);
+    }
+  };
+
+  // Determine streaming status based on user and movie state
+  const determineStreamingStatus = () => {
+    if (!user?.token) {
+      return (
+        <p>
+          <Link to={`/`} className={styles.link}>
+            Sign in
+          </Link>{" "}
+          to see streaming availability.
+        </p>
+      );
+    }
+
+    if (!user?.user?.premium) {
+      return (
+        <p>
+          <Link to={`/app/premium`} className={styles.link}>
+            Subscribe
+          </Link>{" "}
+          to see streaming availability.
+        </p>
+      );
+    }
+
+    if (streamingLoading) {
+      return (
+        <>
+          <CircularProgress
+            size={20}
+            style={{ color: "#5891ff", marginTop: "3px" }}
+          />{" "}
+          Searching for availability...{" "}
+        </>
+      );
+    }
+
+    if (streamingStatus) {
+      return <p>{streamingStatus}</p>;
+    }
+
+    if (!movie?.streamingAvailability?.length) {
+      return <p>No streaming platforms available for this content.</p>;
+    }
+
+    return null; // No status message if everything is fine
+  };
+
+  useEffect(() => {
+    if (id) {
+      handleStreamingAvailability();
+    }
+  }, [id]);
+
   if (!movie) {
     return <div className={styles.loading}>Loading...</div>;
   }
@@ -227,25 +314,27 @@ function Content() {
             style={{ display: imageLoaded ? "block" : "none" }}
           />
 
-          <button
-            className={styles.playTrailerButton}
-            onClick={handleWatchTrailer}
-            disabled={trailerLoading}
-          >
-            {trailerLoading ? (
-              <CircularProgress
-                style={{
-                  color: "white",
-                }}
-                size={20}
-              />
-            ) : (
-              <>
-                <span className={styles.playIcon}>▶</span>
-                <span>Watch Trailer</span>
-              </>
-            )}
-          </button>
+          {imageLoaded && (
+            <button
+              className={styles.playTrailerButton}
+              onClick={handleWatchTrailer}
+              disabled={trailerLoading}
+            >
+              {trailerLoading ? (
+                <CircularProgress
+                  style={{
+                    color: "white",
+                  }}
+                  size={20}
+                />
+              ) : (
+                <>
+                  <span className={styles.playIcon}>▶</span>
+                  <span>Watch Trailer</span>
+                </>
+              )}
+            </button>
+          )}
         </div>
 
         <div className={styles.infoContainer}>
@@ -289,13 +378,19 @@ function Content() {
 
           <div className={styles.streamingOptions}>
             <h3>Where to Watch</h3>
-            <div className={styles.streamingPlatforms}>
-              {movie?.streamingAvailability?.map((platform, index) => (
-                <span key={index} className={styles.platformTag}>
-                  {platform}
-                </span>
-              ))}
-            </div>
+            {determineStreamingStatus() || (
+              <div className={styles.streamingPlatforms}>
+                {movie?.streamingAvailability?.map((platform, index) => (
+                  <span
+                    key={index}
+                    className={styles.platformTag}
+                    onClick={() => openInNewTab(platform?.link)}
+                  >
+                    {platform?.name}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
