@@ -50,8 +50,8 @@
 - loader for watch trailer [done]
 - like, dislike [done]
 - more getContent [done]
-- detail page []
-- streaming availability []
+- detail page -> back button []
+- streaming availability -> login + subscribe []
 
 - frontend [sunday][done]
 - ui adjustments [monday][done]

@@ -19,6 +19,10 @@ const API_ENDPOINTS = {
   LIKE: "discover/like",
   PASS: "discover/pass",
   GET_YOUTUBE_URL: "discover/youtube",
+
+  // content
+  GET_CONTENT_DETAILS: "content",
+  GET_STREAMING_AVAILABILITY: "content/streaming",
 };
 
 // const FILES_URL2 = `https://fanbear-app.s3.amazonaws.com/`;
