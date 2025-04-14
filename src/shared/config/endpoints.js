@@ -23,6 +23,10 @@ const API_ENDPOINTS = {
   // content
   GET_CONTENT_DETAILS: "content",
   GET_STREAMING_AVAILABILITY: "content/streaming",
+
+  // watchlist
+  GET_WATCHLIST: "watchlist",
+  DELETE_WATCHLIST: "watchlist",
 };
 
 // const FILES_URL2 = `https://fanbear-app.s3.amazonaws.com/`;

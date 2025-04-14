@@ -19,7 +19,7 @@ const DiscoverProvider = ({ children }) => {
         return response?.data;
       }
     } catch (error) {
-      toast.error("An error occurred. Please try again or contact support");
+      toast.error("An error occurred. Please try again.");
     }
   }
 
@@ -30,7 +30,7 @@ const DiscoverProvider = ({ children }) => {
         return response?.data;
       }
     } catch (error) {
-      toast.error("An error occurred. Please try again or contact support");
+      toast.error("An error occurred. Please try again.");
     }
   }
 
@@ -44,7 +44,7 @@ const DiscoverProvider = ({ children }) => {
       if (content?.length > 0) {
         setMovies([..._movies, ...content.reverse()]);
       } else {
-        toast.error("An error occurred. Please try again or contact support");
+        toast.error("An error occurred. Please try again.");
       }
     }
     setLoading(false);
@@ -58,7 +58,7 @@ const DiscoverProvider = ({ children }) => {
     if (content?.length > 0) {
       setMovies((prev) => [...[...prev].reverse(), ...content].reverse());
     } else {
-      toast.error("An error occurred. Please try again or contact support");
+      toast.error("An error occurred. Please try again.");
     }
     setLoading(false);
   }

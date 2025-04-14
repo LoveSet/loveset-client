@@ -60,7 +60,7 @@
   - content [done]
   - out of swipe modal [done]
   - invite modal [done]
-  - watchlist []
+  - watchlist [done]
   - premium []
   - settings []
   - getUser -> App.js []

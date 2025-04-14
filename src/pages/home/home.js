@@ -99,7 +99,7 @@ function Home() {
         }
       } catch (error) {
         setLoading(false);
-        toast.error("An error occurred. Please try again or contact support");
+        toast.error("An error occurred. Please try again.");
       }
     },
     flow: "auth-code",

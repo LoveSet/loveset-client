@@ -10,6 +10,7 @@ import { useModal } from "../../shared/hooks/useModal";
 import YouTubeVideoModal from "../../shared/components/modal/youtubeVideoModal";
 import useDiscoverService from "../../shared/hooks/api/useDiscoverService";
 import openInNewTab from "../../shared/utils/openInNewTab";
+import { usePreviousLocation } from "../../shared/context/useLocationContext";
 
 const mockMovies = [
   {
@@ -129,10 +130,16 @@ function Content() {
       toast.error("Something went wrong. Please try again.");
     }
   };
+  const { previousLocation, presentLocation } = usePreviousLocation();
 
   const handleBack = () => {
     if (user?.token) {
-      navigate("/app/discover");
+      if (!previousLocation) {
+        navigate("/app/discover", { state: null });
+      } else {
+        // navigate(previousLocation.pathname, { state: null });
+        navigate(-1, { state: null });
+      }
     } else {
       navigate("/");
     }

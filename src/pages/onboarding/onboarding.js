@@ -43,7 +43,7 @@ function Onboarding() {
       if (response) {
       }
     } catch (error) {
-      toast.error("An error occurred. Please try again or contact support");
+      toast.error("An error occurred. Please try again.");
     }
   }
 
