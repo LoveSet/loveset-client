@@ -197,30 +197,40 @@ function Premium() {
           </div>
 
           <div className={styles.subscriptionActions}>
-            <button
-              className={`${styles.subscribeButton} ${user?.user?.premium ? "_disabled" : ""}`}
-              onClick={
-                loading || user?.user?.premium ? () => {} : handleSubscribe
-              }
-            >
-              {loading ? (
-                <CircularProgress
-                  style={{
-                    color: "white",
-                  }}
-                  size={13}
-                />
-              ) : (
-                <>Continue</>
-              )}
-            </button>
-
-            <button
-              className={styles.cancelButton}
-              onClick={() => navigate("/app/discover")}
-            >
-              No Thanks
-            </button>
+            {user?.user?.premium ? (
+              <button
+                className={`${styles.subscribeButton} `}
+                onClick={() => {
+                  navigate("/app/settings");
+                }}
+              >
+                Manage Subscription
+              </button>
+            ) : (
+              <>
+                <button
+                  className={`${styles.subscribeButton} `}
+                  onClick={loading ? () => {} : handleSubscribe}
+                >
+                  {loading ? (
+                    <CircularProgress
+                      style={{
+                        color: "white",
+                      }}
+                      size={13}
+                    />
+                  ) : (
+                    <>Continue</>
+                  )}
+                </button>
+                <button
+                  className={styles.cancelButton}
+                  onClick={() => navigate("/app/discover")}
+                >
+                  No Thanks
+                </button>
+              </>
+            )}
           </div>
 
           {showTerms && (
