@@ -2,11 +2,11 @@
 import { Modal, Box } from "@mui/material";
 import "../../styles/modals.css";
 
-const TermsOfServiceModal = ({ open = true, onClose }) => {
+const TermsOfServiceModal = ({ modal }) => {
   return (
     <Modal
-      open={open}
-      onClose={onClose}
+      open={modal.open}
+      onClose={modal.handleClose}
       aria-labelledby="terms-of-service-modal"
       BackdropProps={{
         timeout: 500,
@@ -23,7 +23,7 @@ const TermsOfServiceModal = ({ open = true, onClose }) => {
         className="modalType1"
       >
         <div className="modal-container terms-modal">
-          <button className="modal-close" onClick={onClose}>
+          <button className="modal-close" onClick={modal.handleClose}>
             ×
           </button>
 
@@ -103,7 +103,7 @@ const TermsOfServiceModal = ({ open = true, onClose }) => {
           </div>
 
           <div className="modal-footer">
-            <button className="accept-button" onClick={onClose}>
+            <button className="accept-button" onClick={modal.handleClose}>
               I Accept
             </button>
           </div>

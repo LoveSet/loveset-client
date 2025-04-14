@@ -83,7 +83,7 @@ function Watchlist() {
           (_watchlist) => _watchlist.id !== watchlistId
         );
         setWatchlist(updatedWatchlist);
-        toast.success("Removed from your watchlist.");
+        toast.info("Removed from your watchlist.");
       }
       setLoading(false);
     } catch (error) {

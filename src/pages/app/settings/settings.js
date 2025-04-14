@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../legacy/contexts/AuthContext";
+// import { useAuth } from "../../../legacy/contexts/AuthContext";
 import TermsOfServiceModal from "../../../shared/components/modal/termsOfServiceModal";
 import styles from "./settings.module.css";
 import AppLayout from "../../../shared/components/appLayout/appLayout";
