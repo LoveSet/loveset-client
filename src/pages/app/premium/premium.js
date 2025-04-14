@@ -16,8 +16,10 @@ import { PADDLE_PRICE } from "../../../shared/config/integrations";
 import { toast } from "react-toastify";
 import PageLoader from "../../../shared/components/pageLoader/pageLoader";
 import { CircularProgress } from "@mui/material";
+import { useAuthState } from "../../../shared/context/useAuthContext";
 
 function Premium() {
+  const { user } = useAuthState();
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState("6month");
   const [showTerms, setShowTerms] = useState(false);
@@ -196,8 +198,10 @@ function Premium() {
 
           <div className={styles.subscriptionActions}>
             <button
-              className={styles.subscribeButton}
-              onClick={loading ? () => {} : handleSubscribe}
+              className={`${styles.subscribeButton} ${user?.user?.premium ? "_disabled" : ""}`}
+              onClick={
+                loading || user?.user?.premium ? () => {} : handleSubscribe
+              }
             >
               {loading ? (
                 <CircularProgress

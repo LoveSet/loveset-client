@@ -128,3 +128,8 @@ p {
   justify-content: center;
   width: 100%;
 }
+
+._disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
