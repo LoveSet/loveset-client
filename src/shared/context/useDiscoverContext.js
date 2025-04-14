@@ -19,7 +19,8 @@ const DiscoverProvider = ({ children }) => {
         return response?.data;
       }
     } catch (error) {
-      toast.error("An error occurred. Please try again.");
+      // toast.error("An error occurred. Please try again.");
+      toast.error("An error occurred. Please refresh the page to try again.");
     }
   }
 
@@ -30,7 +31,8 @@ const DiscoverProvider = ({ children }) => {
         return response?.data;
       }
     } catch (error) {
-      toast.error("An error occurred. Please try again.");
+      toast.error("An error occurred. Please refresh the page to try again.");
+      // toast.error("An error occurred. Please try again.");
     }
   }
 
