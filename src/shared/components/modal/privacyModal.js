@@ -39,7 +39,7 @@ const PrivacyModal = ({ modal, closeAction = () => {} }) => {
 
           <div className="modal-header">
             <h2 className="modal-title">Privacy Policy</h2>
-            <p className="modal-subtitle">Last Updated: April 6, 2025</p>
+            <p className="modal-subtitle">Last Updated: April 14, 2025</p>
           </div>
 
           <div className="modal-content terms-content">
