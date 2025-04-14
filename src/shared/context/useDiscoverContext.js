@@ -34,6 +34,44 @@ const DiscoverProvider = ({ children }) => {
     }
   }
 
+  // async function handleGetContent() {
+  //   let attempt = 0;
+  //   const backoffCap = 10000; // Maximum delay between retries (10 seconds)
+
+  //   while (true) {
+  //     // Keep trying indefinitely
+  //     try {
+  //       attempt++;
+  //       const response = await getContent();
+  //       if (response) {
+  //         // If we retried many times, maybe show a success toast
+  //         if (attempt > 1) {
+  //           toast.success("Connection restored successfully!");
+  //         }
+  //         return response?.data;
+  //       }
+  //     } catch (error) {
+  //       // Calculate backoff delay - exponential but with a maximum cap
+  //       const backoffDelay = Math.min(Math.pow(2, attempt) * 100, backoffCap);
+
+  //       console.log(
+  //         `Attempt ${attempt} failed. Retrying in ${backoffDelay}ms...`
+  //       );
+
+  //       // Show temporary toast that we're retrying
+  //       // toast.info(`Connection issue. Retrying... (attempt ${attempt})`, {
+  //       //   autoClose: backoffDelay,
+  //       //   closeOnClick: false,
+  //       // });
+
+  //       // Wait before retrying
+  //       await new Promise((resolve) => setTimeout(resolve, backoffDelay));
+
+  //       // The loop will continue to the next iteration automatically
+  //     }
+  //   }
+  // }
+
   async function handleDiscovery(_movies = []) {
     setLoading(true);
     const cache = await handleGetCache();

@@ -340,15 +340,16 @@ function Content() {
                 <CircularProgress
                   style={{
                     color: "white",
+                    marginRight: "6px",
                   }}
                   size={20}
                 />
               ) : (
                 <>
                   <span className={styles.playIcon}>▶</span>
-                  <span>Watch Trailer</span>
                 </>
               )}
+              <span>Watch Trailer</span>
             </button>
           )}
         </div>
