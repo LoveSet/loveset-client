@@ -9,6 +9,7 @@ import { useModal } from "../../../shared/hooks/useModal";
 import useBillingService from "../../../shared/hooks/api/useBillingService";
 import MessageModal from "../../../shared/components/modal/messageModal/messageModal";
 import { AuthActionSuccess } from "../../../shared/context/reducers/authActions";
+import PrivacyModal from "../../../shared/components/modal/privacyModal";
 
 function Settings() {
   const { user, dispatch } = useAuthState();
@@ -97,6 +98,9 @@ function Settings() {
     }
   }
 
+  const modal2 = useModal();
+  const modal3 = useModal();
+
   return (
     <AppLayout>
       <MessageModal
@@ -118,6 +122,10 @@ function Settings() {
         ]}
         showClose={false}
       />
+
+      <TermsOfServiceModal modal={modal2} />
+      <PrivacyModal modal={modal3} />
+
       <div className={styles.settingsContainer}>
         <div className={styles.settingsHeader}>
           <h1 className={styles.settingsTitle}>Settings</h1>
@@ -226,13 +234,15 @@ function Settings() {
           <div className={styles.accountActions}>
             <button
               className={styles.accountActionButton}
-              onClick={() => setShowTerms(true)}
+              // onClick={() => setShowTerms(true)}
+              onClick={modal2.handleOpen}
             >
               Terms of Service
             </button>
             <button
               className={styles.accountActionButton}
-              onClick={() => setShowTerms(true)}
+              // onClick={() => setShowTerms(true)}
+              onClick={modal3.handleOpen}
             >
               Privacy Policy
             </button>
@@ -245,9 +255,9 @@ function Settings() {
           </div>
         </div>
 
-        {showTerms && (
+        {/* {showTerms && (
           <TermsOfServiceModal onClose={() => setShowTerms(false)} />
-        )}
+        )} */}
       </div>
     </AppLayout>
   );

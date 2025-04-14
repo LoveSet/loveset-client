@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import InviteFriendModal from "../modals/InviteFriendModal";
 import InviteFriendModal from "../../shared/components/modal/inviteFriendModal";
 import TermsOfServiceModal from "../../shared/components/modal/termsOfServiceModal";
+import PrivacyModal from "../../shared/components/modal/privacyModal";
 import styles from "./home.module.css";
 import useAuthService from "../../shared/hooks/api/useAuthService";
 import { useAuthState } from "../../shared/context/useAuthContext";
@@ -14,6 +15,7 @@ import { useSearchParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import PageLoader from "../../shared/components/pageLoader/pageLoader";
 import useGeoLocation from "../../shared/hooks/useGeoLocation";
+import { useModal } from "../../shared/hooks/useModal";
 
 function Home() {
   const { mutateAsync: google } = useAuthService.useGoogleService();
@@ -105,6 +107,9 @@ function Home() {
     flow: "auth-code",
   });
 
+  const modal = useModal();
+  const modal2 = useModal();
+
   return (
     <>
       <ToastContainer
@@ -119,6 +124,9 @@ function Home() {
         pauseOnHover
       />
       <PageLoader loading={loading} />
+      <TermsOfServiceModal modal={modal} />
+      <PrivacyModal modal={modal2} />
+
       <div className={styles.homeContainer}>
         <div className={styles.homeContent}>
           <div className={styles.logoContainer}>
@@ -162,28 +170,22 @@ function Home() {
 
           <div className={styles.termsText}>
             By continuing, you agree to our
-            <button
-              className={styles.termsLink}
-              onClick={() => setShowTerms(true)}
-            >
+            <button className={styles.termsLink} onClick={modal.handleOpen}>
               Terms of Service
             </button>{" "}
             &
-            <button
-              className={styles.termsLink}
-              onClick={() => setShowInvite(true)}
-            >
+            <button className={styles.termsLink} onClick={modal2.handleOpen}>
               Privacy Policy
             </button>
           </div>
         </div>
 
-        {showTerms && (
+        {/* {showTerms && (
           <TermsOfServiceModal onClose={() => setShowTerms(false)} />
         )}
         {showInvite && (
           <InviteFriendModal onClose={() => setShowInvite(false)} />
-        )}
+        )} */}
       </div>
     </>
   );

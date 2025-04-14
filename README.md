@@ -81,6 +81,6 @@
   - test `all emails` in coupling [done]
   - enable api redr [done]
 
-- terms + linking []
+- terms + linking [done]
 - hosting -> .env + paddle + google analytics []
 - launch after paddle verification []

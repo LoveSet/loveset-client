@@ -15,11 +15,23 @@ import Settings from "../pages/app/settings/settings";
 import { IoSearch, IoHeartOutline } from "react-icons/io5";
 import { AiOutlineFire } from "react-icons/ai";
 import { IoSettingsOutline } from "react-icons/io5";
+import Terms from "../pages/terms/terms";
+import Privacy from "../pages/privacy/privacy";
 
 export const pages = [
   {
     path: "/",
     element: <Home />,
+    app: false,
+  },
+  {
+    path: "/terms-of-service",
+    element: <Terms />,
+    app: false,
+  },
+  {
+    path: "/privacy-policy",
+    element: <Privacy />,
     app: false,
   },
   {
