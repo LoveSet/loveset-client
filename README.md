@@ -53,6 +53,21 @@
 - detail page -> back button [done]
 - streaming availability -> login + subscribe [done]
 
+- Monday:
+
+  - discover [done]
+  - youtube modal [done]
+  - content [done]
+  - out of swipe modal [done]
+  - invite modal [done]
+  - watchlist []
+  - premium []
+  - settings []
+  - getUser -> App.js []
+  - terms []
+  - hosting []
+  - paddle []
+
 - frontend [sunday][done]
 - ui adjustments [monday][done]
 - backend [tuesday,wednesday,thursday][done]
@@ -60,16 +75,13 @@
   - totalSwipes in user.model.js, add with like + pass [done]
   - referredSomeone : true/false in user.model.js [done]
   - adjust coding [done]
-  - all emitting\* []
-  - getCache + getContent --> Context []
-  - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling []
-  - show error toast notification from all rate limit errors []
+  - getCache + getContent --> Context [done]
+  - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling [done]
   - test everything billing + `subscription cron job` + `subscription expired email` in coupling []
   - test `all emails` in coupling []
   - App.js -> getUser []
   - google analytics []
   - enable emails []
+  - enable api redr []
 - terms + hosting + paddle [sunday][]
 - launch after paddle verification []
-
-package to install: react-query

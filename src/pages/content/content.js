@@ -97,7 +97,7 @@ const mockMovies = [
 function Content() {
   const { user } = useAuthState();
   const { slug } = useParams();
-  const id = slug;
+  // const id = slug;
   const navigate = useNavigate();
 
   const [movie, setMovie] = useState(null);
@@ -115,7 +115,7 @@ function Content() {
     try {
       const response = await getContent({
         params: {
-          contentId: id,
+          contentId: slug,
         },
         query: {
           userId: user?.user?.id,
@@ -188,8 +188,10 @@ function Content() {
   };
 
   useEffect(() => {
+    if (slug) {
+    }
     handleGetContent();
-  }, [id]);
+  }, [slug]);
 
   const [streamingLoading, setStreamingLoading] = useState(true);
 
@@ -203,7 +205,7 @@ function Content() {
       setStreamingLoading(true);
 
       const response = await getStreamingAvailability({
-        params: { contentId: id },
+        params: { contentId: slug },
         query: { userId: user?.user?.id },
       });
 
@@ -272,10 +274,10 @@ function Content() {
   };
 
   useEffect(() => {
-    if (id) {
+    if (slug) {
       handleStreamingAvailability();
     }
-  }, [id]);
+  }, [slug]);
 
   if (!movie) {
     return <div className={styles.loading}>Loading...</div>;

@@ -38,8 +38,8 @@ const api = (method, url, variables) =>
             error?.response?.data?.message == "Please authenticate" &&
             JSON.parse(localStorage.getItem("token"))
           ) {
-            localStorage.clear();
-            window.location = "/";
+            // localStorage.clear();
+            // window.location = "/";
           }
           //
           reject(error?.response?.data);

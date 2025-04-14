@@ -4,12 +4,14 @@ import { useState } from "react";
 import { Modal, Box } from "@mui/material";
 import "../../styles/modals.css";
 import { ClipboardCopy } from "lucide-react";
+import { useAuthState } from "../../context/useAuthContext";
 
-const GetFreeSwipesModal = ({ open = true, onClose }) => {
+const InviteFriendModal = ({ modal }) => {
+  const { user } = useAuthState();
   const [isCopied, setIsCopied] = useState(false);
 
   // This would be your unique referral URL
-  const referralUrl = "https://moviematch.com/ref/2CCF3A";
+  const referralUrl = `https://loveset.platle.com/?ref=${user?.user?.ref}`;
 
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(referralUrl);
@@ -23,8 +25,8 @@ const GetFreeSwipesModal = ({ open = true, onClose }) => {
 
   return (
     <Modal
-      open={open}
-      onClose={onClose}
+      open={modal.open}
+      onClose={modal.handleClose}
       aria-labelledby="free-swipes-modal"
       BackdropProps={{
         timeout: 500,
@@ -41,7 +43,7 @@ const GetFreeSwipesModal = ({ open = true, onClose }) => {
         className="modalType1"
       >
         <div className="modal-container">
-          <button className="modal-close" onClick={onClose}>
+          <button className="modal-close" onClick={modal.handleClose}>
             ×
           </button>
 
@@ -101,4 +103,4 @@ const GetFreeSwipesModal = ({ open = true, onClose }) => {
   );
 };
 
-export default GetFreeSwipesModal;
+export default InviteFriendModal;

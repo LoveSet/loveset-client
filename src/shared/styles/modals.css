@@ -43,6 +43,7 @@
 }
 
 .modal-title {
+  font-family: "Neuzeit Grotesk Bold";
   font-size: 1.5rem;
   color: var(--text-primary);
 }
@@ -62,6 +63,7 @@
 }
 
 .modal-description {
+  font-family: "Inter";
   margin-bottom: 20px;
   line-height: 1.6;
   color: var(--text-secondary);
@@ -90,6 +92,7 @@
 }
 
 .upgrade-button {
+  font-family: "Inter";
   padding: 12px 0;
   background-color: var(--primary-color);
   color: white;
@@ -112,6 +115,7 @@
 }
 
 .invite-button {
+  font-family: "Inter";
   padding: 12px 0;
   background-color: #f2f2f2;
   /* color: white; */
@@ -136,12 +140,14 @@
 }
 
 .form-label {
+  font-family: "Neuzeit Grotesk Bold";
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-primary);
 }
 
 .form-input {
+  font-family: "Inter";
   padding: 12px 15px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -217,12 +223,14 @@
 }
 
 .referral-title {
+  font-family: "Neuzeit Grotesk Bold";
   font-size: 1rem;
   margin-bottom: 10px;
   color: var(--text-primary);
 }
 
 .referral-steps {
+  font-family: "Inter";
   padding-left: 20px;
   color: var(--text-secondary);
   line-height: 1.6;

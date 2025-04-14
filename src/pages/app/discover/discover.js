@@ -18,6 +18,7 @@ import { GridLoader, HashLoader, PacmanLoader } from "react-spinners";
 import { CircularProgress, Skeleton } from "@mui/material";
 import { AuthActionSuccess } from "../../../shared/context/reducers/authActions";
 import { useAuthState } from "../../../shared/context/useAuthContext";
+import InviteFriendModal from "../../../shared/components/modal/inviteFriendModal";
 
 // Mock movie data
 const mockMovies = [
@@ -517,9 +518,12 @@ function Discover() {
     dispatch(AuthActionSuccess(userObj));
   };
 
+  const modal2 = useModal();
+
   const handleLike = () => {
     if (swipesLeft <= 0 && !isPremium) {
-      setShowOutOfSwipes(true);
+      // setShowOutOfSwipes(true);
+      modal2.handleOpen();
       return;
     }
 
@@ -547,7 +551,8 @@ function Discover() {
 
   const handleDislike = () => {
     if (swipesLeft <= 0 && !isPremium) {
-      setShowOutOfSwipes(true);
+      // setShowOutOfSwipes(true);
+      modal2.handleOpen();
       return;
     }
 
@@ -632,9 +637,20 @@ function Discover() {
     }
   };
 
+  const modal3 = useModal();
+
   return (
     <AppLayout>
       <YouTubeVideoModal modal={modal} videoId={videoId} />
+      <OutOfSwipesModal
+        modal={modal2}
+        onUpgrade={() => navigate("/app/premium")}
+        onInviteFriend={() => {
+          modal2.handleClose();
+          modal3.handleOpen();
+        }}
+      />
+      <InviteFriendModal modal={modal3} />
 
       <div className={styles.swipingContainerWrapper}>
         <div className={styles.swipingContainer}>
@@ -683,13 +699,6 @@ function Discover() {
             <span className={styles.likeIcon}>♥</span>
           </button> */}
           </div>
-
-          {showOutOfSwipes && (
-            <OutOfSwipesModal
-              onClose={() => setShowOutOfSwipes(false)}
-              onUpgrade={() => navigate("/app/premium")}
-            />
-          )}
         </div>
       </div>
     </AppLayout>

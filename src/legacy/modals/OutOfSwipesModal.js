@@ -1,8 +1,13 @@
-"use client"
-import { Modal, Box } from "@mui/material"
-import "../styles/modals.css"
+"use client";
+import { Modal, Box } from "@mui/material";
+import "../styles/modals.css";
 
-const OutOfSwipesModal = ({ open=true, onClose, onUpgrade, onInviteFriend }) => {
+const OutOfSwipesModal = ({
+  open = true,
+  onClose,
+  onUpgrade,
+  onInviteFriend,
+}) => {
   return (
     <Modal
       open={open}
@@ -30,11 +35,13 @@ const OutOfSwipesModal = ({ open=true, onClose, onUpgrade, onInviteFriend }) => 
           <div className="modal-content">
             <div className="out-of-swipes-icon">😢</div>
 
-            <h2 className="modal-title">You're out of swipes</h2>
+            <h2 className="modal-title modal-title-center">
+              You're out of swipes
+            </h2>
 
             <p className="modal-description">
-              MovieMatch uses purchases to sustain the business. More swipes are coming soon, or you can upgrade to get
-              more now.
+              LoveSet uses purchases to sustain the business. More swipes are
+              coming soon, or you can upgrade to get more now.
             </p>
 
             <div className="modal-actions">
@@ -51,8 +58,7 @@ const OutOfSwipesModal = ({ open=true, onClose, onUpgrade, onInviteFriend }) => 
         </div>
       </Box>
     </Modal>
-  )
-}
+  );
+};
 
-export default OutOfSwipesModal
-
+export default OutOfSwipesModal;

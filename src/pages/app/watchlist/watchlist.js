@@ -2,25 +2,29 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./watchlist.module.css";
 import AppLayout from "../../../shared/components/appLayout/appLayout";
+import { useAuthState } from "../../../shared/context/useAuthContext";
 
 function Watchlist() {
+  const { user } = useAuthState();
   const navigate = useNavigate();
   const [likedMovies, setLikedMovies] = useState([]);
   const [isPremium, setIsPremium] = useState(false);
 
-  useEffect(() => {
-    // Load liked movies from localStorage
-    const storedLikedMovies = JSON.parse(
-      localStorage.getItem("likedMovies") || "[]"
-    );
-    setLikedMovies(storedLikedMovies);
+  const [watchlist, setWatchlist] = useState([]);
 
-    // Check if user is premium
-    const userPremium = localStorage.getItem("isPremium");
-    if (userPremium === "true") {
-      setIsPremium(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Load liked movies from localStorage
+  //   const storedLikedMovies = JSON.parse(
+  //     localStorage.getItem("likedMovies") || "[]"
+  //   );
+  //   setLikedMovies(storedLikedMovies);
+
+  //   // Check if user is premium
+  //   const userPremium = localStorage.getItem("isPremium");
+  //   if (userPremium === "true") {
+  //     setIsPremium(true);
+  //   }
+  // }, []);
 
   const handleRemoveFromLikes = (movieId) => {
     if (!isPremium) {
@@ -63,7 +67,7 @@ function Watchlist() {
           </div>
         ) : (
           <div className={styles.movieGrid}>
-            {likedMovies.map((movie) => (
+            {watchlist.map((movie) => (
               <div key={movie.id} className={styles.movieItem}>
                 <div
                   className={styles.moviePoster}
@@ -99,7 +103,7 @@ function Watchlist() {
           </div>
         )}
 
-        {!isPremium && likedMovies.length > 0 && (
+        {!user?.user?.premium && watchlist?.length > 0 && (
           <div className={styles.premiumPrompt}>
             <p>Upgrade to Premium to remove movies from your likes</p>
             <button

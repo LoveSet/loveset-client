@@ -1,17 +1,15 @@
 "use client";
 import { Modal, Box } from "@mui/material";
 import "../../styles/modals.css";
+import { useAuthState } from "../../context/useAuthContext";
 
-const OutOfSwipesModal = ({
-  open = true,
-  onClose,
-  onUpgrade,
-  onInviteFriend,
-}) => {
+const OutOfSwipesModal = ({ modal, onUpgrade, onInviteFriend }) => {
+  const { user } = useAuthState();
+
   return (
     <Modal
-      open={open}
-      onClose={onClose}
+      open={modal.open}
+      onClose={modal.handleClose}
       aria-labelledby="out-of-swipes-modal"
       BackdropProps={{
         timeout: 500,
@@ -28,17 +26,19 @@ const OutOfSwipesModal = ({
         className="modalType1"
       >
         <div className="modal-container">
-          <button className="modal-close" onClick={onClose}>
+          <button className="modal-close" onClick={modal.handleClose}>
             ×
           </button>
 
           <div className="modal-content">
             <div className="out-of-swipes-icon">😢</div>
 
-            <h2 className="modal-title">You're out of swipes</h2>
+            <h2 className="modal-title modal-title-center">
+              You're out of swipes
+            </h2>
 
             <p className="modal-description">
-              MovieMatch uses purchases to sustain the business. More swipes are
+              LoveSet uses purchases to sustain the business. More swipes are
               coming soon, or you can upgrade to get more now.
             </p>
 
@@ -48,9 +48,11 @@ const OutOfSwipesModal = ({
               </button>
 
               {/* will show if you have not done so already */}
-              <button className="invite-button" onClick={onInviteFriend}>
-                Invite Friend for 10 Free Swipes
-              </button>
+              {!user?.user?.hasReferred && (
+                <button className="invite-button" onClick={onInviteFriend}>
+                  Invite Friend for 10 Free Swipes
+                </button>
+              )}
             </div>
           </div>
         </div>

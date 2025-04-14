@@ -26,10 +26,12 @@ import { IoIosLogOut } from "react-icons/io";
 import styles from "./appLayout.module.css";
 import { pages } from "../../../routes";
 import { ToastContainer, toast } from "react-toastify";
+import { useAuthState } from "../../context/useAuthContext";
 
 const drawerWidth = 256.8;
 
 function AppLayout({ children }) {
+  const { user } = useAuthState();
   // const { user, logout } = useAuth();
   const logout = () => {};
   const location = useLocation();
@@ -64,7 +66,7 @@ function AppLayout({ children }) {
       </Box> */}
 
       <Box className={styles.userProfile}>
-        <Box className={styles.userAvatar}>{"A"}</Box>
+        <Box className={styles.userAvatar}>{user?.user?.name?.[0]}</Box>
         {sidebarOpen && (
           <Box className={styles.userInfo}>
             <Typography
@@ -75,7 +77,8 @@ function AppLayout({ children }) {
               }}
             >
               {/* {user?.name || "User"} */}
-              Archie Bryann
+              {/* Archie Bryann */}
+              {user?.user?.name}
             </Typography>
             <Typography
               variant="body2"
@@ -84,7 +87,7 @@ function AppLayout({ children }) {
                 fontFamily: "Inter",
               }}
             >
-              @ekomobong
+              @{user?.user?.username}
             </Typography>
           </Box>
         )}
