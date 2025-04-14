@@ -64,7 +64,7 @@
   - premium []
   - settings []
   - getUser -> App.js []
-  - terms []
+  - terms + linking []
   - hosting []
   - paddle []
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 // import OutOfSwipesModal from "../modals/OutOfSwipesModal";
 import OutOfSwipesModal from "../../../shared/components/modal/outOfSwipesModal";
 // import { useAuth } from "../../../contexts/AuthContext";
@@ -19,7 +19,10 @@ import { CircularProgress, Skeleton } from "@mui/material";
 import { AuthActionSuccess } from "../../../shared/context/reducers/authActions";
 import { useAuthState } from "../../../shared/context/useAuthContext";
 import InviteFriendModal from "../../../shared/components/modal/inviteFriendModal";
-
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
+import useUserService from "../../../shared/hooks/api/useUserService";
+import PageLoader from "../../../shared/components/pageLoader/pageLoader";
 // Mock movie data
 const mockMovies = [
   {
@@ -639,8 +642,74 @@ function Discover() {
 
   const modal3 = useModal();
 
+  const [searchParams] = useSearchParams();
+  const action = searchParams.get("action");
+  const [showConfetti, setShowConfetti] = useState(false);
+  const { width, height } = useWindowSize();
+
+  useEffect(() => {
+    if (action == "subscribed") {
+      // isVerifyingPayment = true
+
+      const userObj = {
+        token: user?.token,
+        currentUser: { ...user?.user, isVerifyingPayment: true },
+        permission: user?.permission,
+      };
+      dispatch(AuthActionSuccess(userObj));
+
+      handleCheckSubscriptionStatus();
+    }
+  }, [action]);
+
+  const [loading00, setLoading00] = useState(false);
+  const { mutateAsync: getUser } = useUserService.useGetUserService();
+
+  async function handleCheckSubscriptionStatus() {
+    try {
+      setLoading00(true);
+      let req = {
+        params: {
+          username: user?.user?.username,
+        },
+      };
+      const response = await getUser(req).catch((err) => {
+        setLoading00(false);
+        toast.error("An error occurred. Please try again or contact @platle!");
+      });
+
+      if (response?.data?.premium && !response?.data?.unsubscribed) {
+        const userObj = {
+          token: user?.token,
+          currentUser: {
+            ...response?.data,
+          },
+          permission: [response?.data?.admin ? "admin" : "user"],
+        };
+        dispatch(AuthActionSuccess(userObj));
+
+        setShowConfetti(true);
+        setLoading00(false);
+      } else {
+        setTimeout(handleCheckSubscriptionStatus, 3000);
+      }
+    } catch (err) {
+      setLoading00(false);
+      toast.error("An error occurred. Please try again or contact @platle!");
+    }
+  }
+
   return (
     <AppLayout>
+      <PageLoader loading={loading00} />
+      {showConfetti && (
+        <Confetti
+          width={width - 20}
+          height={height - 20}
+          numberOfPieces={700}
+          recycle={false}
+        />
+      )}
       <YouTubeVideoModal modal={modal} videoId={videoId} />
       <OutOfSwipesModal
         modal={modal2}

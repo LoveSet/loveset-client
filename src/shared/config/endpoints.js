@@ -27,6 +27,11 @@ const API_ENDPOINTS = {
   // watchlist
   GET_WATCHLIST: "watchlist",
   DELETE_WATCHLIST: "watchlist",
+
+  // billing
+  GET_CUSTOMER: "billing/customer",
+  GET_BILLING_HISTORY: "billing/history",
+  UNSUBSCRIBE: "billing/unsubscribe",
 };
 
 // const FILES_URL2 = `https://fanbear-app.s3.amazonaws.com/`;

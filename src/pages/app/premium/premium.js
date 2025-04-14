@@ -10,6 +10,10 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { LuSearch } from "react-icons/lu";
 import { CgInfinity } from "react-icons/cg";
 import AppLayout from "../../../shared/components/appLayout/appLayout";
+import useBillingService from "../../../shared/hooks/api/useBillingService";
+import { CLIENT_URL } from "../../../shared/config/endpoints";
+import { PADDLE_PRICE } from "../../../shared/config/integrations";
+import { toast } from "react-toastify";
 
 function Premium() {
   const navigate = useNavigate();
@@ -47,17 +51,64 @@ function Premium() {
     setSelectedPlan(planId);
   };
 
-  const handleSubscribe = () => {
-    // Simulate subscription process
-    localStorage.setItem("isPremium", "true");
-    localStorage.setItem("premiumPlan", selectedPlan);
-    localStorage.setItem(
-      "premiumExpiry",
-      new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
-    );
+  // const handleSubscribe = () => {
+  //   // Simulate subscription process
+  //   localStorage.setItem("isPremium", "true");
+  //   localStorage.setItem("premiumPlan", selectedPlan);
+  //   localStorage.setItem(
+  //     "premiumExpiry",
+  //     new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+  //   );
 
-    // Redirect to swiping page
-    navigate("/app/discover");
+  //   // Redirect to swiping page
+  //   navigate("/app/discover");
+  // };
+
+  const [loading, setLoading] = useState(false);
+  const { mutateAsync: getCustomer } =
+    useBillingService.useGetCustomerService();
+
+  const getPriceId = () => {
+    if (selectedPlan?.id == "weekly") {
+      return PADDLE_PRICE.WEEKLY_PRICE_ID;
+    } else if (selectedPlan?.id == "monthly") {
+      return PADDLE_PRICE.MONTHLY_PRICE_ID;
+    } else {
+      return PADDLE_PRICE.BI_ANNUALLY_PRICE_ID;
+    }
+  };
+
+  const handleSubscribe = async () => {
+    try {
+      setLoading(true);
+
+      const response = await getCustomer().catch((err) => {
+        setLoading(false);
+        toast.error("An error occurred. Please try again or contact @platle!");
+      });
+
+      if (response?.data) {
+        const Paddle = window.Paddle;
+        Paddle.Checkout.open({
+          settings: {
+            theme: "dark",
+            successUrl: `${CLIENT_URL}/app/discover?action=subscribed`,
+          },
+          customer: {
+            id: response?.data?.paddleCustomerId,
+          },
+          items: [
+            {
+              priceId: getPriceId(),
+              quantity: 1,
+            },
+          ],
+        });
+      }
+    } catch (err) {
+      setLoading(false);
+      toast.error("An error occurred. Please try again!");
+    }
   };
 
   return (
