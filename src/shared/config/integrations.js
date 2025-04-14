@@ -16,8 +16,8 @@ const PADDLE_PRICE_CONFIG = {
   },
 };
 
-// const PADDLE_PRICE = PADDLE_PRICE_CONFIG.DEV; // Change to PROD for production
-const PADDLE_PRICE = PADDLE_PRICE_CONFIG.PROD;
+const PADDLE_PRICE = PADDLE_PRICE_CONFIG.DEV; // Change to PROD for production
+// const PADDLE_PRICE = PADDLE_PRICE_CONFIG.PROD;
 
 module.exports = {
   GOOGLE_CLIENT_ID,

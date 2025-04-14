@@ -422,7 +422,7 @@ function Discover() {
 
   const hasRun = useRef(false);
   useEffect(() => {
-    if (!hasRun.current && !loading) {
+    if (!hasRun.current && !loading && movies?.length < 1) {
       handleDiscovery([]);
       hasRun.current = true; // Mark as executed
     }
@@ -440,7 +440,7 @@ function Discover() {
   const [showOutOfSwipes, setShowOutOfSwipes] = useState(false);
   const [likedMovies, setLikedMovies] = useState([]);
   const [dislikedMovies, setDislikedMovies] = useState([]);
-  const [isPremium, setIsPremium] = useState(user?.user?.premium);
+  // const [isPremium, setIsPremium] = useState(user?.user?.premium);
 
   // useEffect(() => {
   //   // Check if user is premium
@@ -524,7 +524,7 @@ function Discover() {
   const modal2 = useModal();
 
   const handleLike = () => {
-    if (swipesLeft <= 0 && !isPremium) {
+    if (swipesLeft <= 0 && !user?.user?.premium) {
       // setShowOutOfSwipes(true);
       modal2.handleOpen();
       return;
@@ -535,7 +535,7 @@ function Discover() {
 
     // setLikedMovies([...likedMovies, currentMovie]);
 
-    if (!isPremium) {
+    if (!user?.user?.premium) {
       setSwipesLeft(swipesLeft - 1);
       handleUpdateSwipesUsed();
     }
@@ -553,7 +553,7 @@ function Discover() {
   };
 
   const handleDislike = () => {
-    if (swipesLeft <= 0 && !isPremium) {
+    if (swipesLeft <= 0 && !user?.user?.premium) {
       // setShowOutOfSwipes(true);
       modal2.handleOpen();
       return;
@@ -563,7 +563,7 @@ function Discover() {
     handlePassShow(currentMovie?.id);
     // setDislikedMovies([...dislikedMovies, currentMovie]);
 
-    if (!isPremium) {
+    if (!user?.user?.premium) {
       setSwipesLeft(swipesLeft - 1);
       handleUpdateSwipesUsed();
     }
@@ -689,6 +689,7 @@ function Discover() {
         dispatch(AuthActionSuccess(userObj));
 
         setShowConfetti(true);
+        handleReplenish();
         setLoading00(false);
       } else {
         setTimeout(handleCheckSubscriptionStatus, 3000);

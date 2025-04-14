@@ -61,7 +61,7 @@
   - out of swipe modal [done]
   - invite modal [done]
   - watchlist [done]
-  - premium []
+  - premium [done]
   - settings []
   - getUser -> App.js []
   - terms + linking []

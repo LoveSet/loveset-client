@@ -14,6 +14,8 @@ import useBillingService from "../../../shared/hooks/api/useBillingService";
 import { CLIENT_URL } from "../../../shared/config/endpoints";
 import { PADDLE_PRICE } from "../../../shared/config/integrations";
 import { toast } from "react-toastify";
+import PageLoader from "../../../shared/components/pageLoader/pageLoader";
+import { CircularProgress } from "@mui/material";
 
 function Premium() {
   const navigate = useNavigate();
@@ -69,9 +71,9 @@ function Premium() {
     useBillingService.useGetCustomerService();
 
   const getPriceId = () => {
-    if (selectedPlan?.id == "weekly") {
+    if (selectedPlan == "weekly") {
       return PADDLE_PRICE.WEEKLY_PRICE_ID;
-    } else if (selectedPlan?.id == "monthly") {
+    } else if (selectedPlan == "monthly") {
       return PADDLE_PRICE.MONTHLY_PRICE_ID;
     } else {
       return PADDLE_PRICE.BI_ANNUALLY_PRICE_ID;
@@ -84,8 +86,10 @@ function Premium() {
 
       const response = await getCustomer().catch((err) => {
         setLoading(false);
-        toast.error("An error occurred. Please try again or contact @platle!");
+        toast.error("An error occurred. Please try again.");
       });
+
+      setLoading(false);
 
       if (response?.data) {
         const Paddle = window.Paddle;
@@ -113,6 +117,7 @@ function Premium() {
 
   return (
     <AppLayout>
+      {/* <PageLoader loading={loading} /> */}
       <div className={styles.premiumContainerWrapper}>
         <div className={styles.premiumContainer}>
           <div className={styles.premiumHeader}>
@@ -192,9 +197,18 @@ function Premium() {
           <div className={styles.subscriptionActions}>
             <button
               className={styles.subscribeButton}
-              onClick={handleSubscribe}
+              onClick={loading ? () => {} : handleSubscribe}
             >
-              Continue
+              {loading ? (
+                <CircularProgress
+                  style={{
+                    color: "white",
+                  }}
+                  size={13}
+                />
+              ) : (
+                <>Continue</>
+              )}
             </button>
 
             <button

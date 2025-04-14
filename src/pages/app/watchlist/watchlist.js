@@ -136,7 +136,10 @@ function Watchlist() {
           loader={
             <div
               className="j-center"
-              style={{ marginTop: "8px", marginBottom: "8px" }}
+              style={{
+                marginTop: "8px",
+                marginBottom: "8px",
+              }}
             >
               {/* <ReactLoading
                   type="spinningBubbles"
@@ -207,9 +210,9 @@ function Watchlist() {
                     <button
                       className={styles.removeButton}
                       onClick={() => handleDeleteFromWatchlist(movie.id)}
-                      disabled={!isPremium}
+                      disabled={!user?.user?.premium}
                     >
-                      {isPremium ? "🗑️ Remove" : "🔒 Remove"}
+                      {user?.user?.premium ? "🗑️ Remove" : "🔒 Remove"}
                     </button>
                   </div>
                 </div>

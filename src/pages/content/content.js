@@ -259,13 +259,20 @@ function Content() {
 
     if (streamingLoading) {
       return (
-        <>
+        <div style={{ display: "flex" }}>
           <CircularProgress
             size={20}
-            style={{ color: "#5891ff", marginTop: "3px" }}
+            style={{ color: "#5891ff", marginTop: "4px" }}
           />{" "}
-          Searching for availability...{" "}
-        </>
+          <span
+            style={{
+              marginLeft: "6px",
+              marginTop: "2.5px",
+            }}
+          >
+            Searching for availability...{" "}
+          </span>
+        </div>
       );
     }
 
