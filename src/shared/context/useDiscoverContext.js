@@ -24,15 +24,30 @@ const DiscoverProvider = ({ children }) => {
     }
   }
 
-  async function handleGetContent() {
+  // async function handleGetContent() {
+  //   try {
+  //     const response = await getContent();
+  //     if (response) {
+  //       return response?.data;
+  //     }
+  //   } catch (error) {
+  //     toast.error("An error occurred. Please refresh the page to try again.");
+  //     // toast.error("An error occurred. Please try again.");
+  //   }
+  // }
+
+  async function handleGetContent(retries = 3) {
     try {
       const response = await getContent();
       if (response) {
-        return response?.data;
+        return response.data;
       }
     } catch (error) {
-      toast.error("An error occurred. Please refresh the page to try again.");
-      // toast.error("An error occurred. Please try again.");
+      if (retries > 0) {
+        return await handleGetContent(retries - 1); // retry
+      } else {
+        toast.error("An error occurred. Please refresh the page to try again.");
+      }
     }
   }
 
