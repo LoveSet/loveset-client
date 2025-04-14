@@ -65,7 +65,7 @@
   - settings [done]
     - unsubscribe [done]
     - test everything billing + `subscription cron job` + `subscription expired email` in coupling [done]
-  - getUser -> App.js []
+  - getUser -> App.js [done]
   - terms + linking []
   - hosting []
   - paddle []
@@ -80,9 +80,7 @@
   - adjust coding [done]
   - getCache + getContent --> Context [done]
   - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling [done]
-
   - test `all emails` in coupling []
-  - App.js -> getUser []
   - google analytics []
   - enable emails []
   - enable api redr []
