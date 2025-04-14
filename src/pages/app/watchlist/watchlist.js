@@ -5,27 +5,39 @@ import AppLayout from "../../../shared/components/appLayout/appLayout";
 import { useAuthState } from "../../../shared/context/useAuthContext";
 import useWatchlistService from "../../../shared/hooks/api/useWatchlistService";
 import { toast } from "react-toastify";
-import { Skeleton } from "@mui/material"; // Import Skeleton
+import { Skeleton } from "@mui/material";
 import { FILES_URL } from "../../../shared/config/endpoints";
 import PageLoader from "../../../shared/components/pageLoader/pageLoader";
+import InfiniteScroll from "react-infinite-scroll-component";
+// import ReactLoading from "react-loading";
+import {
+  GridLoader,
+  HashLoader,
+  PacmanLoader,
+  SyncLoader,
+  BeatLoader,
+} from "react-spinners";
 
 function Watchlist() {
   const { user } = useAuthState();
   const navigate = useNavigate();
   const [likedMovies, setLikedMovies] = useState([]);
   const [isPremium, setIsPremium] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState({}); // Track image loading state for each movie
-
-  let limit = 10;
+  const [imageLoaded, setImageLoaded] = useState({});
+  const [watchlist, setWatchlist] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const [watchlist, setWatchlist] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const limit = 10;
 
   const { mutateAsync: getWatchlist } =
     useWatchlistService.useGetWatchlistService();
 
+  const [loading2, setLoading2] = useState(true);
+
   const handleGetWatchlist = async () => {
     try {
+      setLoading2(true);
       const response = await getWatchlist({
         query: {
           limit,
@@ -39,7 +51,9 @@ function Watchlist() {
         setPage(response?.data?.currentPage);
         setTotalPages(response?.data?.totalPages);
       }
+      setLoading2(false);
     } catch (error) {
+      setLoading2(false);
       toast.error("An error occurred while getting your watchlist.");
     }
   };
@@ -47,8 +61,6 @@ function Watchlist() {
   useEffect(() => {
     handleGetWatchlist();
   }, []);
-
-  const [loading, setLoading] = useState(false);
 
   const { mutateAsync: deleteFromWatchlist } =
     useWatchlistService.useDeleteFromWatchlistService();
@@ -61,14 +73,12 @@ function Watchlist() {
       }
 
       setLoading(true);
-      // Call the API to delete the movie from the watchlist
       const response = await deleteFromWatchlist({
         params: {
           watchlistId,
         },
       });
       if (response) {
-        // Update the watchlist state by filtering out the deleted movie
         const updatedWatchlist = watchlist.filter(
           (_watchlist) => _watchlist.id !== watchlistId
         );
@@ -97,7 +107,7 @@ function Watchlist() {
           </p>
         </div>
 
-        {watchlist?.length === 0 ? (
+        {!loading2 && watchlist?.length < 1 && (
           <div className={styles.emptyWatchlist}>
             <div className={styles.emptyIcon}>🎬</div>
             <h2 className={styles.emptyTitle}>No liked movies yet</h2>
@@ -111,7 +121,40 @@ function Watchlist() {
               Discover Movies
             </button>
           </div>
-        ) : (
+        )}
+
+        <InfiniteScroll
+          style={{
+            overflow: "unset",
+          }}
+          // className="_infinite-scroll-component"
+          scrollThreshold="100px"
+          dataLength={watchlist.length}
+          next={handleGetWatchlist}
+          hasMore={page < totalPages}
+          // height={`calc(100vh - ${user?.user?.premium ? 0 : 171}px)`}
+          loader={
+            <div
+              className="j-center"
+              style={{ marginTop: "8px", marginBottom: "8px" }}
+            >
+              {/* <ReactLoading
+                  type="spinningBubbles"
+                  color={"#8a96a3"}
+                  height={24}
+                  width={24}
+                /> */}
+              <HashLoader
+                color={"#5891ff"}
+                loading={true}
+                // cssOverride={override}
+                size={40}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </div>
+          }
+        >
           <div className={styles.movieGrid}>
             {watchlist.map((movie) => (
               <div key={movie.contentId.id} className={styles.movieItem}>
@@ -119,7 +162,6 @@ function Watchlist() {
                   className={styles.moviePoster}
                   onClick={() => handleViewDetails(movie.contentId.slug)}
                 >
-                  {/* Skeleton Loader */}
                   {!imageLoaded[movie.contentId.id] && (
                     <Skeleton
                       variant="rectangular"
@@ -164,7 +206,7 @@ function Watchlist() {
                   <div className={styles.movieActions}>
                     <button
                       className={styles.removeButton}
-                      onClick={() => handleDeleteFromWatchlist(movie.id)} // watchlistId
+                      onClick={() => handleDeleteFromWatchlist(movie.id)}
                       disabled={!isPremium}
                     >
                       {isPremium ? "🗑️ Remove" : "🔒 Remove"}
@@ -174,7 +216,7 @@ function Watchlist() {
               </div>
             ))}
           </div>
-        )}
+        </InfiniteScroll>
 
         {!user?.user?.premium && watchlist?.length > 0 && (
           <div className={styles.premiumPrompt}>

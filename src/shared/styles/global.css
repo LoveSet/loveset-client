@@ -122,3 +122,9 @@ p {
     width: 90% !important;
   }
 }
+
+.j-center {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

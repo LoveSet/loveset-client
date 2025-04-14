@@ -122,3 +122,7 @@ p {
     width: 90% !important;
   }
 }
+
+._infinite-scroll-component {
+  overflow-y: hidden !important;
+}
