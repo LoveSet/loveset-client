@@ -689,7 +689,6 @@ function Discover() {
         dispatch(AuthActionSuccess(userObj));
 
         setShowConfetti(true);
-        handleReplenish();
         setLoading00(false);
       } else {
         setTimeout(handleCheckSubscriptionStatus, 3000);
