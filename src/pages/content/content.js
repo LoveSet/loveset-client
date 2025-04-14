@@ -342,7 +342,7 @@ function Content() {
                     color: "white",
                     marginRight: "6px",
                   }}
-                  size={20}
+                  size={15}
                 />
               ) : (
                 <>
