@@ -4,11 +4,16 @@ import { useAuth } from "../../../legacy/contexts/AuthContext";
 import TermsOfServiceModal from "../../../shared/components/modal/termsOfServiceModal";
 import styles from "./settings.module.css";
 import AppLayout from "../../../shared/components/appLayout/appLayout";
+import { useAuthState } from "../../../shared/context/useAuthContext";
+import { useModal } from "../../../shared/hooks/useModal";
+import useBillingService from "../../../shared/hooks/api/useBillingService";
+import MessageModal from "../../../shared/components/modal/messageModal/messageModal";
+import { AuthActionSuccess } from "../../../shared/context/reducers/authActions";
 
 function Settings() {
+  const { user, dispatch } = useAuthState();
   const navigate = useNavigate();
   // const { user, logout } = useAuth();
-  const logout = () => {};
   const [isPremium, setIsPremium] = useState(false);
   const [premiumPlan, setPremiumPlan] = useState("");
   const [premiumExpiry, setPremiumExpiry] = useState("");
@@ -22,25 +27,27 @@ function Settings() {
     favoriteMovie: "",
   });
 
-  useEffect(() => {
-    // Check if user is premium
-    const userPremium = localStorage.getItem("isPremium");
-    if (userPremium === "true") {
-      setIsPremium(true);
-      setPremiumPlan(localStorage.getItem("premiumPlan") || "");
-      setPremiumExpiry(localStorage.getItem("premiumExpiry") || "");
-    }
+  // useEffect(() => {
+  //   // Check if user is premium
+  //   const userPremium = localStorage.getItem("isPremium");
+  //   if (userPremium === "true") {
+  //     setIsPremium(true);
+  //     setPremiumPlan(localStorage.getItem("premiumPlan") || "");
+  //     setPremiumExpiry(localStorage.getItem("premiumExpiry") || "");
+  //   }
 
-    // Load user preferences
-    const storedPreferences = localStorage.getItem("userPreferences");
-    if (storedPreferences) {
-      setPreferences(JSON.parse(storedPreferences));
-    }
-  }, []);
+  //   // Load user preferences
+  //   const storedPreferences = localStorage.getItem("userPreferences");
+  //   if (storedPreferences) {
+  //     setPreferences(JSON.parse(storedPreferences));
+  //   }
+  // }, []);
+
+  const logout = () => {};
 
   const handleLogout = () => {
-    logout();
-    navigate("/");
+    window.localStorage.clear();
+    window.location = "/";
   };
 
   const handleEditPreferences = () => {
@@ -51,10 +58,11 @@ function Settings() {
     navigate("/app/premium");
   };
 
-  const formatExpiryDate = (dateString) => {
-    if (!dateString) return "";
+  const formatExpiryDate = (timestamp) => {
+    if (!timestamp) return "";
 
-    const date = new Date(dateString);
+    // Convert Unix timestamp (seconds) to milliseconds for JavaScript Date
+    const date = new Date(timestamp * 1000);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
@@ -62,8 +70,54 @@ function Settings() {
     });
   };
 
+  const modal = useModal();
+
+  const [loading3, setLoading3] = useState(false);
+  const { mutateAsync: unsubscribe } =
+    useBillingService.useUnsubscribeService();
+
+  async function handleUnsubscribe() {
+    try {
+      setLoading3(true);
+      const response = await unsubscribe({}).catch((err) => {
+        setLoading3(false);
+      });
+
+      if (response) {
+        const userObj = {
+          token: user?.token,
+          currentUser: { ...user?.user, ...response?.data },
+          permission: user?.permission,
+        };
+        dispatch(AuthActionSuccess(userObj));
+      }
+      setLoading3(false);
+    } catch (err) {
+      setLoading3(false);
+    }
+  }
+
   return (
     <AppLayout>
+      <MessageModal
+        modal={modal}
+        message={`Are you sure you want to unsubscribe? We're sad to see you go!`}
+        action={[
+          {
+            label: "Cancel",
+            onClick: modal.handleClose,
+          },
+          {
+            label: "Unsubscribe",
+            onClick: async () => {
+              await handleUnsubscribe();
+              modal.handleClose();
+            },
+            disabled: loading3,
+          },
+        ]}
+        showClose={false}
+      />
       <div className={styles.settingsContainer}>
         <div className={styles.settingsHeader}>
           <h1 className={styles.settingsTitle}>Settings</h1>
@@ -73,11 +127,11 @@ function Settings() {
           <h2 className={styles.sectionTitle}>Profile</h2>
 
           <div className={styles.profileInfo}>
-            <div className={styles.userAvatar}>A</div>
+            <div className={styles.userAvatar}>{user?.user?.name?.[0]}</div>
 
             <div className={styles.userDetails}>
-              <div className={styles.userName}>Archie Bryann</div>
-              <div className={styles.userEmail}>@ekomobong</div>
+              <div className={styles.userName}>{user?.user?.name}</div>
+              <div className={styles.userEmail}>@{user?.user?.username}</div>
             </div>
           </div>
         </div>
@@ -85,31 +139,7 @@ function Settings() {
         <div className={styles.settingsSection}>
           <h2 className={styles.sectionTitle}>Subscription</h2>
 
-          {isPremium ? (
-            <div className={styles.subscriptionInfo}>
-              <div className={styles.premiumBadge}>Premium</div>
-
-              <div className={styles.planDetails}>
-                <div className={styles.planName}>
-                  {premiumPlan === "weekly"
-                    ? "1-Week Plan"
-                    : premiumPlan === "monthly"
-                      ? "Monthly Plan"
-                      : premiumPlan === "6month"
-                        ? "6-Month Plan"
-                        : "Premium Plan"}
-                </div>
-
-                <div className={styles.planExpiry}>
-                  Expires on {formatExpiryDate(premiumExpiry)}
-                </div>
-              </div>
-
-              <button className={styles.manageSubscriptionButton}>
-                Manage Subscription
-              </button>
-            </div>
-          ) : (
+          {!user?.user?.premium || user?.user?.unsubscribed ? (
             <div className={styles.upgradePrompt}>
               <p>Upgrade to Premium for unlimited swipes and more features</p>
               <button
@@ -117,6 +147,34 @@ function Settings() {
                 onClick={handleUpgradePremium}
               >
                 Upgrade Now
+              </button>
+            </div>
+          ) : (
+            <div className={styles.subscriptionInfo}>
+              <div className={styles.premiumBadge}>Premium</div>
+
+              <div className={styles.planDetails}>
+                <div className={styles.planName}>
+                  {user?.user?.subscriptionPlan === "weekly"
+                    ? "1-Week Plan"
+                    : user?.user?.subscriptionPlan === "monthly"
+                      ? "Monthly Plan"
+                      : user?.user?.subscriptionPlan === "biannually"
+                        ? "6-Month Plan"
+                        : "Premium Plan"}
+                </div>
+
+                <div className={styles.planExpiry}>
+                  Expires on{" "}
+                  {formatExpiryDate(user?.user?.subscriptionExpiring)}
+                </div>
+              </div>
+
+              <button
+                className={styles.manageSubscriptionButton}
+                onClick={modal.handleOpen}
+              >
+                Manage Subscription
               </button>
             </div>
           )}
@@ -129,27 +187,27 @@ function Settings() {
             <div className={styles.preferenceItem}>
               <div className={styles.preferenceLabel}>Content Types</div>
               <div className={styles.preferenceValue}>
-                {preferences.contentTypes.join(", ") || "Not set"}
+                {user?.user?.contentTypes.join(", ") || "Not set"}
               </div>
             </div>
 
             <div className={styles.preferenceItem}>
               <div className={styles.preferenceLabel}>Industries</div>
               <div className={styles.preferenceValue}>
-                {preferences.filmIndustries.join(", ") || "Not set"}
+                {user?.user?.filmIndustries.join(", ") || "Not set"}
               </div>
             </div>
 
             <div className={styles.preferenceItem}>
               <div className={styles.preferenceLabel}>Genres</div>
               <div className={styles.preferenceValue}>
-                {preferences.genres.join(", ") || "Not set"}
+                {user?.user?.genres.join(", ") || "Not set"}
               </div>
             </div>
             <div className={styles.preferenceItem}>
               <div className={styles.preferenceLabel}>Time Periods</div>
               <div className={styles.preferenceValue}>
-                {preferences.timePeriods.join(", ") || "Not set"}
+                {user?.user?.timePeriods.join(", ") || "Not set"}
               </div>
             </div>
           </div>

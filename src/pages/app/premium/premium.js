@@ -197,16 +197,7 @@ function Premium() {
           </div>
 
           <div className={styles.subscriptionActions}>
-            {user?.user?.premium ? (
-              <button
-                className={`${styles.subscribeButton} `}
-                onClick={() => {
-                  navigate("/app/settings");
-                }}
-              >
-                Manage Subscription
-              </button>
-            ) : (
+            {!user?.user?.premium || user?.user?.unsubscribed ? (
               <>
                 <button
                   className={`${styles.subscribeButton} `}
@@ -230,6 +221,15 @@ function Premium() {
                   No Thanks
                 </button>
               </>
+            ) : (
+              <button
+                className={`${styles.subscribeButton} `}
+                onClick={() => {
+                  navigate("/app/settings");
+                }}
+              >
+                Manage Subscription
+              </button>
             )}
           </div>
 

@@ -133,3 +133,9 @@ p {
   pointer-events: none;
   opacity: 0.5;
 }
+
+.disabled-btn {
+  background: rgba(138, 150, 163, 0.75);
+  opacity: 0.4;
+  pointer-events: none;
+}

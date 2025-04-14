@@ -63,6 +63,8 @@
   - watchlist [done]
   - premium [done]
   - settings []
+    - unsubscribe []
+    - test everything billing + `subscription cron job` + `subscription expired email` in coupling []
   - getUser -> App.js []
   - terms + linking []
   - hosting []
@@ -72,16 +74,18 @@
 - ui adjustments [monday][done]
 - backend [tuesday,wednesday,thursday][done]
 - coupling [friday,saturday][]
+
   - totalSwipes in user.model.js, add with like + pass [done]
   - referredSomeone : true/false in user.model.js [done]
   - adjust coding [done]
   - getCache + getContent --> Context [done]
   - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling [done]
-  - test everything billing + `subscription cron job` + `subscription expired email` in coupling []
+
   - test `all emails` in coupling []
   - App.js -> getUser []
   - google analytics []
   - enable emails []
   - enable api redr []
+
 - terms + hosting + paddle [sunday][]
 - launch after paddle verification []
