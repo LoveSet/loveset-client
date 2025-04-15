@@ -57,8 +57,8 @@ const InviteFriendModal = ({ modal }) => {
             </div> */}
 
             <p className="modal-description">
-              Invite friends to MovieMatch and get 10 free swipes when they sign
-              up using your referral link!
+              Invite friends to LoveSet and get 10 free swipes when they sign up
+              using your referral link!
             </p>
 
             <div className="invite-form">
@@ -91,7 +91,7 @@ const InviteFriendModal = ({ modal }) => {
                 <h3 className="referral-title">How it works:</h3>
                 <ol className="referral-steps">
                   <li>Share your unique link with friends</li>
-                  <li>Friend downloads MovieMatch</li>
+                  <li>Friend signs up on LoveSet</li>
                   <li>You get 10 free swipes when they sign up!</li>
                 </ol>
               </div>

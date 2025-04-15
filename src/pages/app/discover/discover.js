@@ -24,6 +24,7 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import useUserService from "../../../shared/hooks/api/useUserService";
 import PageLoader from "../../../shared/components/pageLoader/pageLoader";
 import { useMediaQuery } from "react-responsive";
+import { Helmet } from "react-helmet";
 
 // Mock movie data
 const mockMovies = [
@@ -705,6 +706,13 @@ function Discover() {
 
   return (
     <AppLayout>
+      <Helmet>
+        <style>{`
+              body {
+                overflow-y: hidden;
+              }
+              `}</style>
+      </Helmet>
       <PageLoader loading={loading00} />
       {showConfetti && (
         <Confetti
