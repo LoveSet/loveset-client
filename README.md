@@ -82,5 +82,5 @@
   - enable api redr [done]
 
 - terms + linking [done]
-- hosting -> .env + paddle + google analytics []
+- hosting -> .env + paddle + google analytics [done]
 - launch after paddle verification []

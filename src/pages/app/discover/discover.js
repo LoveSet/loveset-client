@@ -23,6 +23,8 @@ import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
 import useUserService from "../../../shared/hooks/api/useUserService";
 import PageLoader from "../../../shared/components/pageLoader/pageLoader";
+import { useMediaQuery } from "react-responsive";
+
 // Mock movie data
 const mockMovies = [
   {
@@ -248,8 +250,11 @@ const MovieCard = ({
     return `${rotateRaw.get() + offset}deg`;
   });
 
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const swipeThreshold = isMobile ? 30 : 100;
+
   const handleDragEnd = () => {
-    if (Math.abs(x.get()) > 100) {
+    if (Math.abs(x.get()) > swipeThreshold) {
       if (x.get() > 0) {
         handleLike();
       } else {
@@ -287,13 +292,12 @@ const MovieCard = ({
         right: 0,
       }}
       onDragEnd={handleDragEnd}
-      transition={
-        {
-          // type: "spring",
-          // damping: 50,
-          // stiffness: 400,
-        }
-      }
+      transition={{
+        type: "spring",
+        // damping: 50,
+        damping: 10,
+        stiffness: 100,
+      }}
     >
       <div className={styles.moviePoster} style={{ pointerEvents: "none" }}>
         {!imageLoaded && (

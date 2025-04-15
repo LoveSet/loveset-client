@@ -10,14 +10,14 @@ const PADDLE_PRICE_CONFIG = {
     BI_ANNUALLY_PRICE_ID: "pri_01jrff13k5923d6kv3ats5cfwm",
   },
   PROD: {
-    WEEKLY_PRICE_ID: "",
-    MONTHLY_PRICE_ID: "",
-    BI_ANNUALLY_PRICE_ID: "",
+    WEEKLY_PRICE_ID: "pri_01jrtygcb4w43emsrspps21m57",
+    MONTHLY_PRICE_ID: "pri_01jrtyhw9f1scrgjttvjbvx7g6",
+    BI_ANNUALLY_PRICE_ID: "pri_01jrtyjkn7bqs9dcx8ff68jnp9",
   },
 };
 
-const PADDLE_PRICE = PADDLE_PRICE_CONFIG.DEV; // Change to PROD for production
-// const PADDLE_PRICE = PADDLE_PRICE_CONFIG.PROD;
+// const PADDLE_PRICE = PADDLE_PRICE_CONFIG.DEV; // Change to PROD for production
+const PADDLE_PRICE = PADDLE_PRICE_CONFIG.PROD;
 
 module.exports = {
   GOOGLE_CLIENT_ID,

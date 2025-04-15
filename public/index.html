@@ -9,7 +9,7 @@
       name="description"
       content="Find your next favorite movie or show with LoveSet. Swipe right on titles you love, get personalized recommendations that match your unique taste."
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -40,12 +40,23 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4KE37FFXH5"
+    ></script>
     <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
     <script type="text/javascript">
-      Paddle.Environment.set("sandbox");
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-4KE37FFXH5");
+
+      // Paddle.Environment.set("sandbox");
       Paddle.Initialize({
-        token: "test_3fc7c742c280c762627c81a059f", // replace with a client-side token
-        // token: "awaiting"
+        // token: "test_3fc7c742c280c762627c81a059f", // replace with a client-side token
+        token: "live_1c42d1e058a15345ac4f73c826a",
       });
     </script>
   </body>

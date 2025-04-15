@@ -49,7 +49,7 @@ export const pages = [
     path: "/app/discover",
     element: <Discover />,
     app: true,
-    guarded: false,
+    guarded: true,
     nav: {
       icon: <IoSearch />,
       name: "Discover",
@@ -62,7 +62,7 @@ export const pages = [
     path: "/app/watchlist",
     element: <Watchlist />,
     app: true,
-    guarded: false,
+    guarded: true,
     nav: {
       icon: <IoHeartOutline />,
       name: "Watchlist",
@@ -75,7 +75,7 @@ export const pages = [
     path: "/app/premium",
     element: <Premium />,
     app: true,
-    guarded: false,
+    guarded: true,
     nav: {
       icon: <AiOutlineFire />,
       name: "Premium",
@@ -88,7 +88,7 @@ export const pages = [
     path: "/app/settings",
     element: <Settings />,
     app: true,
-    guarded: false,
+    guarded: true,
     nav: {
       icon: <IoSettingsOutline />,
       name: "Settings",

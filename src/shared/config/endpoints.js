@@ -1,8 +1,8 @@
-const CLIENT_URL = "http://localhost:3000";
-const ROOT_URL = "http://localhost:9000";
+// const CLIENT_URL = "http://localhost:3000";
+// const ROOT_URL = "http://localhost:9000";
 
-// const CLIENT_URL = "https://platle.com";
-// const ROOT_URL = "https://api.platle.com";
+const CLIENT_URL = "https://loveset.platle.com";
+const ROOT_URL = "https://api.loveset.platle.com";
 
 const BASE_URL = `${ROOT_URL}/v1/`;
 const API_ENDPOINTS = {
