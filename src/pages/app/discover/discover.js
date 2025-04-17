@@ -441,7 +441,7 @@ function Discover() {
   //   isNewUser: true,
   // };
   // const [movies, setMovies] = useState([...mockMovies]);
-  const [swipesLeft, setSwipesLeft] = useState(10 - user?.user?.swipesUsed); // Free tier: 10 swipes per day
+  const [swipesLeft, setSwipesLeft] = useState(20 - user?.user?.swipesUsed); // Free tier: 20 swipes per day
   const [showOutOfSwipes, setShowOutOfSwipes] = useState(false);
   const [likedMovies, setLikedMovies] = useState([]);
   const [dislikedMovies, setDislikedMovies] = useState([]);

@@ -24,29 +24,56 @@ function Premium() {
   const [selectedPlan, setSelectedPlan] = useState("6month");
   const [showTerms, setShowTerms] = useState(false);
 
+  // const plans = [
+  //   {
+  //     id: "weekly",
+  //     name: "1-Week",
+  //     price: "$5",
+  //     perWeek: "$5/wk",
+  //     savings: "0%",
+  //     isBest: false,
+  //   },
+  //   {
+  //     id: "monthly",
+  //     name: "Monthly",
+  //     price: "$12",
+  //     perWeek: "$3/wk",
+  //     savings: "0%",
+  //     isBest: false,
+  //   },
+  //   {
+  //     id: "6month",
+  //     name: "6-Month",
+  //     price: "$60",
+  //     perWeek: "$2.50/wk",
+  //     savings: "17%",
+  //     isBest: true,
+  //   },
+  // ];
+
   const plans = [
     {
       id: "weekly",
       name: "1-Week",
-      price: "$5",
-      perWeek: "$5/wk",
+      price: "$1",
+      perWeek: "$1/wk",
       savings: "0%",
       isBest: false,
     },
     {
       id: "monthly",
       name: "Monthly",
-      price: "$12",
-      perWeek: "$3/wk",
+      price: "$3",
+      perWeek: "$0.75/wk",
       savings: "0%",
       isBest: false,
     },
     {
       id: "6month",
       name: "6-Month",
-      price: "$60",
-      perWeek: "$2.50/wk",
-      savings: "17%",
+      price: "$10",
+      perWeek: "$0.42/wk",
+      savings: "44%",
       isBest: true,
     },
   ];
@@ -97,7 +124,7 @@ function Premium() {
         const Paddle = window.Paddle;
         Paddle.Checkout.open({
           settings: {
-            theme: "dark",
+            theme: "light",
             successUrl: `${CLIENT_URL}/app/discover?action=subscribed`,
           },
           customer: {
