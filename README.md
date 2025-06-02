@@ -1,86 +1,109 @@
-- sketch how many pages and components i need. [done]
-- design them in v0. [done]
-- generate the "get 10 more swipes -> invite friend" modal from the "platle v2" document [done]
-- change options font [done]
-- remove box shadow [done]
-- fix: space below modal title [done]
+# LoveSet Client
 
-- adjust ui [done]
-- adjust coding [done]
+LoveSet is a web application that helps you discover your next favorite movie or show. Swipe right on titles you love, get personalized recommendations that match your unique taste.
 
-- pages [done]
+## Features
 
-  - discover [done]
-  - details [done]
-  - watchlist [done]
-  - premium [done]
-  - settings [done]
-  - mobile [done]
+- Google authentication
+- Personalized movie/show recommendations
+- Swiping interface (like/dislike)
+- Watchlist management
+- Premium subscription with Paddle
+- Invite friends for more swipes
+- Responsive design
+- Terms of Service & Privacy Policy modals
+- Email notifications (welcome, referral, subscription expired)
 
-- modals [done]
+## Tech Stack
 
-  - invite friend [done]
-  - out of swipes [done]
-  - terms of service [done]
-  - privacy policy [done]
+- React 19
+- React Router DOM
+- React Query
+- Material UI & Styled Components
+- Framer Motion (animations)
+- React Toastify (notifications)
+- Paddle (payments)
+- Google OAuth
+- Axios (API requests)
 
-- emails [done]
+## Getting Started
 
-  - referral award [done]
-  - subscription expired [done]
-  - welcome [done]
+### Prerequisites
 
-- fonts: ui-serif, Inter (text), Biotif\*, Neuzeit Grotesk Bold
+- Node.js (v16 or higher recommended)
+- npm (v8 or higher)
 
-- bugs [done]
+### Installation
 
-  - https://v0.dev/chat/swiping-animation-code-WJNbidJ7KMk [done]
-  - https://www.hover.dev/components/cards + https://www.youtube.com/watch?app=desktop&v=bzJHOoiu1Bs [done]
-  - swiping animation, animate with button clicks [done]
-  - the item being swiped away should fade away to make it more graceful [done]
-  - like batch should be more visible [done]
-  - what to do about the buttons [done]
-  - animation should also work when you like and dislike [done]
+1. **Clone the repository:**
 
-- move getContent to `useDiscoveryContext` [done]
+   ```sh
+   git clone https://github.com/yourusername/loveset-client.git
+   cd loveset-client
+   ```
 
-- get youtube trailer -> react-modal-video [done]
-- loader for discovery [done]
-- loader for content images [done]
-- loader for watch trailer [done]
-- like, dislike [done]
-- more getContent [done]
-- detail page -> back button [done]
-- streaming availability -> login + subscribe [done]
+2. **Install dependencies:**
 
-- Monday:
+   ```sh
+   npm install
+   ```
 
-  - discover [done]
-  - youtube modal [done]
-  - content [done]
-  - out of swipe modal [done]
-  - invite modal [done]
-  - watchlist [done]
-  - premium [done]
-  - settings [done]
-    - unsubscribe [done]
-    - test everything billing + `subscription cron job` + `subscription expired email` in coupling [done]
-  - getUser -> App.js [done]
+3. **Set up environment variables:**
 
-- frontend [sunday][done]
-- ui adjustments [monday][done]
-- backend [tuesday,wednesday,thursday][done]
-- coupling [friday,saturday][done]
+   - Copy `.env.example` to `.env` and fill in the required values (API endpoints, Paddle keys, Google OAuth client ID, etc).
 
-  - totalSwipes in user.model.js, add with like + pass [done]
-  - referredSomeone : true/false in user.model.js [done]
-  - adjust coding [done]
-  - getCache + getContent --> Context [done]
-  - if nothing from `getCache` to show, use `getContent` ==> handle this in coupling [done]
-  - enable emails [done]
-  - test `all emails` in coupling [done]
-  - enable api redr [done]
+4. **Start the development server:**
+   ```sh
+   npm start
+   ```
+   The app will run at [http://localhost:3000](http://localhost:3000).
 
-- terms + linking [done]
-- hosting -> .env + paddle + google analytics [done]
-- launch after paddle verification []
+### Build for Production
+
+```sh
+npm run build
+```
+
+The production-ready files will be in the `build/` directory.
+
+### Running Tests
+
+```sh
+npm test
+```
+
+## Project Structure
+
+```
+src/
+  pages/           # Main app pages (home, onboarding, discover, etc)
+  shared/          # Shared components, hooks, styles, config
+  email/           # Transactional email templates
+  assets/          # Fonts and images
+  routes/          # Route definitions
+  App.js           # Main app component
+  index.js         # Entry point
+public/
+  index.html       # Main HTML template
+  ...
+```
+
+## Environment Variables
+
+- `REACT_APP_API_URL` - Backend API endpoint
+- `REACT_APP_GOOGLE_CLIENT_ID` - Google OAuth client ID
+- `REACT_APP_PADDLE_VENDOR_ID` - Paddle vendor ID
+- `REACT_APP_PADDLE_PUBLIC_KEY` - Paddle public key
+
+## Deployment
+
+- Build the app with `npm run build`.
+- Deploy the contents of the `build/` directory to your preferred static hosting (Vercel, Netlify, AWS S3, etc).
+
+## License
+
+MIT
+
+---
+
+**LoveSet** &copy; 2025. All rights reserved.
