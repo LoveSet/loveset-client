@@ -88,13 +88,6 @@ public/
   ...
 ```
 
-## Environment Variables
-
-- `REACT_APP_API_URL` - Backend API endpoint
-- `REACT_APP_GOOGLE_CLIENT_ID` - Google OAuth client ID
-- `REACT_APP_PADDLE_VENDOR_ID` - Paddle vendor ID
-- `REACT_APP_PADDLE_PUBLIC_KEY` - Paddle public key
-
 ## Deployment
 
 - Build the app with `npm run build`.
