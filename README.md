@@ -38,7 +38,7 @@ LoveSet is a web application that helps you discover your next favorite movie or
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/loveset-client.git
+   git clone https://github.com/LoveSet/loveset-client.git
    cd loveset-client
    ```
 
